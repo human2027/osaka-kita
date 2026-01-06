@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{4146a280-0cb8-4618-998b-9ab314a7b48b}</ProjectGuid>
+    <RootNamespace>AI</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>"D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用"</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>"D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用";$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>"D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用"</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>"D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用"</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>"D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用";$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>"D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用"</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Animation\AnimationController\AIAnimationController.cpp" />
+    <ClCompile Include="Animation\AnimationFrame\AIAnimationFrame.cpp" />
+    <ClCompile Include="Base\CharacterBase\CharacterBase.cpp" />
+    <ClCompile Include="Base\InputBase\InputBase.cpp" />
+    <ClCompile Include="Base\MapBase\MapBase.cpp" />
+    <ClCompile Include="Base\UIBase\UIBase.cpp" />
+    <ClCompile Include="Data\AnimationSprite\AnimationSprite.cpp" />
+    <ClCompile Include="Data\AnimationTag\AnimationTag.cpp" />
+    <ClCompile Include="Data\BlackBoard\BlackBoard.cpp" />
+    <ClCompile Include="Data\MapLoad\MapLoader.cpp" />
+    <ClCompile Include="Factory\CharacterFactory\CharacterFactory.cpp" />
+    <ClCompile Include="Main\Character\AI\AIPlayer.cpp" />
+    <ClCompile Include="Main\Character\Player\Player.cpp" />
+    <ClCompile Include="Main\Judge\Judge.cpp" />
+    <ClCompile Include="Main\Main.cpp" />
+    <ClCompile Include="Main\Map\NormalMap.cpp" />
+    <ClCompile Include="Main\UI\SimpleUI.cpp" />
+    <ClCompile Include="Manager\GameManager\GameManager.cpp" />
+    <ClCompile Include="Manager\MapManager\MapManager.cpp" />
+    <ClCompile Include="Manager\TurnManager\TurnManager.cpp" />
+    <ClCompile Include="Manager\UIManager\UIManager.cpp" />
+    <ClCompile Include="Rule\RoundEndRule\RoundEndRule.cpp" />
+    <ClCompile Include="Rule\RoundRule\RoundRule.cpp" />
+    <ClCompile Include="State\InRound\InRoundState.cpp" />
+    <ClCompile Include="State\RoundResult\GameEndState.cpp" />
+    <ClCompile Include="State\RoundResult\RoundResultState.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation\AnimationController\AIAnimationController.h" />
+    <ClInclude Include="Animation\AnimationFrame\AIAnimationFrame.h" />
+    <ClInclude Include="Base\AnimationBase\AnimationBase.h" />
+    <ClInclude Include="Base\CharacterBase\CharacterBase.h" />
+    <ClInclude Include="Base\InputBase\InputBase.h" />
+    <ClInclude Include="Base\InputBase\Pad.h" />
+    <ClInclude Include="Base\MapBase\MapBase.h" />
+    <ClInclude Include="Base\ObjectBase\ObjectBase.h" />
+    <ClInclude Include="Base\StateBase\StateBase.h" />
+    <ClInclude Include="Base\UIBase\UIBase.h" />
+    <ClInclude Include="Data\AnimationSprite\AnimationSprite.h" />
+    <ClInclude Include="Data\AnimationTag\AnimationTag.h" />
+    <ClInclude Include="Data\BlackBoard\BlackBoard.h" />
+    <ClInclude Include="Data\InitialValue\InitialValue.h" />
+    <ClInclude Include="Data\MapLoad\MapLoader.h" />
+    <ClInclude Include="Data\UIEvent\UIEvent.h" />
+    <ClInclude Include="Factory\CharacterFactory\CharacterFactory.h" />
+    <ClInclude Include="Main\Character\AI\AIPlayer.h" />
+    <ClInclude Include="Main\Character\AI\KeyboardInput.h" />
+    <ClInclude Include="Main\Character\Player\Player.h" />
+    <ClInclude Include="Main\Judge\Judge.h" />
+    <ClInclude Include="Main\Map\NormalMap.h" />
+    <ClInclude Include="Main\UI\SimpleUI.h" />
+    <ClInclude Include="Manager\GameManager\GameManager.h" />
+    <ClInclude Include="Manager\MapManager\MapManager.h" />
+    <ClInclude Include="Manager\TurnManager\TurnManager.h" />
+    <ClInclude Include="Manager\UIManager\UIManager.h" />
+    <ClInclude Include="Rule\RoundEndRule\RoundEndRule.h" />
+    <ClInclude Include="Rule\RoundRule\RoundRule.h" />
+    <ClInclude Include="State\InRound\InRoundState.h" />
+    <ClInclude Include="State\RoundResult\GameEndState.h" />
+    <ClInclude Include="State\RoundResult\RoundResultState.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
