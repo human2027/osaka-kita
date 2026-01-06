@@ -1,9 +1,8 @@
 #pragma once
 #include <memory>
 #include "CharacterBase.h"
-
-class InputBase;   
-
+#include "InputBase.h"
+ 
 class Player : public CharacterBase
 {
 public:

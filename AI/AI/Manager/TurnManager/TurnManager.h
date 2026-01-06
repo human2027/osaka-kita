@@ -2,10 +2,10 @@
 
 #include <functional>
 #include "UIEvent.h"
-
-class CharacterBase;
-class MapManager;
-class Judge;
+#include "InitialValue.h"
+#include "CharacterBase.h"
+#include "MapManager.h"
+#include "Judge.h"
 
 class TurnManager
 {
