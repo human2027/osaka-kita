@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\Base">
+      <UniqueIdentifier>{e2a55cc9-2257-465d-b0d3-5bff4dfff13a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Base\InputBase">
+      <UniqueIdentifier>{2ef9b567-b3d0-4c0f-92a5-709a163abd05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Base\ObjectBase">
+      <UniqueIdentifier>{c2f56f60-b73f-46ff-bd31-f311aa6666df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Base\UIBase">
+      <UniqueIdentifier>{29fbdfcb-7c3d-4821-a834-d05981033946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Base\MapBase">
+      <UniqueIdentifier>{0a9e9e32-662a-4eb0-af0a-cde37bd7251f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Base\CharacterBase">
+      <UniqueIdentifier>{bd11921d-edf4-4778-958d-58dfb22fedb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main">
+      <UniqueIdentifier>{ddd18fca-4963-4254-a0ce-ae99ce8ca5d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Map">
+      <UniqueIdentifier>{536ead28-6709-4491-87a9-ba54da5465b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Character">
+      <UniqueIdentifier>{4c9a943d-fac9-46c2-afb5-cd6f3d6c7a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\UI">
+      <UniqueIdentifier>{c2a26b92-9911-487c-b4a1-f26e4a43f027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Character\AI">
+      <UniqueIdentifier>{f5135c51-8a1c-4e71-a41f-8112e4e4ceed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Character\Player">
+      <UniqueIdentifier>{aad7cee2-8937-432e-a64b-f1a889730d5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Manager">
+      <UniqueIdentifier>{84646bcd-ab14-463d-9257-c8befc9fc086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Base\AnimationBase">
+      <UniqueIdentifier>{b9067c2a-701f-452b-a3cb-ec9483ee3fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Manager\GameManager">
+      <UniqueIdentifier>{e6cbf7b6-f6c7-45ef-ae02-3198766d3c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Manager\MapManager">
+      <UniqueIdentifier>{e53e023f-0e27-4ceb-8e5b-5bf57121a075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Factory">
+      <UniqueIdentifier>{ae4989d4-836e-44be-a0e7-0c6137fff974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Factory\AnimationFactory">
+      <UniqueIdentifier>{edca2f71-6182-4092-9636-322929bfd0ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Factory\ItemFactory">
+      <UniqueIdentifier>{e162e95c-079a-4bc6-af65-d06ce1a30ee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Judge">
+      <UniqueIdentifier>{9f28ced8-e209-4890-8cbe-b47907929888}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\UI\NewFilter1">
+      <UniqueIdentifier>{5cd73a91-b6be-4480-8078-653d7f102899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Manager\UIManager">
+      <UniqueIdentifier>{f7f6d593-fdb9-49ab-9e3b-99c4e7f7187e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data">
+      <UniqueIdentifier>{a6a335c1-cc83-4854-9fa3-790db601ea0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Map">
+      <UniqueIdentifier>{ba99119d-3b95-4fab-bcd4-58095495db02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Map\LoadMap">
+      <UniqueIdentifier>{9600abbd-c351-4c51-a692-34cd7558218f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\InitialValue">
+      <UniqueIdentifier>{c70c4aae-1906-4c4e-afe6-0dd4a94d7525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Manager\TurnManager">
+      <UniqueIdentifier>{f38d4f4d-bff0-4c93-b09d-dea0e55f2090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State">
+      <UniqueIdentifier>{ca71deed-5e35-4155-9385-d951eaacafd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\InRound">
+      <UniqueIdentifier>{aaeffcfe-2a3d-42ca-a932-9e9e4847c9f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Result">
+      <UniqueIdentifier>{cbc80a11-8213-4b69-a98c-48c204c7ff62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\End">
+      <UniqueIdentifier>{a3e5c429-9bd7-4b41-bec4-d62511df38af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Factory\CharacterFactory">
+      <UniqueIdentifier>{ccb45291-1121-4191-9d34-66388552c9c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\BlackBoard">
+      <UniqueIdentifier>{572094bc-1f14-4aa7-9f8f-95f9b51b9a2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Base\StateBase">
+      <UniqueIdentifier>{791511f0-f71f-48fd-acf2-d936ee960c3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Tag">
+      <UniqueIdentifier>{16b24061-a76f-48bc-bc2c-f8de90b82328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Tag\Animation">
+      <UniqueIdentifier>{494a60e5-dfe8-4286-816b-613b0f8ab52c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Sprite">
+      <UniqueIdentifier>{b98aba1b-a746-4e37-a54f-013d5ee3f784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Character\AI\Animation">
+      <UniqueIdentifier>{0e51f1b8-7eda-4ad5-98c8-66890e106584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Character\AI\AnimationFrame">
+      <UniqueIdentifier>{ca748c41-9d97-49f5-9839-ce5cda36dc52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\RoundRule">
+      <UniqueIdentifier>{b0b75f1c-a4de-4eca-b870-454a94edbfd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\RoundRule\RoundRule">
+      <UniqueIdentifier>{4a583132-b49c-4b12-9e6f-75ce2090028d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\RoundRule\RoundEndRule">
+      <UniqueIdentifier>{c6be1435-b644-4a72-ba08-0b72de2287ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\UIEvent">
+      <UniqueIdentifier>{ecad16a3-293a-4063-ad2b-e60314b2139b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Behavior">
+      <UniqueIdentifier>{92ef1167-b847-4c4f-81e8-6328e6efcd8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Behavior\BehaviorNode">
+      <UniqueIdentifier>{da7b0429-d133-4227-9fa4-e92789216c4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Behavior\SurviveHP">
+      <UniqueIdentifier>{bd1a95d6-cf72-46bb-a3c5-342b03fef34c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Base\MapBase\MapBase.cpp">
+      <Filter>ソース ファイル\Base\MapBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\InputBase\InputBase.cpp">
+      <Filter>ソース ファイル\Base\InputBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\UIBase\UIBase.cpp">
+      <Filter>ソース ファイル\Base\UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Map\NormalMap.cpp">
+      <Filter>ソース ファイル\Main\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Character\Player\Player.cpp">
+      <Filter>ソース ファイル\Main\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Main.cpp">
+      <Filter>ソース ファイル\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\CharacterBase\CharacterBase.cpp">
+      <Filter>ソース ファイル\Base\CharacterBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\GameManager\GameManager.cpp">
+      <Filter>ソース ファイル\Manager\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\MapManager\MapManager.cpp">
+      <Filter>ソース ファイル\Manager\MapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\UI\SimpleUI.cpp">
+      <Filter>ソース ファイル\Main\UI\NewFilter1</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Character\AI\AIPlayer.cpp">
+      <Filter>ソース ファイル\Main\Character\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Judge\Judge.cpp">
+      <Filter>ソース ファイル\Main\Judge</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\UIManager\UIManager.cpp">
+      <Filter>ソース ファイル\Manager\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\MapLoad\MapLoader.cpp">
+      <Filter>ソース ファイル\Data\Map\LoadMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\TurnManager\TurnManager.cpp">
+      <Filter>ソース ファイル\Manager\TurnManager</Filter>
+    </ClCompile>
+    <ClCompile Include="State\InRound\InRoundState.cpp">
+      <Filter>ソース ファイル\State\InRound</Filter>
+    </ClCompile>
+    <ClCompile Include="State\RoundResult\RoundResultState.cpp">
+      <Filter>ソース ファイル\State\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="State\RoundResult\GameEndState.cpp">
+      <Filter>ソース ファイル\State\End</Filter>
+    </ClCompile>
+    <ClCompile Include="Factory\CharacterFactory\CharacterFactory.cpp">
+      <Filter>ソース ファイル\Factory\CharacterFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\BlackBoard\BlackBoard.cpp">
+      <Filter>ソース ファイル\Data\BlackBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\AnimationTag\AnimationTag.cpp">
+      <Filter>ソース ファイル\Data\Tag\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\AnimationSprite\AnimationSprite.cpp">
+      <Filter>ソース ファイル\Data\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\AnimationController\AIAnimationController.cpp">
+      <Filter>ソース ファイル\Main\Character\AI\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\AnimationFrame\AIAnimationFrame.cpp">
+      <Filter>ソース ファイル\Main\Character\AI\AnimationFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="Rule\RoundRule\RoundRule.cpp">
+      <Filter>ソース ファイル\Main\RoundRule\RoundRule</Filter>
+    </ClCompile>
+    <ClCompile Include="Rule\RoundEndRule\RoundEndRule.cpp">
+      <Filter>ソース ファイル\Main\RoundRule\RoundEndRule</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Behavior\BehaviorNode\BehaviorNode.cpp">
+      <Filter>ソース ファイル\Data\Behavior\BehaviorNode</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Base\MapBase\MapBase.h">
+      <Filter>ソース ファイル\Base\MapBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\InputBase\InputBase.h">
+      <Filter>ソース ファイル\Base\InputBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\AnimationBase\AnimationBase.h">
+      <Filter>ソース ファイル\Base\AnimationBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\StateBase\StateBase.h">
+      <Filter>ソース ファイル\Base\StateBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\UIBase\UIBase.h">
+      <Filter>ソース ファイル\Base\UIBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\ObjectBase\ObjectBase.h">
+      <Filter>ソース ファイル\Base\ObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\Map\NormalMap.h">
+      <Filter>ソース ファイル\Main\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\Character\Player\Player.h">
+      <Filter>ソース ファイル\Main\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\CharacterBase\CharacterBase.h">
+      <Filter>ソース ファイル\Base\CharacterBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\GameManager\GameManager.h">
+      <Filter>ソース ファイル\Manager\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\MapManager\MapManager.h">
+      <Filter>ソース ファイル\Manager\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\UI\SimpleUI.h">
+      <Filter>ソース ファイル\Main\UI\NewFilter1</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\Character\AI\AIPlayer.h">
+      <Filter>ソース ファイル\Main\Character\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\Judge\Judge.h">
+      <Filter>ソース ファイル\Main\Judge</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\Character\AI\KeyboardInput.h">
+      <Filter>ソース ファイル\Base\InputBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\UIManager\UIManager.h">
+      <Filter>ソース ファイル\Manager\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\MapLoad\MapLoader.h">
+      <Filter>ソース ファイル\Data\Map\LoadMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\InitialValue\InitialValue.h">
+      <Filter>ソース ファイル\Data\InitialValue</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\InputBase\Pad.h">
+      <Filter>ソース ファイル\Base\InputBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\TurnManager\TurnManager.h">
+      <Filter>ソース ファイル\Manager\TurnManager</Filter>
+    </ClInclude>
+    <ClInclude Include="State\InRound\InRoundState.h">
+      <Filter>ソース ファイル\State\InRound</Filter>
+    </ClInclude>
+    <ClInclude Include="State\RoundResult\RoundResultState.h">
+      <Filter>ソース ファイル\State\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="State\RoundResult\GameEndState.h">
+      <Filter>ソース ファイル\State\End</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory\CharacterFactory\CharacterFactory.h">
+      <Filter>ソース ファイル\Factory\CharacterFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\BlackBoard\BlackBoard.h">
+      <Filter>ソース ファイル\Data\BlackBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\AnimationTag\AnimationTag.h">
+      <Filter>ソース ファイル\Data\Tag\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\AnimationSprite\AnimationSprite.h">
+      <Filter>ソース ファイル\Data\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\AnimationController\AIAnimationController.h">
+      <Filter>ソース ファイル\Main\Character\AI\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\AnimationFrame\AIAnimationFrame.h">
+      <Filter>ソース ファイル\Main\Character\AI\AnimationFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule\RoundEndRule\RoundEndRule.h">
+      <Filter>ソース ファイル\Main\RoundRule\RoundEndRule</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\UIEvent\UIEvent.h">
+      <Filter>ソース ファイル\Data\UIEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule\RoundRule\RoundRule.h">
+      <Filter>ソース ファイル\Main\RoundRule\RoundRule</Filter>
+    </ClInclude>
+    <ClInclude Include="SurviveHP.h">
+      <Filter>ソース ファイル\Data\Behavior\SurviveHP</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Behavior\BehaviorNode\BehaviorNode.h">
+      <Filter>ソース ファイル\Data\Behavior\BehaviorNode</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
