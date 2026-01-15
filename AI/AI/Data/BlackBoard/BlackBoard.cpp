@@ -1,6 +1,6 @@
 #include "Blackboard.h"
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Blackboard::Blackboard()
     : playerPos(0)
     , aiPos(0)
@@ -8,11 +8,14 @@ Blackboard::Blackboard()
     , turnInRound(0)
     , playerHasItem(false)
     , aiHasItem(false)
+    , playerHP(0)
+    , playerMaxHP(1)
+    , aiHP(0)
+    , aiMaxHP(1)
 {
-   
 }
 
-// ˆÊ’uî•ñ
+// ä½ç½®æƒ…å ±
 void Blackboard::SetPositions(int playerPos_, int aiPos_)
 {
     playerPos = playerPos_;
@@ -28,8 +31,7 @@ int Blackboard::GetAIPos() const
 {
     return aiPos;
 }
-
-// ƒ‰ƒEƒ“ƒh / ƒ^[ƒ“î•ñ
+// ãƒ©ã‚¦ãƒ³ãƒ‰ / ã‚¿ãƒ¼ãƒ³æƒ…å ±
 void Blackboard::SetRoundInfo(int round, int turn)
 {
     roundNumber = round;
@@ -46,7 +48,7 @@ int Blackboard::GetTurnInRound() const
     return turnInRound;
 }
 
-// ƒvƒŒƒCƒ„[c‚èD
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ®‹ã‚Šæœ­
 void Blackboard::SetPlayerHand(const std::vector<int>& hand)
 {
     playerHand = hand;
@@ -57,7 +59,7 @@ const std::vector<int>& Blackboard::GetPlayerHand() const
     return playerHand;
 }
 
-// ƒAƒCƒeƒ€•Ûƒtƒ‰ƒO
+// ã‚¢ã‚¤ãƒ†ãƒ ä¿æŒãƒ•ãƒ©ã‚°
 void Blackboard::SetItemFlags(bool playerHas, bool aiHas)
 {
     playerHasItem = playerHas;
@@ -74,7 +76,7 @@ bool Blackboard::AIHasItem() const
     return aiHasItem;
 }
 
-// 5ƒ}ƒXæ‚Ìƒ^ƒCƒ‹î•ñ
+// 5ãƒã‚¹å…ˆã®ã‚¿ã‚¤ãƒ«æƒ…å ±
 void Blackboard::SetPlayerForwardTiles(const std::array<TileInfoForAI, 5>& tiles)
 {
     playerForward = tiles;
@@ -93,4 +95,48 @@ const std::array<TileInfoForAI, 5>& Blackboard::GetPlayerForwardTiles() const
 const std::array<TileInfoForAI, 5>& Blackboard::GetAIForwardTiles() const
 {
     return aiForward;
+}
+
+// HPæƒ…å ±
+void Blackboard::SetHP(int playerHP_, int playerMaxHP_, int aiHP_, int aiMaxHP_)
+{
+    playerHP = playerHP_;
+    playerMaxHP = (playerMaxHP_ <= 0) ? 1 : playerMaxHP_;
+
+    aiHP = aiHP_;
+    aiMaxHP = (aiMaxHP_ <= 0) ? 1 : aiMaxHP_;
+}
+
+int Blackboard::GetPlayerHP() const
+{
+    return playerHP;
+}
+
+int Blackboard::GetPlayerMaxHP() const
+{
+    return playerMaxHP;
+}
+
+int Blackboard::GetAIHP() const
+{
+    return aiHP;
+}
+
+int Blackboard::GetAIMaxHP() const
+{
+    return aiMaxHP;
+}
+
+bool Blackboard::IsAIDangerHP(float ratio) const
+{
+    if (aiMaxHP <= 0) return false;
+    const float r = static_cast<float>(aiHP) / static_cast<float>(aiMaxHP);
+    return r <= ratio;
+}
+
+bool Blackboard::IsAICriticalHP(float ratio) const
+{
+    if (aiMaxHP <= 0) return false;
+    const float r = static_cast<float>(aiHP) / static_cast<float>(aiMaxHP);
+    return r <= ratio;
 }
