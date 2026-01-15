@@ -98,15 +98,15 @@ const std::array<TileInfoForAI, 5>& Blackboard::GetAIForwardTiles() const
 }
 
 // HP情報
-void Blackboard::SetHP(int playerHP_, int playerMaxHP_, int aiHP_, int aiMaxHP_)
+void Blackboard::SetHP(int playerHP_, int playerMaxHP_,
+    int aiHP_, int aiMaxHP_)
 {
     playerHP = playerHP_;
-    playerMaxHP = (playerMaxHP_ <= 0) ? 1 : playerMaxHP_;
+    playerMaxHP = playerMaxHP_;
 
     aiHP = aiHP_;
-    aiMaxHP = (aiMaxHP_ <= 0) ? 1 : aiMaxHP_;
+    aiMaxHP = aiMaxHP_;
 }
-
 int Blackboard::GetPlayerHP() const
 {
     return playerHP;
@@ -139,4 +139,96 @@ bool Blackboard::IsAICriticalHP(float ratio) const
     if (aiMaxHP <= 0) return false;
     const float r = static_cast<float>(aiHP) / static_cast<float>(aiMaxHP);
     return r <= ratio;
+}
+// AI残り札
+void Blackboard::SetAIHand(const std::vector<int>& hand)
+{
+    aiHand = hand;
+}
+
+const std::vector<int>& Blackboard::GetAIHand() const
+{
+    return aiHand;
+}
+
+// 直前ターン情報
+void Blackboard::SetLastTurn(int playerCard, int aiCard, int result)
+{
+    lastPlayerCard = playerCard;
+    lastAICard = aiCard;
+    lastResult = result;
+}
+
+int Blackboard::GetLastPlayerCard() const
+{
+    return lastPlayerCard;
+}
+
+int Blackboard::GetLastAICard() const
+{
+    return lastAICard;
+}
+
+int Blackboard::GetLastResult() const
+{
+    return lastResult;
+}
+
+void Blackboard::SetReverseActive(bool active)
+{
+    reverseActive = active;
+}
+
+bool Blackboard::IsReverseActive() const
+{
+    return reverseActive;
+}
+
+// ターン内通知フラグ
+void Blackboard::ClearTurnFlags()
+{
+    playerUsedBoostThisTurn = false;
+    aiUsedBoostThisTurn = false;
+    playerUsedReverseThisTurn = false;
+    aiUsedReverseThisTurn = false;
+}
+
+void Blackboard::NotifyPlayerUsedBoost()
+{
+    playerUsedBoostThisTurn = true;
+}
+
+void Blackboard::NotifyAIUsedBoost()
+{
+    aiUsedBoostThisTurn = true;
+}
+
+void Blackboard::NotifyPlayerUsedReverse()
+{
+    playerUsedReverseThisTurn = true;
+}
+
+void Blackboard::NotifyAIUsedReverse()
+{
+    aiUsedReverseThisTurn = true;
+}
+
+bool Blackboard::PlayerUsedBoostThisTurn() const
+{
+    return playerUsedBoostThisTurn;
+}
+
+bool Blackboard::AIUsedBoostThisTurn() const
+{
+    return aiUsedBoostThisTurn;
+}
+
+bool Blackboard::PlayerUsedReverseThisTurn() const
+{
+    return playerUsedReverseThisTurn;
+}
+
+bool Blackboard::AIUsedReverseThisTurn() const
+{
+    return aiUsedReverseThisTurn;
 }

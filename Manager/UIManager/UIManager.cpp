@@ -3,9 +3,7 @@
 #include "DxLib.h"
 #include <algorithm>
 
-//----------------------------------------
 // •`‰æ
-//----------------------------------------
 void UIManager::Draw(const std::shared_ptr<Player>& player,
     const std::shared_ptr<AIPlayer>& ai,
     int round, int plays,

@@ -6,6 +6,7 @@
 #include "CharacterBase.h"
 #include "MapManager.h"
 #include "Judge.h"
+#include "Blackboard.h"
 
 class TurnManager
 {
@@ -18,9 +19,9 @@ public:
         CharacterBase& player,
         CharacterBase& ai,
         MapManager& map,
-        Judge& judge
+        Judge& judge,
+        Blackboard& bb
     );
-
     using UIEventCallback = std::function<void(const UIEvent&)>;
     void SetUIEventCallback(const UIEventCallback& cb)
     {

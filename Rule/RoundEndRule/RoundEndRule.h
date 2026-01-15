@@ -3,7 +3,7 @@
 #include "CharacterBase.h"
 #include "InitialValue.h"
 
-// ラウンド終了時の処理だけを担当するルールクラス
+// ラウンド終了時の処理だけを担当するルールクラスになる2
 class RoundEndRule
 {
 public:

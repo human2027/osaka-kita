@@ -130,9 +130,9 @@ void GameManager::UpdateInRound()
         *player,
         *aiPlayer,
         mapManager,
-        judge
+        judge,
+        *blackboard
     );
-
     if (!turned) {
         // 何も起きなかった（カード無効など）
         return;

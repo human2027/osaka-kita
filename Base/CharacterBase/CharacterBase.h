@@ -2,7 +2,7 @@
 #include <vector>
 #include "InitialValue.h"
 
-class CharacterBase  {
+class CharacterBase {
 public:
 
     CharacterBase();
@@ -20,6 +20,8 @@ public:
 
     //HP
     void SetHP(int v) { hp = v; }
+
+    int GetMaxHP() const { return MAX_Player_HP; }
 
     //êŠ
     void SetPos(int v) { pos = v; }

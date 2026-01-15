@@ -3,13 +3,12 @@
 #include <array>
 #include "MapBase.h"
 
-// 5マス先のマス情報を格納する軽量構造体
 struct TileInfoForAI
 {
-    int index = -1;                      // マス番号（範囲外なら -1）
-    TileType type = TileType::Normal;    // ダメージ/回復/アイテム/通常 など
-    int value = 0;                       // ダメージ/回復量
-    int itemId = -1;                     // アイテム種類（未使用なら -1 のまま）
+    int index = -1;
+    TileType type = TileType::Normal;
+    int value = 0;
+    int itemId = -1;
 };
 
 class Blackboard
@@ -27,9 +26,12 @@ public:
     int  GetRoundNumber() const;
     int  GetTurnInRound() const;
 
-    // プレイヤー残り札
+    // 残り札（両者）
     void SetPlayerHand(const std::vector<int>& hand);
     const std::vector<int>& GetPlayerHand() const;
+
+    void SetAIHand(const std::vector<int>& hand);
+    const std::vector<int>& GetAIHand() const;
 
     // アイテム保持
     void SetItemFlags(bool playerHas, bool aiHas);
@@ -39,44 +41,72 @@ public:
     // 5マス先のタイル情報
     void SetPlayerForwardTiles(const std::array<TileInfoForAI, 5>& tiles);
     void SetAIForwardTiles(const std::array<TileInfoForAI, 5>& tiles);
-
     const std::array<TileInfoForAI, 5>& GetPlayerForwardTiles() const;
     const std::array<TileInfoForAI, 5>& GetAIForwardTiles() const;
 
     // HP情報
-    void SetHP(int playerHP, int playerMaxHP, int aiHP, int aiMaxHP);
+    void SetHP(int playerHP, int playerMaxHP,
+        int aiHP, int aiMaxHP);
     int  GetPlayerHP() const;
     int  GetPlayerMaxHP() const;
     int  GetAIHP() const;
     int  GetAIMaxHP() const;
 
-    // 危険判定（閾値は好きに調整）
-    bool IsAIDangerHP(float ratio = 0.3f) const;     // 30%以下を危険
-    bool IsAICriticalHP(float ratio = 0.15f) const;  // 15%以下を致命
+    bool IsAIDangerHP(float ratio = 0.3f) const;
+    bool IsAICriticalHP(float ratio = 0.15f) const;
+
+    // 直前ターン情報（要件2,3,4で効く）
+    void SetLastTurn(int playerCard, int aiCard, int result);
+    int  GetLastPlayerCard() const;
+    int  GetLastAICard() const;
+    int  GetLastResult() const;
+
+    void SetReverseActive(bool active);
+    bool IsReverseActive() const;
+
+    // ターン内通知フラグ（アイテム使用＝相手にも見える前提）
+    void ClearTurnFlags(); // ExecuteTurn冒頭で呼ぶ
+    void NotifyPlayerUsedBoost();
+    void NotifyAIUsedBoost();
+    void NotifyPlayerUsedReverse();
+    void NotifyAIUsedReverse();
+
+    bool PlayerUsedBoostThisTurn() const;
+    bool AIUsedBoostThisTurn() const;
+    bool PlayerUsedReverseThisTurn() const;
+    bool AIUsedReverseThisTurn() const;
 
 private:
-    // 座標
-    int playerPos;
-    int aiPos;
+    int playerPos = 0;
+    int aiPos = 0;
 
-    // ラウンド／ターン
-    int roundNumber;
-    int turnInRound;
+    int roundNumber = 1;
+    int turnInRound = 0;
 
-    // プレイヤー残り札
     std::vector<int> playerHand;
+    std::vector<int> aiHand;
 
-    // アイテム所持フラグ
-    bool playerHasItem;
-    bool aiHasItem;
+    bool playerHasItem = false;
+    bool aiHasItem = false;
 
-    // 5マス先のタイル情報
-    std::array<TileInfoForAI, 5> playerForward;
-    std::array<TileInfoForAI, 5> aiForward;
+    std::array<TileInfoForAI, 5> playerForward{};
+    std::array<TileInfoForAI, 5> aiForward{};
 
-    // HP情報
-    int playerHP;
-    int playerMaxHP;
-    int aiHP;
-    int aiMaxHP;
+    int playerHP = 0;
+    int playerMaxHP = 1;
+    int aiHP = 0;
+    int aiMaxHP = 1;
+
+    // last turn
+    int lastPlayerCard = 0;
+    int lastAICard = 0;
+    int lastResult = 0;
+
+    bool reverseActive = false;
+
+    // notifications
+    bool playerUsedBoostThisTurn = false;
+    bool aiUsedBoostThisTurn = false;
+    bool playerUsedReverseThisTurn = false;
+    bool aiUsedReverseThisTurn = false;
 };

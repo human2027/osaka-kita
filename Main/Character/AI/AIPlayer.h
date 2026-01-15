@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <vector>
 #include <memory>
 #include "CharacterBase.h"
 #include "Blackboard.h"
@@ -14,8 +15,7 @@ public:
     void SetBlackboard(std::shared_ptr<Blackboard> bb) { blackboard = std::move(bb); }
 
     // CharacterBase の純粋仮想関数
-    int ChooseCard() override;
-
+    int ChooseCard();
     // AI から見た前方タイル評価を可視化用に返す
     struct AITileEval
     {
@@ -28,7 +28,11 @@ public:
     std::vector<AITileEval> GetForwardEvaluation() const;
     void UpdateBlackboard(Blackboard& bb, const MapManager& map, int roundNumber, int playsThisRound);
 private:
+
+    const MapManager* cachedMap = nullptr;
+
     std::shared_ptr<Blackboard> blackboard;
 
     int EvaluateTile(const TileInfoForAI& info) const;
+
 };
