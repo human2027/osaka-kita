@@ -3,13 +3,13 @@
 #include <array>
 #include "MapBase.h"
 
-// 5ƒ}ƒXæ‚Ìƒ}ƒXî•ñ‚ğŠi”[‚·‚éŒy—Ê\‘¢‘Ì
+// 5ãƒã‚¹å…ˆã®ãƒã‚¹æƒ…å ±ã‚’æ ¼ç´ã™ã‚‹è»½é‡æ§‹é€ ä½“
 struct TileInfoForAI
 {
-    int index = -1;            // ƒ}ƒX”Ô†i”ÍˆÍŠO‚È‚ç -1j
-    TileType type = TileType::Normal;       // ƒ_ƒ[ƒW/‰ñ•œ/ƒAƒCƒeƒ€/’Êí ‚È‚Ç
-    int value = 0;             // ƒ_ƒ[ƒW/‰ñ•œ—Ê
-    int itemId = -1;           // ƒAƒCƒeƒ€í—Şi–¢g—p‚È‚ç -1 ‚Ì‚Ü‚Üj
+    int index = -1;                      // ãƒã‚¹ç•ªå·ï¼ˆç¯„å›²å¤–ãªã‚‰ -1ï¼‰
+    TileType type = TileType::Normal;    // ãƒ€ãƒ¡ãƒ¼ã‚¸/å›å¾©/ã‚¢ã‚¤ãƒ†ãƒ /é€šå¸¸ ãªã©
+    int value = 0;                       // ãƒ€ãƒ¡ãƒ¼ã‚¸/å›å¾©é‡
+    int itemId = -1;                     // ã‚¢ã‚¤ãƒ†ãƒ ç¨®é¡ï¼ˆæœªä½¿ç”¨ãªã‚‰ -1 ã®ã¾ã¾ï¼‰
 };
 
 class Blackboard
@@ -17,49 +17,66 @@ class Blackboard
 public:
     Blackboard();
 
-    //ˆÊ’uî•ñ
+    // ä½ç½®æƒ…å ±
     void SetPositions(int playerPos, int aiPos);
     int  GetPlayerPos() const;
     int  GetAIPos()     const;
 
-    //ƒ‰ƒEƒ“ƒh^ƒ^[ƒ“î•ñ
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ï¼ã‚¿ãƒ¼ãƒ³æƒ…å ±
     void SetRoundInfo(int round, int turnInRound);
     int  GetRoundNumber() const;
     int  GetTurnInRound() const;
 
-    //ƒvƒŒƒCƒ„[c‚èD
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ®‹ã‚Šæœ­
     void SetPlayerHand(const std::vector<int>& hand);
     const std::vector<int>& GetPlayerHand() const;
 
-    //ƒAƒCƒeƒ€•Û
+    // ã‚¢ã‚¤ãƒ†ãƒ ä¿æŒ
     void SetItemFlags(bool playerHas, bool aiHas);
     bool PlayerHasItem() const;
     bool AIHasItem()     const;
 
-    // 5ƒ}ƒXæ‚Ìƒ^ƒCƒ‹î•ñ
+    // 5ãƒã‚¹å…ˆã®ã‚¿ã‚¤ãƒ«æƒ…å ±
     void SetPlayerForwardTiles(const std::array<TileInfoForAI, 5>& tiles);
     void SetAIForwardTiles(const std::array<TileInfoForAI, 5>& tiles);
 
     const std::array<TileInfoForAI, 5>& GetPlayerForwardTiles() const;
     const std::array<TileInfoForAI, 5>& GetAIForwardTiles() const;
 
+    // HPæƒ…å ±
+    void SetHP(int playerHP, int playerMaxHP, int aiHP, int aiMaxHP);
+    int  GetPlayerHP() const;
+    int  GetPlayerMaxHP() const;
+    int  GetAIHP() const;
+    int  GetAIMaxHP() const;
+
+    // å±é™ºåˆ¤å®šï¼ˆé–¾å€¤ã¯å¥½ãã«èª¿æ•´ï¼‰
+    bool IsAIDangerHP(float ratio = 0.3f) const;     // 30%ä»¥ä¸‹ã‚’å±é™º
+    bool IsAICriticalHP(float ratio = 0.15f) const;  // 15%ä»¥ä¸‹ã‚’è‡´å‘½
+
 private:
-    // À•W
+    // åº§æ¨™
     int playerPos;
     int aiPos;
 
-    // ƒ‰ƒEƒ“ƒh^ƒ^[ƒ“
+    // ãƒ©ã‚¦ãƒ³ãƒ‰ï¼ã‚¿ãƒ¼ãƒ³
     int roundNumber;
     int turnInRound;
 
-    // ƒvƒŒƒCƒ„[c‚èD
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ®‹ã‚Šæœ­
     std::vector<int> playerHand;
 
-    // ƒAƒCƒeƒ€Šƒtƒ‰ƒO
+    // ã‚¢ã‚¤ãƒ†ãƒ æ‰€æŒãƒ•ãƒ©ã‚°
     bool playerHasItem;
     bool aiHasItem;
 
-    // 5ƒ}ƒXæ‚Ìƒ^ƒCƒ‹î•ñ
+    // 5ãƒã‚¹å…ˆã®ã‚¿ã‚¤ãƒ«æƒ…å ±
     std::array<TileInfoForAI, 5> playerForward;
     std::array<TileInfoForAI, 5> aiForward;
+
+    // HPæƒ…å ±
+    int playerHP;
+    int playerMaxHP;
+    int aiHP;
+    int aiMaxHP;
 };
