@@ -232,3 +232,24 @@ bool Blackboard::AIUsedReverseThisTurn() const
 {
     return aiUsedReverseThisTurn;
 }
+void Blackboard::SetAIDecision(AIIntent intent, int choseCard, bool yolo)
+{
+    aiIntent = intent;
+    aiChoseCard = choseCard;
+    aiYolo = yolo;
+}
+
+AIIntent Blackboard::GetAIIntent() const
+{
+    return aiIntent;
+}
+
+int Blackboard::GetAIChoseCard() const
+{
+    return aiChoseCard;
+}
+
+bool Blackboard::IsAIYolo() const
+{
+    return aiYolo;
+}

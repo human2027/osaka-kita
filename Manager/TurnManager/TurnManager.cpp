@@ -1,5 +1,4 @@
 #include "TurnManager.h"
-
 #include "CharacterBase.h"
 #include "MapManager.h"
 #include "Judge.h"
@@ -36,13 +35,29 @@ void TurnManager::StartNewRound(CharacterBase& player, CharacterBase& ai)
     currentTurnLimit = maxTurnsPerRound;
 }
 
+void TurnManager::PushUIEvent(UIMessageType type)
+{
+    PushUIEvent(type, 0, 0, 0);
+}
+
+void TurnManager::PushUIEvent(UIMessageType type, int value1)
+{
+    PushUIEvent(type, value1, 0, 0);
+}
+
 void TurnManager::PushUIEvent(UIMessageType type, int value1, int duration)
+{
+    PushUIEvent(type, value1, 0, duration);
+}
+
+void TurnManager::PushUIEvent(UIMessageType type, int value1, int value2, int duration)
 {
     if (!uiEventFunc) return;
 
     UIEvent e;
     e.type = type;
     e.value1 = value1;
+    e.value2 = value2;
     e.duration = duration;
 
     uiEventFunc(e);
@@ -138,7 +153,7 @@ bool TurnManager::ExecuteTurn(
     else
         PushUIEvent(UIMessageType::Draw);
 
-    // --- 手札確定（Remove後） ---
+    //手札確定
     player.RemoveCard(playerCard);
     ai.RemoveCard(aiCard);
 
@@ -149,7 +164,7 @@ bool TurnManager::ExecuteTurn(
     bb.SetPlayerHand(player.GetHand());
     bb.SetAIHand(ai.GetHand());
 
-    // --- タイル効果（入った時だけ：堅牢版） ---
+    // タイル効果
     // 実際に位置が変わった方のみ ApplyTileEffect を適用する
     if (player.GetPos() != prevPlayerPos)
     {

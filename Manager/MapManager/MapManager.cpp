@@ -1,5 +1,5 @@
 #include "MapManager.h"
-#include "DxLib.h"
+#include "DxLib.h" 
 
 void MapManager::Initialize()
 {
@@ -35,18 +35,18 @@ void MapManager::Draw()
 {
     if (!currentMap) return;
 
-    for (int i = 0; i < currentMap->GetSize(); i++)
+    const int size = currentMap->GetSize();
+    for (int i = 0; i < size; i++)
     {
         const Tile& t = currentMap->GetTile(i);
-        unsigned int color = 0xffffff;
+        unsigned int color = GetColor(255, 255, 255);
 
         switch (t.type)
         {
-        //ここら辺は仮なので後で変える部分(予定)
-        case TileType::Damage: color = GetColor(255, 50, 50); break;
-        case TileType::Heal:   color = GetColor(50, 255, 50); break;
+        case TileType::Damage: color = GetColor(255, 50, 50);  break;
+        case TileType::Heal:   color = GetColor(50, 255, 50);  break;
         case TileType::Item:   color = GetColor(200, 200, 50); break;
-        default:               color = GetColor(255, 255, 255); break;
+        default: break;
         }
 
         DrawBox(20 + i * 12, 400, 30 + i * 12, 420, color, TRUE);
@@ -55,10 +55,19 @@ void MapManager::Draw()
 
 const Tile& MapManager::GetTile(int index) const
 {
-    static Tile empty;  // 範囲外用のダミー
+    // ★範囲外用のダミーは必ず初期化しておく（AI評価が安定する）
+    static Tile empty = []()
+        {
+            Tile t{};
+            t.type = TileType::Normal;
+            t.value = 0;
+            return t;
+        }();
 
     if (!currentMap) return empty;
-    if (index < 0 || index >= currentMap->GetSize()) return empty;
+
+    const int size = currentMap->GetSize();
+    if (index < 0 || index >= size) return empty;
 
     return currentMap->GetTile(index);
 }

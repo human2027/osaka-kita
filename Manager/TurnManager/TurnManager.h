@@ -14,7 +14,6 @@ public:
     explicit TurnManager(int maxTurnsPerRound);
 
     void StartNewRound(CharacterBase& player, CharacterBase& ai);
-
     bool ExecuteTurn(
         CharacterBase& player,
         CharacterBase& ai,
@@ -34,9 +33,6 @@ public:
     bool IsRoundFinished()       const { return roundFinished; }
     bool HasPlayerReachedGoal()  const { return playerReachedGoal; }
     bool HasAIReachedGoal()      const { return aiReachedGoal; }
-
-private:
-    void PushUIEvent(UIMessageType type, int value1 = 0, int duration = 0);
 
 private:
     int maxTurnsPerRound = 3;
@@ -61,4 +57,12 @@ private:
     int  currentTurnLimit = 0;
 
     UIEventCallback uiEventFunc;
+
+    //ラッパ
+    void PushUIEvent(UIMessageType type);                         // typeだけ
+    void PushUIEvent(UIMessageType type, int value1);             // type + value1
+    void PushUIEvent(UIMessageType type, int value1, int duration); // type + value1 + duration
+
+    // --- 本体（ここだけが実処理）---
+    void PushUIEvent(UIMessageType type, int value1, int value2, int duration);
 };

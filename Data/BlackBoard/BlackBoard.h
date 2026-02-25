@@ -2,15 +2,15 @@
 #include <vector>
 #include <array>
 #include "MapBase.h"
+#include "AITypes.h"
 
-struct TileInfoForAI
+enum class AIIntent : int
 {
-    int index = -1;
-    TileType type = TileType::Normal;
-    int value = 0;
-    int itemId = -1;
+    GetItem = 0,
+    HealSelf,
+    BlockHeal,
+    Neutral
 };
-
 class Blackboard
 {
 public:
@@ -76,6 +76,12 @@ public:
     bool PlayerUsedReverseThisTurn() const;
     bool AIUsedReverseThisTurn() const;
 
+    //AiÇÃç°âÒÇÃéDÇæÇµèÓïÒ
+    void SetAIDecision(AIIntent intent, int choseCard, bool yolo);
+    AIIntent GetAIIntent() const;
+    int GetAIChoseCard() const;
+    bool IsAIYolo() const;
+
 private:
     int playerPos = 0;
     int aiPos = 0;
@@ -109,4 +115,8 @@ private:
     bool aiUsedBoostThisTurn = false;
     bool playerUsedReverseThisTurn = false;
     bool aiUsedReverseThisTurn = false;
+
+    AIIntent aiIntent = AIIntent::Neutral;
+    int aiChoseCard = 0;   // 1..5
+    bool aiYolo = false;
 };

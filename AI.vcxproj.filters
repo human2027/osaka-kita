@@ -148,8 +148,11 @@
     <Filter Include="ソース ファイル\Data\Behavior\BehaviorNode">
       <UniqueIdentifier>{da7b0429-d133-4227-9fa4-e92789216c4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Data\Behavior\SurviveHP">
-      <UniqueIdentifier>{bd1a95d6-cf72-46bb-a3c5-342b03fef34c}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\Main\Character\AI\Logic">
+      <UniqueIdentifier>{30edf719-a6ad-4831-b3e7-615a4ca13e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Character\AI\AItype">
+      <UniqueIdentifier>{4ab20d8e-d650-449f-be86-ca712ae53ab2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="Data\Behavior\BehaviorNode\BehaviorNode.cpp">
       <Filter>ソース ファイル\Data\Behavior\BehaviorNode</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Character\AI\AIPlayerLogic.cpp">
+      <Filter>ソース ファイル\Main\Character\AI\Logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -332,11 +338,14 @@
     <ClInclude Include="Rule\RoundRule\RoundRule.h">
       <Filter>ソース ファイル\Main\RoundRule\RoundRule</Filter>
     </ClInclude>
-    <ClInclude Include="SurviveHP.h">
-      <Filter>ソース ファイル\Data\Behavior\SurviveHP</Filter>
-    </ClInclude>
     <ClInclude Include="Data\Behavior\BehaviorNode\BehaviorNode.h">
       <Filter>ソース ファイル\Data\Behavior\BehaviorNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Main\Character\AI\AIPlayerLogic.h">
+      <Filter>ソース ファイル\Main\Character\AI\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\AItype\AITypes.h">
+      <Filter>ソース ファイル\Main\Character\AI\AItype</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

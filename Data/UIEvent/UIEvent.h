@@ -1,4 +1,3 @@
-// UIEvent.h
 #pragma once
 
 // どんな種類のシステムメッセージか
@@ -27,13 +26,16 @@ enum class UIMessageType
 
     BothDeadDraw,       // 両者HP0
     PlayerDeadLose,     // プレイヤーHP0で敗北
-    AIDeadLose          // AI HP0で敗北
+    AIDeadLose,         // AI HP0で敗北
+    AI_PresentStart,    // value1 = (int)AIIntent, duration = 思考/溜め時間
+    AI_ShowCard,        // value1 = aiCard(1..5), duration = 表示時間
 };
 
 // UI に渡す一件分のイベント
 struct UIEvent
 {
     UIMessageType type{};
-    int           value1 = 0; // 汎用パラメータ（移動マス数など）
-    int           duration = 0; // 表示フレーム（0 のときは UI 側でデフォルトを決める）
+    int value1 = 0; // 汎用パラメータ（移動マス数など）
+    int value2 = 0;//演出、サブ情報用
+    int duration = 0; // 表示フレーム（0 のときは UI 側でデフォルトを決める）
 };

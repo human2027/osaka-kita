@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule;$(PlayerDir)Data\Key;$(PlayerDir)Data\Aitype</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule;$(PlayerDir)Data\Key;$(PlayerDir)Data\Aitype</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -152,6 +152,7 @@
     <ClCompile Include="Data\MapLoad\MapLoader.cpp" />
     <ClCompile Include="Factory\CharacterFactory\CharacterFactory.cpp" />
     <ClCompile Include="Main\Character\AI\AIPlayer.cpp" />
+    <ClCompile Include="Main\Character\AI\AIPlayerLogic.cpp" />
     <ClCompile Include="Main\Character\Player\Player.cpp" />
     <ClCompile Include="Main\Judge\Judge.cpp" />
     <ClCompile Include="Main\Main.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Base\ObjectBase\ObjectBase.h" />
     <ClInclude Include="Base\StateBase\StateBase.h" />
     <ClInclude Include="Base\UIBase\UIBase.h" />
+    <ClInclude Include="Data\AItype\AITypes.h" />
     <ClInclude Include="Data\AnimationSprite\AnimationSprite.h" />
     <ClInclude Include="Data\AnimationTag\AnimationTag.h" />
     <ClInclude Include="Data\Behavior\BehaviorNode\BehaviorNode.h" />
@@ -187,6 +189,7 @@
     <ClInclude Include="Data\UIEvent\UIEvent.h" />
     <ClInclude Include="Factory\CharacterFactory\CharacterFactory.h" />
     <ClInclude Include="Main\Character\AI\AIPlayer.h" />
+    <ClInclude Include="Main\Character\AI\AIPlayerLogic.h" />
     <ClInclude Include="Main\Character\AI\KeyboardInput.h" />
     <ClInclude Include="Main\Character\Player\Player.h" />
     <ClInclude Include="Main\Judge\Judge.h" />
@@ -201,7 +204,6 @@
     <ClInclude Include="State\InRound\InRoundState.h" />
     <ClInclude Include="State\RoundResult\GameEndState.h" />
     <ClInclude Include="State\RoundResult\RoundResultState.h" />
-    <ClInclude Include="SurviveHP.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

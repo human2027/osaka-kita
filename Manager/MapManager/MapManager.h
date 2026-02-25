@@ -5,9 +5,7 @@
 
 #include "MapBase.h"
 #include "MapLoader.h"
-#include "Blackboard.h"
-#include <DxLib.h>
-
+#include "CharacterBase.h" 
 class MapManager
 {
 public:
@@ -17,7 +15,7 @@ public:
     // マップ切り替え
     void SetMap(std::shared_ptr<MapBase> map)
     {
-        currentMap = map;
+        currentMap = std::move(map);
     }
 
     // CSV読み込み → MapBaseに反映
@@ -26,10 +24,17 @@ public:
     // マップ初期化
     void Initialize();
 
-     const Tile& GetTile(int index) const;
+    //
+    void Draw();
+
+    // タイル取得（範囲外はダミーを返す）
+    const Tile& GetTile(int index) const;
 
     // マスの効果をキャラクターに適用
     void ApplyTileEffect(CharacterBase& character);
+
+    // ゴール判定
+    bool IsGoal(int pos) const;
 
     // 目標地点（ゴール）
     int GetGoal() const
@@ -42,12 +47,7 @@ public:
     {
         return currentMap ? currentMap->GetSize() : 0;
     }
-    //ゴールのsん義
-    bool IsGoal(int pos) const;
 
-    // 描画
-    void Draw();
 private:
-
     std::shared_ptr<MapBase> currentMap;
 };
