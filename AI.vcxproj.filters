@@ -154,6 +154,9 @@
     <Filter Include="ソース ファイル\Main\Character\AI\AItype">
       <UniqueIdentifier>{4ab20d8e-d650-449f-be86-ca712ae53ab2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Main\Character\AI\AnimDB">
+      <UniqueIdentifier>{2dc3614b-66c8-43ff-bd78-0c56d20674d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\MapBase\MapBase.cpp">
@@ -239,6 +242,9 @@
     </ClCompile>
     <ClCompile Include="Main\Character\AI\AIPlayerLogic.cpp">
       <Filter>ソース ファイル\Main\Character\AI\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\AnimDB\AnimDB.cpp">
+      <Filter>ソース ファイル\Main\Character\AI\AnimDB</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="Data\AItype\AITypes.h">
       <Filter>ソース ファイル\Main\Character\AI\AItype</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\AnimDB\AnimDB.h">
+      <Filter>ソース ファイル\Main\Character\AI\AnimDB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

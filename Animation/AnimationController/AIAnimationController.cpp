@@ -1,36 +1,21 @@
 #include "AIAnimationController.h"
-
+#include "AnimDB.h"          
+#include <DxLib.h>          
 AIAnimationController::AIAnimationController(AnimationSprite* bank)
     : anim(bank)
 {
-    // 最初は敵Idleアニメ
-    anim.Play("Enemy_Idle", true, 8.0f);
+    // 最初は Idle
+    PlayByTag(AnimTag{ AnimGroup::Enemy, AnimAction::Idle, AnimMood::Normal });
+    state = State::Idle;
 }
 
-std::string AIAnimationController::MakeHandKey(int cardValue) const
+void AIAnimationController::OnChooseCard(int cardValue, AnimMood mood)
 {
-    // カードの数値に応じてキー名を返す
-    // 実際のファイル名に合わせて修正してください
-    switch (cardValue)
-    {
-    case 1: return "Enemy_Hand1";
-    case 2: return "Enemy_Hand2";
-    case 3: return "Enemy_Hand3";
-    case 4: return "Enemy_Hand4";
-    case 5: return "Enemy_Hand5";
-    default:
-        return "Enemy_Hand1"; // 保険
-    }
-}
-
-void AIAnimationController::OnChooseCard(int cardValue)
-{
+    shownNumber = cardValue;
     state = State::ShowNumber;
 
-    const std::string key = MakeHandKey(cardValue);
-
-    // 1回だけ再生する（終わったら Idle に戻す）
-    anim.Play(key, false, 12.0f);
+    // 数字表示アニメ（モーションは1種類、表情差分は mood で分岐させる）
+    PlayByTag(AnimTag{ AnimGroup::Enemy, AnimAction::ShowHand, mood });
 }
 
 void AIAnimationController::Update(float dt)
@@ -40,17 +25,14 @@ void AIAnimationController::Update(float dt)
     switch (state)
     {
     case State::Idle:
-        if (anim.GetCurrentKey() != "Enemy_Idle")
-        {
-            anim.Play("Enemy_Idle", true, 8.0f);
-        }
+        EnsureIdle();
         break;
 
     case State::ShowNumber:
         if (anim.IsFinished())
         {
             state = State::Idle;
-            anim.Play("Enemy_Idle", true, 8.0f);
+            EnsureIdle();
         }
         break;
     }
@@ -58,5 +40,47 @@ void AIAnimationController::Update(float dt)
 
 void AIAnimationController::Draw(int x, int y)
 {
+    // アニメ本体
     anim.Draw(x, y);
+
+    // 数字は「アニメとは別」に描画
+    // ここは好みで：数字画像を描く/フォント描画/位置補正など
+    if (state == State::ShowNumber)
+    {
+        // 例：簡易に文字表示（あなたのUIに合わせて置き換えてOK）
+        // 数字を手元に出すなら x/y のオフセットを調整
+        const int ox = 40;
+        const int oy = 10;
+        DrawFormatString(x + ox, y + oy, GetColor(255, 255, 255), "%d", shownNumber);
+    }
+}
+
+// ---- private ----
+
+void AIAnimationController::EnsureIdle()
+{
+    const AnimTag idle{ AnimGroup::Enemy, AnimAction::Idle, AnimMood::Normal };
+    if (!(currentTag == idle))
+    {
+        PlayByTag(idle);
+    }
+}
+
+void AIAnimationController::PlayByTag(const AnimTag& tag)
+{
+    auto specOpt = AnimDB::Find(tag);
+    if (!specOpt.has_value())
+    {
+#ifdef _DEBUG
+        // 登録漏れが一発で分かるようにする（DxLib）
+        // ※ ToStringが無いならここは消してもOK
+        // printfDx("AnimDB missing tag\n");
+#endif
+        return;
+    }
+
+    const AnimPlaySpec& spec = specOpt.value();
+    anim.Play(spec.key, spec.loop, spec.fps);
+
+    currentTag = tag;
 }

@@ -8,7 +8,7 @@ namespace
     // 必要に応じてここへ追加
     const std::unordered_map<std::string, AnimTag> ANIM_TAG_TABLE =
     {
-        // ▼ プレイヤー
+        //プレイヤー
         {
             "Player_Idle",
             AnimTag{

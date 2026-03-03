@@ -19,7 +19,7 @@ enum class AnimAction
     StrongAtk,
     ItemUse,
     Bluff,
-    ShawHand
+    ShowHand
 };
 
 // 感情・雰囲気
@@ -32,15 +32,19 @@ enum class AnimMood
     Bluffing,
 };
 
-// 3軸タグ
+// 3軸タグ（variant無し）
 struct AnimTag
 {
     AnimGroup  group = AnimGroup::None;
     AnimAction action = AnimAction::None;
     AnimMood   mood = AnimMood::None;
-    int variant = 0;//手札の番号
 };
 
-// キーからタグを取得
-// 登録されていないキー → 全部 None の AnimTag3 を返す
+// 等価比較（vector探索に必要）
+inline bool operator==(const AnimTag& a, const AnimTag& b) noexcept
+{
+    return a.group == b.group && a.action == b.action && a.mood == b.mood;
+}
+
+// キーからタグを取得（必要なら）
 AnimTag GetAnimTagByKey(const std::string& key);

@@ -1,27 +1,40 @@
 #pragma once
-#include <string>
-#include "AIAnimationFrame.h"  
+#include <cstdint>
+#include "AIAnimationFrame.h"
+#include "AnimationTag.h"   
+
+class AnimationSprite;
+
+// 「タグ → (key, loop, fps)」を引くDB（後述のAnimDB）
+struct AnimPlaySpec;
+class AnimDB;
 
 class AIAnimationController
 {
 public:
-    AIAnimationController(AnimationSprite* bank);
+    enum class State : uint8_t
+    {
+        Idle,
+        ShowNumber
+    };
+
+    explicit AIAnimationController(AnimationSprite* bank);
+
+    // AIがカードを選んだとき呼ぶ
+    // mood は「ブラフっぽい顔」「強気」など、演出側の気分を渡せる（不要なら AnimMood::Normal 固定でOK）
+    void OnChooseCard(int cardValue, AnimMood mood = AnimMood::Normal);
 
     void Update(float dt);
     void Draw(int x, int y);
 
-    // AI がカードを選んだときに呼ぶ
-    void OnChooseCard(int cardValue);
+private:
+    void PlayByTag(const AnimTag& tag);
+    void EnsureIdle();
 
 private:
-    enum class State
-    {
-        Idle,
-        ShowNumber,
-    };
-
     AIAnimationFrame anim;
-    State state = State::Idle;
 
-    std::string MakeHandKey(int cardValue) const;
+    State  state = State::Idle;
+    int    shownNumber = 0;    // 表示する数字（アニメとは別）
+    AnimTag currentTag{};      // 「今なにを再生してるか」はキーじゃなくタグで管理
 };
