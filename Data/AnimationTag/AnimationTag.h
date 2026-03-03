@@ -19,6 +19,7 @@ enum class AnimAction
     StrongAtk,
     ItemUse,
     Bluff,
+    ShawHand
 };
 
 // 感情・雰囲気
@@ -37,6 +38,7 @@ struct AnimTag
     AnimGroup  group = AnimGroup::None;
     AnimAction action = AnimAction::None;
     AnimMood   mood = AnimMood::None;
+    int variant = 0;//手札の番号
 };
 
 // キーからタグを取得

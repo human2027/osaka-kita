@@ -200,7 +200,7 @@ namespace
 
     static int CardPreferenceBias(const Blackboard& bb, int aiCard)
     {
-        const int center = aiCard - 3; // 1:-2,2:-1,3:0,4:+1,5:+2
+        const int center = aiCard - 3; 
         int bias = 0;
 
         // (A) HPí·Ç¢ Å® è¨Ç≥Ç¢éDäÒÇË
@@ -279,7 +279,7 @@ namespace
         }
         return cands.back().card;
     }
-} // anonymous namespace
+}
 
 namespace AIPlayerLogic
 {
