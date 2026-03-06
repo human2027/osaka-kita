@@ -20,7 +20,7 @@ void AIPlayer::UpdateBlackboard(Blackboard& bb, const MapManager& map, int /*rou
     const int aiPos = GetPos();
     const int mapSize = map.GetSize();
 
-    for (int steps = AI_CARD_MIN; steps <= AI_CARD_MAX; ++steps)
+    for (int steps = AI_Card_Min; steps <= AI_Card_Max; ++steps)
     {
         TileInfoForAI info{};
         const int tileIndex = aiPos + steps;
@@ -46,7 +46,7 @@ void AIPlayer::UpdateBlackboard(Blackboard& bb, const MapManager& map, int /*rou
     std::array<TileInfoForAI, 5> plForward{};
     const int plPos = bb.GetPlayerPos();
 
-    for (int steps = AI_CARD_MIN; steps <= AI_CARD_MAX; ++steps)
+    for (int steps = AI_Card_Min; steps <= AI_Card_Max; ++steps)
     {
         TileInfoForAI info{};
         const int tileIndex = plPos + steps;
@@ -69,25 +69,26 @@ void AIPlayer::UpdateBlackboard(Blackboard& bb, const MapManager& map, int /*rou
     bb.SetPlayerForwardTiles(plForward);
 }
 
+
 // タイル評価（可視化用途）
 int AIPlayer::EvaluateTile(const TileInfoForAI& info) const
 {
     if (info.index < 0)
-        return nothing_score;
+        return Nothing_Score;
 
     int score = 0;
     switch (info.type)
     {
     case TileType::Damage:
-        score -= Damage_score;
+        score -= AI_Neutral_W_Damage_Avoid;
         score -= info.value;
         break;
     case TileType::Heal:
-        score += Heal_score;
+        score += AI_Neutral_W_Heal;
         score += info.value;
         break;
     case TileType::Item:
-        score += Item_score;
+        score += AI_Neutral_W_Iteam;
         break;
     case TileType::Normal:
     default:
@@ -103,9 +104,9 @@ std::vector<AIPlayer::AITileEval> AIPlayer::GetForwardEvaluation() const
 
     const auto& forward = blackboard->GetAIForwardTiles();
 
-    result.reserve(AI_CARD_MAX - AI_CARD_MIN + 1);
+    result.reserve(AI_Card_Max - AI_Card_Min + 1);
 
-    for (int steps = AI_CARD_MIN; steps <= AI_CARD_MAX; ++steps)
+    for (int steps = AI_Card_Min; steps <= AI_Card_Max; ++steps)
     {
         const TileInfoForAI& info = forward[steps - 1];
 
@@ -126,7 +127,7 @@ int AIPlayer::ChooseCard()
     const auto& myHand = GetHand();
     if (myHand.empty()) return -1;
 
-    const bool hasYolo = HasCard(AI_YOLO_CARD);
+    const bool hasYolo = HasCard(AI_Yolo_Card);
 
     auto dec = AIPlayerLogic::ChooseCard(*blackboard, cachedMap, myHand, hasYolo);
 

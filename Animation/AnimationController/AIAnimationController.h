@@ -2,12 +2,11 @@
 #include <cstdint>
 #include "AIAnimationFrame.h"
 #include "AnimationTag.h"   
-
-class AnimationSprite;
+#include "AnimDB.h"
+#include "AnimationSprite.h"
 
 // 「タグ → (key, loop, fps)」を引くDB（後述のAnimDB）
 struct AnimPlaySpec;
-class AnimDB;
 
 class AIAnimationController
 {

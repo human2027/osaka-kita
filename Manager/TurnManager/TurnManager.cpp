@@ -206,7 +206,7 @@ bool TurnManager::ExecuteTurn(
     RoundRule::HandleTurnLimitAndExtension(
         playsThisRound,
         currentTurnLimit,
-        MAX_TURN_LIMIT,
+        Max_Turn_Limit,
         segmentDraws,
         segmentSameNumber,
         roundFinished,
@@ -223,8 +223,8 @@ bool TurnManager::ExecuteTurn(
     {
         if (!hadAnyDraw && !hadSameNum)
             PushUIEvent(UIMessageType::RoundEndQuick, playsThisRound);
-        else if (currentTurnLimit >= MAX_TURN_LIMIT)
-            PushUIEvent(UIMessageType::RoundEndMaxTurn, MAX_TURN_LIMIT);
+        else if (currentTurnLimit >= Max_Turn_Limit)
+            PushUIEvent(UIMessageType::RoundEndMaxTurn, Max_Turn_Limit);
     }
 
     if (roundEndedThisTurn)

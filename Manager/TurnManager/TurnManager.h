@@ -63,6 +63,5 @@ private:
     void PushUIEvent(UIMessageType type, int value1);             // type + value1
     void PushUIEvent(UIMessageType type, int value1, int duration); // type + value1 + duration
 
-    // --- –{‘Ìi‚±‚±‚¾‚¯‚ªÀˆ—j---
     void PushUIEvent(UIMessageType type, int value1, int value2, int duration);
 };

@@ -1,5 +1,5 @@
 #include "MapLoader.h"
-#include "InitialValue.h"   // š ‚³‚Á‚«‚Ì’è”‚ğg‚¤
+#include "InitialValue.h"   
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -27,10 +27,10 @@ bool MapLoader::LoadCSV(const std::string& path, std::vector<Tile>& outTiles)
         switch (tile.type)
         {
         case TileType::Damage:
-            tile.value = TILE_DAMAGE_VALUE;  
+            tile.value = Tile_Damage_Value;  
             break;
         case TileType::Heal:
-            tile.value = TILE_HEAL_VALUE;  
+            tile.value = Tile_Heal_Value;  
             break;
         case TileType::Item:
         case TileType::Event:

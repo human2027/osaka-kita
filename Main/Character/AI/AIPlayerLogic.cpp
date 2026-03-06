@@ -24,11 +24,11 @@ namespace
 
     struct Weights
     {
-        int wItem = AI_NEUTRAL_W_ITEM;
-        int wHeal = AI_NEUTRAL_W_HEAL;
-        int wDamageAvoid = AI_NEUTRAL_W_DAMAGE_AVOID;
-        int wDamageEnemy = AI_NEUTRAL_W_DAMAGE_ENEMY;
-        int wBlockHeal = AI_NEUTRAL_W_BLOCK_HEAL;
+        int wItem = AI_Healself_W_Iteam;
+        int wHeal = AI_Neutral_W_Heal;
+        int wDamageAvoid = AI_Neutral_W_Damage_Avoid;
+        int wDamageEnemy = AI_Neutral_W_Damage_Enemy;
+        int wBlockHeal = AI_Neutral_W_Block_Heal;
     };
 
     static float Rand01()
@@ -58,7 +58,7 @@ namespace
             return Intent::GetItem;
 
         // (2) í·HPÇ»ÇÁâÒïúóDêÊ
-        if (bb.IsAIDangerHP(AI_DANGER_HP_RATIO))
+        if (bb.IsAIDangerHP(AI_Danger_HP_Ratio))
             return Intent::HealSelf;
 
         // (3) ëäéËÇ™ïméÄÇ≈ÅAëäéËëOï˚Ç…âÒïúÇ™Ç†ÇÈÇ»ÇÁëjé~
@@ -66,7 +66,7 @@ namespace
         const int plMax = bb.GetPlayerMaxHP();
         const float pr = (plMax > 0) ? (float)plHP / (float)plMax : 1.0f;
 
-        if (pr <= AI_BLOCK_ENEMY_HP_RATIO)
+        if (pr <= AI_Block_Enemy_HP_Raito)
         {
             const auto& pf = bb.GetPlayerForwardTiles();
             for (int i = 0; i < 5; ++i)
@@ -93,28 +93,28 @@ namespace
             break;
 
         case Intent::HealSelf:
-            w.wItem = AI_HEALSELF_W_ITEM;
-            w.wHeal = AI_HEALSELF_W_HEAL;
-            w.wDamageAvoid = AI_HEALSELF_W_DAMAGE_AVOID;
-            w.wDamageEnemy = AI_HEALSELF_W_DAMAGE_ENEMY;
-            w.wBlockHeal = AI_HEALSELF_W_BLOCK_HEAL;
+            w.wItem = AI_Healself_W_Iteam;
+            w.wHeal = AI_Healself_W_Heal;
+            w.wDamageAvoid = AI_Healself_W_Damage_Avoid;
+            w.wDamageEnemy = AI_Healself_W_Damage_Enemy;
+            w.wBlockHeal = AI_Healself_W_Block_Heal;
             break;
 
         case Intent::BlockHeal:
-            w.wItem = AI_BLOCKHEAL_W_ITEM;
-            w.wHeal = AI_BLOCKHEAL_W_HEAL;
-            w.wDamageAvoid = AI_BLOCKHEAL_W_DAMAGE_AVOID;
-            w.wDamageEnemy = AI_BLOCKHEAL_W_DAMAGE_ENEMY;
-            w.wBlockHeal = AI_BLOCKHEAL_W_BLOCK_HEAL;
+            w.wItem = AI_Blockheal_W_Iteam;
+            w.wHeal = AI_Blockheal_W_Heal;
+            w.wDamageAvoid = AI_Blockheal_W_Damage_Avoid;
+            w.wDamageEnemy = AI_Blockheal_W_Damage_Enemy;
+            w.wBlockHeal = AI_Blockheal_W_Block_Heal;
             break;
 
         case Intent::Neutral:
         default:
-            w.wItem = AI_NEUTRAL_W_ITEM;
-            w.wHeal = AI_NEUTRAL_W_HEAL;
-            w.wDamageAvoid = AI_NEUTRAL_W_DAMAGE_AVOID;
-            w.wDamageEnemy = AI_NEUTRAL_W_DAMAGE_ENEMY;
-            w.wBlockHeal = AI_NEUTRAL_W_BLOCK_HEAL;
+            w.wItem = AI_Neutral_W_Iteam;
+            w.wHeal = AI_Neutral_W_Heal;
+            w.wDamageAvoid = AI_Neutral_W_Damage_Avoid;
+            w.wDamageEnemy = AI_Neutral_W_Damage_Enemy;
+            w.wBlockHeal = AI_Neutral_W_Block_Heal;
             break;
         }
         return w;
@@ -159,7 +159,7 @@ namespace
 
     static int ScoreLandingAI(const TileInfoForAI& t, const Weights& w)
     {
-        if (t.index < 0) return nothing_score;
+        if (t.index < 0) return Nothing_Score;
 
         switch (t.type)
         {
@@ -208,9 +208,9 @@ namespace
         const int aiMax = bb.GetAIMaxHP();
         const float ar = (aiMax > 0) ? (float)aiHP / (float)aiMax : 1.0f;
 
-        if (ar <= AI_LOWHP_SMALL_RATIO)
+        if (ar <= AI_LowHP_Small_Raito)
         {
-            bias += (-center) * AI_BIAS_LOWHP_SMALL;
+            bias += (-center) * AI_Bias_LowHP_Small;
         }
 
         // (B) à íuÇ≈ïâÇØÇƒÇÈ Å® ëÂÇ´Ç¢éDäÒÇË
@@ -218,9 +218,9 @@ namespace
         if (diff > 0)
         {
             int d = diff;
-            if (d > AI_BEHIND_DIFF_CAP) d = AI_BEHIND_DIFF_CAP;
+            if (d > AI_Behind_Diff_Cap) d = AI_Behind_Diff_Cap;
 
-            const int scaled = (AI_BIAS_BEHIND_BIG * d) / AI_BEHIND_DIFF_CAP;
+            const int scaled = (AI_Bias_LowHP_Big * d) / AI_Behind_Diff_Cap;
             bias += (center)*scaled;
         }
 
@@ -230,8 +230,8 @@ namespace
     static bool ShouldYoloBehind(const Blackboard& bb)
     {
         const int diff = bb.GetPlayerPos() - bb.GetAIPos();
-        if (diff < AI_BEHIND_YOLO_MIN_DIFF) return false;
-        return Rand01() < AI_BEHIND_YOLO_PROB;
+        if (diff < AI_Behind_Yolo_Min_Diff) return false;
+        return Rand01() < AI_Behind_Yolo_Prob;
     }
 
     struct Cand
@@ -242,7 +242,7 @@ namespace
 
     static int SoftmaxPick(const std::vector<Cand>& cands, float temperature)
     {
-        if (cands.empty()) return AI_CARD_MIN;
+        if (cands.empty()) return AI_Card_Min;
 
         int maxScore = cands[0].score;
         for (const auto& c : cands)
@@ -256,7 +256,7 @@ namespace
 
         for (const auto& c : cands)
         {
-            const int noise = (rand() % (AI_NOISE_RANGE * 2 + 1)) - AI_NOISE_RANGE; // [-R..+R]
+            const int noise = (rand() % (AI_Noise_Range * 2 + 1)) - AI_Noise_Range; // [-R..+R]
             const double x = (double)(c.score + noise - maxScore) / (double)T;
             const double xc = (x < -50.0) ? -50.0 : (x > 50.0 ? 50.0 : x);
 
@@ -313,7 +313,7 @@ namespace AIPlayerLogic
         // YOLOÅiã}Ç…ç≈ëÂéDÅj
         if (hasYoloCard && ShouldYoloBehind(bb))
         {
-            out.chosenCard = AI_YOLO_CARD; // í èÌ5
+            out.chosenCard = AI_Yolo_Card; // í èÌ5
             out.yolo = true;
             return out;
         }
@@ -323,7 +323,7 @@ namespace AIPlayerLogic
         const auto& ph = bb.GetPlayerHand();
         if (ph.empty())
         {
-            for (int c = AI_CARD_MIN; c <= AI_CARD_MAX; ++c)
+            for (int c = AI_Card_Min; c <= AI_Card_Max; ++c)
                 oppCards.push_back(c);
         }
         else
@@ -343,24 +343,24 @@ namespace AIPlayerLogic
         if (diff > 0)
         {
             int d = diff;
-            if (d > AI_BEHIND_DIFF_CAP) d = AI_BEHIND_DIFF_CAP;
-            behind01 = (float)d / (float)AI_BEHIND_DIFF_CAP;
+            if (d > AI_Behind_Diff_Cap) d = AI_Behind_Diff_Cap;
+            behind01 = (float)d / (float)AI_Behind_Diff_Cap;
         }
-        const float temperature = AI_SOFTMAX_TEMP_BASE + behind01 * AI_SOFTMAX_TEMP_BEHIND_ADD;
+        const float temperature = AI_Softmax_Temp_Base + behind01 * AI_Softmax_Temp_Behind_Add;
 
         std::vector<Cand> cands;
         cands.reserve(myHand.size());
 
         for (int aiCard : myHand)
         {
-            if (aiCard < AI_CARD_MIN || aiCard > AI_CARD_MAX) continue;
+            if (aiCard < AI_Card_Min || aiCard > AI_Card_Max) continue;
 
             long long sum = 0;
             int cnt = 0;
 
             for (int plCard : oppCards)
             {
-                if (plCard < AI_CARD_MIN || plCard > AI_CARD_MAX) continue;
+                if (plCard < AI_Card_Min || plCard > AI_Card_Max) continue;
 
                 const int result = JudgeWinnerMini(plCard, aiCard, reverse);
 
@@ -379,7 +379,7 @@ namespace AIPlayerLogic
                 }
                 else
                 {
-                    sc = -AI_DRAW_PENALTY;
+                    sc = -AI_Draw_Penalty;
                 }
 
                 sum += sc;

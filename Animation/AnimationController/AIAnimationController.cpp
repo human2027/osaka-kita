@@ -1,6 +1,8 @@
 #include "AIAnimationController.h"
 #include "AnimDB.h"          
-#include <DxLib.h>          
+#include <DxLib.h>     
+#include "InitialValue.h"
+
 AIAnimationController::AIAnimationController(AnimationSprite* bank)
     : anim(bank)
 {
@@ -43,19 +45,15 @@ void AIAnimationController::Draw(int x, int y)
     // アニメ本体
     anim.Draw(x, y);
 
-    // 数字は「アニメとは別」に描画
-    // ここは好みで：数字画像を描く/フォント描画/位置補正など
+    //数字画像(フォント描画/位置補正など
     if (state == State::ShowNumber)
     {
         // 例：簡易に文字表示（あなたのUIに合わせて置き換えてOK）
         // 数字を手元に出すなら x/y のオフセットを調整
-        const int ox = 40;
-        const int oy = 10;
-        DrawFormatString(x + ox, y + oy, GetColor(255, 255, 255), "%d", shownNumber);
+    
+        DrawFormatString(x + Count_Position_x, y + Count_Position_y, GetColor(255, 255, 255), "%d", shownNumber);
     }
 }
-
-// ---- private ----
 
 void AIAnimationController::EnsureIdle()
 {
@@ -71,11 +69,6 @@ void AIAnimationController::PlayByTag(const AnimTag& tag)
     auto specOpt = AnimDB::Find(tag);
     if (!specOpt.has_value())
     {
-#ifdef _DEBUG
-        // 登録漏れが一発で分かるようにする（DxLib）
-        // ※ ToStringが無いならここは消してもOK
-        // printfDx("AnimDB missing tag\n");
-#endif
         return;
     }
 

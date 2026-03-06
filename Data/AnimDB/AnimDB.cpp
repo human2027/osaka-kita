@@ -8,7 +8,7 @@ namespace
         AnimPlaySpec spec;
     };
 
-    // ‚±‚±‚É‘‚â‚µ‚Ä‚¢‚­ivariant–³‚µj
+    
     const Entry TABLE[] =
     {
         // --- Enemy ---

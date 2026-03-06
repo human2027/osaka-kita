@@ -10,8 +10,7 @@ struct AnimPlaySpec
     bool  loop = true;
     float fps = 8.0f;
 };
-
-class AnimDB
+struct AnimDB
 {
 public:
     // ƒ^ƒO‚ÉŠ®‘Sˆê’v‚·‚é‚à‚Ì‚ð•Ô‚·
