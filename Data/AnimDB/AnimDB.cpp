@@ -11,17 +11,15 @@ namespace
     
     const Entry TABLE[] =
     {
-        // --- Enemy ---
+        //Enmy
         { {AnimGroup::Enemy, AnimAction::Idle,     AnimMood::Normal},    {"Enemy_Idle", true, 8.0f} },
 
-        // 数字を見せる動作（モーションは同じでも、表情差分があるならkeyを分ける）
+        // 数字を見せる動作
         { {AnimGroup::Enemy, AnimAction::ShowHand, AnimMood::Normal},    {"Enemy_ShowHand", false, 12.0f} },
         { {AnimGroup::Enemy, AnimAction::ShowHand, AnimMood::Confident}, {"Enemy_ShowHand_Confident", false, 12.0f} },
         { {AnimGroup::Enemy, AnimAction::ShowHand, AnimMood::Desperate}, {"Enemy_ShowHand_Desperate", false, 12.0f} },
         { {AnimGroup::Enemy, AnimAction::ShowHand, AnimMood::Bluffing},  {"Enemy_ShowHand_Bluffing", false, 12.0f} },
 
-        // 例：攻撃など（必要なら）
-        // { {AnimGroup::Enemy, AnimAction::WeakAtk,  AnimMood::Normal}, {"Enemy_Atk_Weak", false, 12.0f} },
     };
 
     constexpr int TABLE_SIZE = static_cast<int>(sizeof(TABLE) / sizeof(TABLE[0]));
