@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "GameManager.h"
-
+#include "InitialValue.h"
 //------------------------------------
 // WinMain（DxLib の標準）
 //------------------------------------
@@ -10,7 +10,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     SetOutApplicationLogValidFlag(FALSE);   // ログを出さない
     ChangeWindowMode(TRUE);                 // ウィンドウモード
     SetBackgroundColor(0, 0, 0);            // 背景色
-    SetGraphMode(860, 720, 32);             // 画面サイズ
+    SetGraphMode(Window_screen_W, Window_screen_H, 32);             // 画面サイズ
     if (DxLib_Init() == -1) return -1;
 
     // 画面を真っ黒にしないモード

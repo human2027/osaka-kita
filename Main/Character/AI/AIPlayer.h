@@ -7,11 +7,12 @@
 #include "MapManager.h"
 #include "MapBase.h"
 #include "AITypes.h"
+#include "AIAnimationController.h"
 
 class AIPlayer : public CharacterBase
 {
 public:
-    explicit AIPlayer(std::shared_ptr<Blackboard> bb = nullptr);
+    explicit AIPlayer(std::shared_ptr<Blackboard> bb);
 
     void SetBlackboard(std::shared_ptr<Blackboard> bb) { blackboard = std::move(bb); }
 
@@ -25,6 +26,8 @@ public:
     };
 
     std::vector<AITileEval> GetForwardEvaluation() const;
+
+
 
     void UpdateBlackboard(Blackboard& bb, const MapManager& map, int roundNumber, int playsThisRound);
 

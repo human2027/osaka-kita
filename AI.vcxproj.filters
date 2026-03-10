@@ -157,6 +157,9 @@
     <Filter Include="ソース ファイル\Main\Character\AI\AnimDB">
       <UniqueIdentifier>{2dc3614b-66c8-43ff-bd78-0c56d20674d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Manager\AnimationManager">
+      <UniqueIdentifier>{1281816d-9590-4a24-831c-e80a9e8e0265}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\MapBase\MapBase.cpp">
@@ -245,6 +248,9 @@
     </ClCompile>
     <ClCompile Include="Data\AnimDB\AnimDB.cpp">
       <Filter>ソース ファイル\Main\Character\AI\AnimDB</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\AnimationManager\AnimationManager.cpp">
+      <Filter>ソース ファイル\Manager\AnimationManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="Data\AnimDB\AnimDB.h">
       <Filter>ソース ファイル\Main\Character\AI\AnimDB</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\AnimationManager\AnimationManager.h">
+      <Filter>ソース ファイル\Manager\AnimationManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

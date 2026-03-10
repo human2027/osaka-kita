@@ -26,6 +26,10 @@ void GameManager::Initialize()
     // Blackboard
     blackboard = std::make_shared<Blackboard>();
 
+    // アニメ初期化
+    animationManager.Initialize();
+    animationManager.SetAIDrawPosition(AIDraw_X, AIDraw_Y); 
+
     // プレイヤー / AI 生成
     player = std::make_shared<Player>();
     aiPlayer = std::make_shared<AIPlayer>(blackboard);
@@ -46,6 +50,10 @@ void GameManager::Initialize()
 
     player->ResetRound();
     aiPlayer->ResetRound();
+
+    // 時間初期化
+    prevMs = GetNowCount();
+    deltaTime = 0.0f;
 
     // TurnManager → UI へのイベントコールバック
     turnManager.SetUIEventCallback(
@@ -142,6 +150,17 @@ void GameManager::UpdateInRound()
     playsThisRound = turnManager.GetPlaysThisRound();
     lastPlayerCard = turnManager.GetLastPlayerCard();
     lastAiCard = turnManager.GetLastAICard();
+
+    // AIカード選択時のアニメ再生
+    AnimMood mood = AnimMood::Normal;
+
+    // Blackboard に AIDecision の getter があるなら、あとでここを強化できる
+    // 例:
+    // if (blackboard->GetAIDecisionYolo()) mood = AnimMood::Confident;
+    // else if (blackboard->GetAIDecisionIntent() == AIIntent::HealSelf) mood = AnimMood::Desperate;
+    // else if (blackboard->GetAIDecisionIntent() == AIIntent::BlockHeal) mood = AnimMood::Confident;
+
+    animationManager.OnAIChooseCard(lastAiCard, mood);
 }
 
 // 共通の描画処理
@@ -149,6 +168,11 @@ void GameManager::DrawGame()
 {
     // マップの描画（マスの色など）
     mapManager.Draw();
+
+    // AIアニメ描画
+    animationManager.Draw();
+
+    // UI描画
     uiManager.Draw(
         player, aiPlayer,
         roundNumber, playsThisRound,
@@ -159,6 +183,18 @@ void GameManager::DrawGame()
 // メイン更新
 void GameManager::Update()
 {
+    const int now = GetNowCount();
+    int dtMs = now - prevMs;
+
+    if (dtMs < 0) dtMs = 0;
+    if (dtMs > 100) dtMs = 100; // 暴走防止
+
+    prevMs = now;
+    deltaTime = static_cast<float>(dtMs) / 1000.0f;
+
+    // アニメ更新
+    animationManager.Update(deltaTime);
+
     if (currentState) {
         currentState->Update(*this);
     }

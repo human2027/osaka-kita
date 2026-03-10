@@ -11,19 +11,51 @@ AnimationSprite::~AnimationSprite()
 //ゲーム全体で使うアニメをここで全部読み込む(予定)
 void AnimationSprite::InitializeForBoardGame()
 {
-    // 試し読み込み
     LoadSequence(
-        "Player_PutHand",
-        "AI/AI/Material/Animation/Put hand",
-        "PutHand_",
-        0, 3,
+        "Enemy_Idle",
+        "../AI/Material/Animation/ude doya",
+        "frame_",
+        1, 30,
         ".png",
-        0
+        5
     );
 
-    // 必要になったら追加
-}
+    LoadSequence(
+        "Enemy_ShowHand",
+        "../AI/Material/Animation/nomal",
+        "frame_",
+        1, 30,
+        ".png",
+        5
+    );
 
+    LoadSequence(
+        "Enemy_ShowHand_Confident",
+        "../AI/Material/Animation/mesorasi",
+        "frame_",
+        1, 30,
+        ".png",
+        5
+    );
+
+    LoadSequence(
+        "Enemy_ShowHand_Desperate",
+        "../AI/Material/Animation/sinikake",
+        "frame_",
+        1, 30,
+        ".png",
+        5
+    );
+
+    LoadSequence(
+        "Enemy_ShowHand_Bluffing",
+        "../AI/Material/Animation/bibiri",
+        "frame_",
+        1, 30,
+        ".png",
+        5
+    );
+}
 // 内部専用：連番画像の読み込み
 bool AnimationSprite::LoadSequence(
     const std::string& key,
@@ -128,7 +160,7 @@ int AnimationSprite::GetFrame(const std::string& key, int frameIndex) const
     return seq.handles[frameIndex];
 }
 
-// -------------------------------------------------------------------
+
 void AnimationSprite::Clear()
 {
     for (auto& [key, seq] : sequences)

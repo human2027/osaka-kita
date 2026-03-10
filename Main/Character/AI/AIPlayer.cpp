@@ -5,11 +5,13 @@
 #include "InitialValue.h"
 #include <array>
 #include <vector>
+#include <AnimationTag.h>
 
 AIPlayer::AIPlayer(std::shared_ptr<Blackboard> bb)
     : blackboard(std::move(bb))
 {
 }
+
 
 void AIPlayer::UpdateBlackboard(Blackboard& bb, const MapManager& map, int /*roundNumber*/, int /*playsThisRound*/)
 {
@@ -120,9 +122,11 @@ std::vector<AIPlayer::AITileEval> AIPlayer::GetForwardEvaluation() const
     return result;
 }
 
+
 int AIPlayer::ChooseCard()
 {
     if (!blackboard) return -1;
+    if (!cachedMap) return -1;
 
     const auto& myHand = GetHand();
     if (myHand.empty()) return -1;
@@ -130,7 +134,6 @@ int AIPlayer::ChooseCard()
     const bool hasYolo = HasCard(AI_Yolo_Card);
 
     auto dec = AIPlayerLogic::ChooseCard(*blackboard, cachedMap, myHand, hasYolo);
-
     blackboard->SetAIDecision(dec.intent, dec.chosenCard, dec.yolo);
 
     return dec.chosenCard;

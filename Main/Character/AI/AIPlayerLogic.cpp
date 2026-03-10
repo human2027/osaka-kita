@@ -52,20 +52,18 @@ namespace
     {
         const int aiHP = bb.GetAIHP();
         const int aiMax = bb.GetAIMaxHP();
-
-        // (1) HP–žƒ^ƒ“‚È‚çƒAƒCƒeƒ€‘_‚¢i–¢ŠŽ‚È‚ç“Á‚Éj
+        const int plHP = bb.GetPlayerHP();
+        const int plMax = bb.GetPlayerMaxHP();
+        //HP–žƒ^ƒ“‚È‚çƒAƒCƒeƒ€‘_‚¢i–¢ŠŽ‚È‚ç“Á‚Éj
         if (aiMax > 0 && aiHP >= aiMax && !bb.AIHasItem())
             return Intent::GetItem;
 
-        // (2) ’áHP‚È‚ç‰ñ•œ—Dæ
+        //’áHP‚È‚ç‰ñ•œ—Dæ
         if (bb.IsAIDangerHP(AI_Danger_HP_Ratio))
             return Intent::HealSelf;
 
-        // (3) ‘ŠŽè‚ª•mŽ€‚ÅA‘ŠŽè‘O•û‚É‰ñ•œ‚ª‚ ‚é‚È‚ç‘jŽ~
-        const int plHP = bb.GetPlayerHP();
-        const int plMax = bb.GetPlayerMaxHP();
+        //‘ŠŽè‚ª•mŽ€‚ÅA‘ŠŽè‘O•û‚É‰ñ•œ‚ª‚ ‚é‚È‚ç‘jŽ~
         const float pr = (plMax > 0) ? (float)plHP / (float)plMax : 1.0f;
-
         if (pr <= AI_Block_Enemy_HP_Raito)
         {
             const auto& pf = bb.GetPlayerForwardTiles();

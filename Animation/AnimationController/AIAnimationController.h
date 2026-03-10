@@ -5,9 +5,6 @@
 #include "AnimDB.h"
 #include "AnimationSprite.h"
 
-// 「タグ → (key, loop, fps)」を引くDB（後述のAnimDB）
-struct AnimPlaySpec;
-
 class AIAnimationController
 {
 public:
@@ -24,7 +21,7 @@ public:
     void OnChooseCard(int cardValue, AnimMood mood = AnimMood::Normal);
 
     void Update(float dt);
-    void Draw(int x, int y);
+    void Draw(int x, int y) const;
 
 private:
     void PlayByTag(const AnimTag& tag);

@@ -40,7 +40,7 @@ void AIAnimationController::Update(float dt)
     }
 }
 
-void AIAnimationController::Draw(int x, int y)
+void AIAnimationController::Draw(int x, int y) const
 {
     // ÉAÉjÉÅñ{ëÃ
     anim.Draw(x, y);

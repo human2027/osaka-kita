@@ -1,8 +1,8 @@
 #pragma once
 
 //画面サイズ
-constexpr float Window_screen_W = 860.0f;
-constexpr float Window_screen_H = 720.0f;
+constexpr float Window_screen_W = 1980.0f;
+constexpr float Window_screen_H = 1080.0f;
 
 //ゲーム
 
@@ -111,3 +111,6 @@ constexpr int AI_Behind_Yolo_Min_Diff = 5;
 
 // YOLO時に切る札（最大札を想定）
 constexpr int AI_Yolo_Card = AI_Card_Max;
+
+constexpr int AIDraw_X = 0;
+constexpr int AIDraw_Y = 0;
