@@ -8,7 +8,7 @@ public:
     AIAnimationFrame(const AnimationSprite* bank);
 
     // 指定アニメを再生開始
-    void Play(const std::string& key, bool loop, float fps);
+    bool Play(const std::string& key, bool loop, float fps);
 
     // 毎フレーム更新（deltaTime は秒）
     void Update(float deltaTime);

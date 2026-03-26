@@ -25,10 +25,10 @@ public:
     // ï`âÊà íuïœçX
     void SetAIDrawPosition(int x, int y);
 
+    bool IsAIShowingCard() const;
 private:
     AnimationSprite aiBank;
     AIAnimationController aiController;
-
     int aiDrawX = 0;
     int aiDrawY = 0;
 };

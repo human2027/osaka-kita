@@ -160,6 +160,9 @@
     <Filter Include="ソース ファイル\Manager\AnimationManager">
       <UniqueIdentifier>{1281816d-9590-4a24-831c-e80a9e8e0265}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Base\InputBase\Mouse">
+      <UniqueIdentifier>{8a218451-778e-419e-957e-0d03427e9d14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\MapBase\MapBase.cpp">
@@ -252,6 +255,9 @@
     <ClCompile Include="Manager\AnimationManager\AnimationManager.cpp">
       <Filter>ソース ファイル\Manager\AnimationManager</Filter>
     </ClCompile>
+    <ClCompile Include="Data\Mouse\MouseInput.cpp">
+      <Filter>ソース ファイル\Base\InputBase\Mouse</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\MapBase\MapBase.h">
@@ -295,9 +301,6 @@
     </ClInclude>
     <ClInclude Include="Main\Judge\Judge.h">
       <Filter>ソース ファイル\Main\Judge</Filter>
-    </ClInclude>
-    <ClInclude Include="Main\Character\AI\KeyboardInput.h">
-      <Filter>ソース ファイル\Base\InputBase</Filter>
     </ClInclude>
     <ClInclude Include="Manager\UIManager\UIManager.h">
       <Filter>ソース ファイル\Manager\UIManager</Filter>
@@ -364,6 +367,12 @@
     </ClInclude>
     <ClInclude Include="Manager\AnimationManager\AnimationManager.h">
       <Filter>ソース ファイル\Manager\AnimationManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Key\KeyboardInput.h">
+      <Filter>ソース ファイル\Base\InputBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Mouse\MouseInput.h">
+      <Filter>ソース ファイル\Base\InputBase\Mouse</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

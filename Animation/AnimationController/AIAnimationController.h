@@ -22,11 +22,11 @@ public:
 
     void Update(float dt);
     void Draw(int x, int y) const;
-
+    bool IsShowingCard() const;
 private:
     void PlayByTag(const AnimTag& tag);
     void EnsureIdle();
-
+   
 private:
     AIAnimationFrame anim;
 

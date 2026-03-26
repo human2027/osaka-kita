@@ -3,6 +3,22 @@
 #include "DxLib.h"
 #include <algorithm>
 
+namespace
+{
+    // 手札UI
+    constexpr int kHandStartX = 180;
+    constexpr int kHandY = 560;
+    constexpr int kCardW = 80;
+    constexpr int kCardH = 100;
+    constexpr int kCardGap = 20;
+
+    // 決定ボタンUI
+    constexpr int kConfirmX = 700;
+    constexpr int kConfirmY = 580;
+    constexpr int kConfirmW = 120;
+    constexpr int kConfirmH = 50;
+}
+
 // 描画
 void UIManager::Draw(const std::shared_ptr<Player>& player,
     const std::shared_ptr<AIPlayer>& ai,
@@ -16,7 +32,7 @@ void UIManager::Draw(const std::shared_ptr<Player>& player,
     int x = kBaseX;
     int y = kBaseY;
 
-    //基本情報表示
+    // 基本情報表示
     DrawFormatString(x, y, yellow, "Round %d  Turn %d", round, plays);
     y += kLineHeight;
 
@@ -39,7 +55,7 @@ void UIManager::Draw(const std::shared_ptr<Player>& player,
     );
     y += kLineHeight;
 
-    //AI の前方評価の可視化
+    // AI の前方評価の可視化
     if (ai)
     {
         auto evals = ai->GetForwardEvaluation();
@@ -61,7 +77,7 @@ void UIManager::Draw(const std::shared_ptr<Player>& player,
         }
     }
 
-    //システムメッセージ一覧を描画 
+    // システムメッセージ一覧を描画
     int yMsg = kMessageOffsetY;
     for (auto& msg : m_messages)
     {
@@ -246,4 +262,77 @@ void UIManager::ShowPlayerHPZeroLose()
 void UIManager::ShowAIHPZeroLose()
 {
     AddMessage("AIのHPが0！あなたの勝利！", kDurMiddle);
+}
+
+// ===== 追加：手札UI描画 =====
+
+void UIManager::DrawPlayerHand(const std::shared_ptr<Player>& player, int selectedCard) const
+{
+    if (!player) return;
+
+    const auto& hand = player->GetHand();
+
+    const int white = GetColor(255, 255, 255);
+    const int yellow = GetColor(255, 255, 0);
+    const int gray = GetColor(160, 160, 160);
+
+    DrawString(kHandStartX, kHandY - 28, "手札", white);
+
+    for (int i = 0; i < static_cast<int>(hand.size()); ++i)
+    {
+        const int card = hand[i];
+        const int x = kHandStartX + i * (kCardW + kCardGap);
+        const int y = kHandY;
+
+        DrawBox(x, y, x + kCardW, y + kCardH, gray, TRUE);
+        DrawBox(x, y, x + kCardW, y + kCardH, white, FALSE);
+
+        DrawFormatString(x + 30, y + 38, white, "%d", card);
+
+        if (card == selectedCard)
+        {
+            DrawBox(x - 3, y - 3, x + kCardW + 3, y + kCardH + 3, yellow, FALSE);
+            DrawBox(x - 2, y - 2, x + kCardW + 2, y + kCardH + 2, yellow, FALSE);
+        }
+    }
+}
+
+void UIManager::DrawConfirmButton() const
+{
+    const int white = GetColor(255, 255, 255);
+    const int cyan = GetColor(0, 255, 255);
+
+    DrawBox(kConfirmX, kConfirmY, kConfirmX + kConfirmW, kConfirmY + kConfirmH, cyan, TRUE);
+    DrawBox(kConfirmX, kConfirmY, kConfirmX + kConfirmW, kConfirmY + kConfirmH, white, FALSE);
+    DrawString(kConfirmX + 20, kConfirmY + 16, "ターン終了", white);
+}
+
+// ===== 追加：当たり判定 =====
+
+int UIManager::HitTestPlayerCard(int mouseX, int mouseY, const std::shared_ptr<Player>& player) const
+{
+    if (!player) return 0;
+
+    const auto& hand = player->GetHand();
+
+    for (int i = 0; i < static_cast<int>(hand.size()); ++i)
+    {
+        const int card = hand[i];
+        const int x = kHandStartX + i * (kCardW + kCardGap);
+        const int y = kHandY;
+
+        if (mouseX >= x && mouseX <= x + kCardW &&
+            mouseY >= y && mouseY <= y + kCardH)
+        {
+            return card;
+        }
+    }
+
+    return 0;
+}
+
+bool UIManager::HitTestConfirmButton(int mouseX, int mouseY) const
+{
+    return mouseX >= kConfirmX && mouseX <= kConfirmX + kConfirmW &&
+        mouseY >= kConfirmY && mouseY <= kConfirmY + kConfirmH;
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include <string>
-
 #include "Player.h"
 #include "AIPlayer.h"
 #include "MapManager.h"
@@ -12,6 +11,18 @@
 #include "Blackboard.h"
 #include "InputBase.h"
 #include "AnimationManager.h"
+#include "InitialValue.h"
+#include "MouseInput.h"
+
+enum class TurnPhase
+{
+    StartTurn,
+    AIChooseCard,
+    AIShowAnimation,
+    PlayerChooseCard,
+    ResolveTurn,
+    TurnEnd
+};
 
 class GameManager
 {
@@ -67,4 +78,15 @@ public:
     // アニメ更新用
     int prevMs = 0;
     float deltaTime = 0.0f;
+
+private:
+    TurnPhase turnPhase = TurnPhase::StartTurn;
+
+    int pendingPlayerCard = -1;
+    int pendingAICard = -1;
+
+    // プレイヤーが今UI上で選択しているカード
+    int selectedPlayerCard = 0;
+
+    MouseInput mouseInput;
 };

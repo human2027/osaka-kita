@@ -30,3 +30,7 @@ void AnimationManager::SetAIDrawPosition(int x, int y)
     aiDrawX = x;
     aiDrawY = y;
 }
+bool AnimationManager::IsAIShowingCard() const
+{
+    return aiController.IsShowingCard();
+}

@@ -14,9 +14,11 @@ public:
     explicit TurnManager(int maxTurnsPerRound);
 
     void StartNewRound(CharacterBase& player, CharacterBase& ai);
-    bool ExecuteTurn(
+    bool ResolveTurn(
         CharacterBase& player,
         CharacterBase& ai,
+        int playerCard,
+        int aiCard,
         MapManager& map,
         Judge& judge,
         Blackboard& bb

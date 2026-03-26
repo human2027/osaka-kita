@@ -13,13 +13,24 @@ AIAnimationController::AIAnimationController(AnimationSprite* bank)
 
 void AIAnimationController::OnChooseCard(int cardValue, AnimMood mood)
 {
+    const AnimTag tag{ AnimGroup::Enemy, AnimAction::ShowHand, mood };
+    auto specOpt = AnimDB::Find(tag);
+    if (!specOpt.has_value())
+    {
+        return;
+    }
+
+    const AnimPlaySpec& spec = specOpt.value();
+
+    if (!anim.Play(spec.key, spec.loop, spec.fps))
+    {
+        return;
+    }
+
     shownNumber = cardValue;
     state = State::ShowNumber;
-
-    // 数字表示アニメ（モーションは1種類、表情差分は mood で分岐させる）
-    PlayByTag(AnimTag{ AnimGroup::Enemy, AnimAction::ShowHand, mood });
+    currentTag = tag;
 }
-
 void AIAnimationController::Update(float dt)
 {
     anim.Update(dt);
@@ -48,9 +59,6 @@ void AIAnimationController::Draw(int x, int y) const
     //数字画像(フォント描画/位置補正など
     if (state == State::ShowNumber)
     {
-        // 例：簡易に文字表示（あなたのUIに合わせて置き換えてOK）
-        // 数字を手元に出すなら x/y のオフセットを調整
-    
         DrawFormatString(x + Count_Position_x, y + Count_Position_y, GetColor(255, 255, 255), "%d", shownNumber);
     }
 }
@@ -76,4 +84,8 @@ void AIAnimationController::PlayByTag(const AnimTag& tag)
     anim.Play(spec.key, spec.loop, spec.fps);
 
     currentTag = tag;
+}
+bool AIAnimationController::IsShowingCard() const
+{
+    return state == State::ShowNumber;
 }

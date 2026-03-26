@@ -37,6 +37,11 @@ public:
     void ShowPlayerHPZeroLose();
     void ShowAIHPZeroLose();
 
+    //マウス用
+    int HitTestPlayerCard(int mouseX, int mouseY, const std::shared_ptr<Player>& player) const;
+    bool HitTestConfirmButton(int mouseX, int mouseY) const;
+    void DrawPlayerHand(const std::shared_ptr<Player>& player, int selectedCard) const;
+    void DrawConfirmButton() const;
 private:
     // 実際にメッセージキューへ積む共通処理
     void AddMessage(const std::string& text, int duration);

@@ -63,9 +63,11 @@ void TurnManager::PushUIEvent(UIMessageType type, int value1, int value2, int du
     uiEventFunc(e);
 }
 
-bool TurnManager::ExecuteTurn(
+bool TurnManager::ResolveTurn(
     CharacterBase& player,
     CharacterBase& ai,
+    int playerCard,
+    int aiCard,
     MapManager& map,
     Judge& judge,
     Blackboard& bb
@@ -74,17 +76,6 @@ bool TurnManager::ExecuteTurn(
     if (roundFinished)
         return false;
 
-    // ターンごとの通知フラグをクリア
-    bb.ClearTurnFlags();
-
-    bool roundEndedThisTurn = false;
-
-    // 移動前位置-
-    const int prevPlayerPos = player.GetPos();
-    const int prevAIPos = ai.GetPos();
-
-    //カード選択
-    int playerCard = player.ChooseCard();
     if (playerCard <= 0)
         return false;
 
@@ -94,12 +85,23 @@ bool TurnManager::ExecuteTurn(
         return false;
     }
 
-    int aiCard = ai.ChooseCard();
     if (!ai.HasCard(aiCard))
     {
         const auto& hand = ai.GetHand();
         aiCard = hand.empty() ? 0 : static_cast<int>(hand.front());
+
+        if (aiCard <= 0 || !ai.HasCard(aiCard))
+            return false;
     }
+
+    // ターンごとの通知フラグをクリア
+    bb.ClearTurnFlags();
+
+    bool roundEndedThisTurn = false;
+
+    // 移動前位置
+    const int prevPlayerPos = player.GetPos();
+    const int prevAIPos = ai.GetPos();
 
     lastPlayerCard = playerCard;
     lastAICard = aiCard;
@@ -107,7 +109,7 @@ bool TurnManager::ExecuteTurn(
     int playerMove = playerCard;
     int aiMove = aiCard;
 
-    //アイテム発動検知
+    // アイテム発動検知
     const bool pBoostBefore = player.IsBoostActive();
     const bool aBoostBefore = ai.IsBoostActive();
     const bool pRevBefore = player.IsReverseActive();
@@ -153,19 +155,18 @@ bool TurnManager::ExecuteTurn(
     else
         PushUIEvent(UIMessageType::Draw);
 
-    //手札確定
+    // 手札確定
     player.RemoveCard(playerCard);
     ai.RemoveCard(aiCard);
 
     player.AddRoundHistory(playerCard);
     ai.AddRoundHistory(aiCard);
 
-    // 残り札をBBに反映（要件3の根幹）
+    // 残り札をBBに反映
     bb.SetPlayerHand(player.GetHand());
     bb.SetAIHand(ai.GetHand());
 
     // タイル効果
-    // 実際に位置が変わった方のみ ApplyTileEffect を適用する
     if (player.GetPos() != prevPlayerPos)
     {
         map.ApplyTileEffect(player);
@@ -175,12 +176,11 @@ bool TurnManager::ExecuteTurn(
         map.ApplyTileEffect(ai);
     }
 
-    // HP/位置確定をBBに反映（要件1,4）
+    // HP/位置確定をBBに反映
     bb.SetPositions(player.GetPos(), ai.GetPos());
-    // MaxHP は現状定数運用（GetMaxHPが無い前提）
     bb.SetHP(player.GetHP(), MAX_Player_HP, ai.GetHP(), MAX_Player_HP);
 
-    //ゴール判定
+    // ゴール判定
     RoundRule::CheckGoal(
         map, player, ai,
         playerReachedGoal, aiReachedGoal,

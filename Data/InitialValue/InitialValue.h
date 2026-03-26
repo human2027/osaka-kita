@@ -18,7 +18,7 @@ constexpr int Tile_Heal_Value = 10;  // 回復マスで増えるHP
 constexpr int Goal_pos = 50;//ゴール地点
 
 //UI
-constexpr int Count_Position_x = 40;
+constexpr int Count_Position_x = 100;
 constexpr int Count_Position_y = 40;
 
 
@@ -112,5 +112,5 @@ constexpr int AI_Behind_Yolo_Min_Diff = 5;
 // YOLO時に切る札（最大札を想定）
 constexpr int AI_Yolo_Card = AI_Card_Max;
 
-constexpr int AIDraw_X = 0;
-constexpr int AIDraw_Y = 0;
+constexpr int AIDraw_X = 500;
+constexpr int AIDraw_Y = 150;

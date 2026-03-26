@@ -2,7 +2,7 @@
 #include "InputBase.h"
 
 Player::Player()
-    : CharacterBase()   // HP/pos/手札 初期化
+    : CharacterBase()
 {
     input = nullptr;
 }
@@ -18,16 +18,19 @@ int Player::ChooseCard()
 
     int card = input->GetSelectedCard();
 
-    // そのカードをまだ持っているか
     if (!HasCard(card))
     {
-        return 0;  
+        return 0;
+    }
+
+    if (!input->IsConfirmTriggered())
+    {
+        return 0;
     }
 
     return card;
 }
-
 void Player::PlayAnimation(int animType)
 {
-    // 将来的手を出すモーション(別の.cpp .hを作るかも)
+    // 将来的手を出すモーション
 }

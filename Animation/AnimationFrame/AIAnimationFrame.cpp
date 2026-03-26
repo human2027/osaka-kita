@@ -7,9 +7,9 @@ AIAnimationFrame::AIAnimationFrame(const AnimationSprite* bank)
 {
 }
 
-void AIAnimationFrame::Play(const std::string& key, bool loop, float fps)
+bool AIAnimationFrame::Play(const std::string& key, bool loop, float fps)
 {
-    if (!bank || !bank->HasSequence(key)) return;
+    if (!bank || !bank->HasSequence(key)) return false;
 
     currentKey = key;
     looping = loop;
@@ -17,6 +17,7 @@ void AIAnimationFrame::Play(const std::string& key, bool loop, float fps)
     timer = 0.0f;
     currentFrame = 0;
     finished = false;
+    return true;
 }
 
 void AIAnimationFrame::Update(float deltaTime)

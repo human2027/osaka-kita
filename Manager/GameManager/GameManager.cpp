@@ -13,7 +13,7 @@
 #include "DxLib.h"
 #include <cstdlib>
 #include <ctime>
-
+#include "MouseInput.h"
 GameManager::GameManager()
 {
 }
@@ -28,7 +28,7 @@ void GameManager::Initialize()
 
     // アニメ初期化
     animationManager.Initialize();
-    animationManager.SetAIDrawPosition(AIDraw_X, AIDraw_Y); 
+    animationManager.SetAIDrawPosition(AIDraw_X, AIDraw_Y);
 
     // プレイヤー / AI 生成
     player = std::make_shared<Player>();
@@ -37,7 +37,7 @@ void GameManager::Initialize()
     // 入力デバイス（キーボード）設定
     inputDevice = std::make_shared<KeyboardInput>();
     player->SetInput(inputDevice);
-
+    selectedPlayerCard = 0;
     // マップ生成 & 設定
     auto fixedMap = std::make_shared<NormalMap>();
     mapManager.SetMap(fixedMap);
@@ -47,6 +47,10 @@ void GameManager::Initialize()
     playsThisRound = 0;
     lastPlayerCard = 0;
     lastAiCard = 0;
+
+    pendingPlayerCard = -1;
+    pendingAICard = -1;
+    turnPhase = TurnPhase::StartTurn;
 
     player->ResetRound();
     aiPlayer->ResetRound();
@@ -71,15 +75,24 @@ void GameManager::StartRound()
 {
     playsThisRound = 0;
 
+    pendingPlayerCard = -1;
+    pendingAICard = -1;
+    selectedPlayerCard = 0;
+    turnPhase = TurnPhase::StartTurn;
+
     turnManager.StartNewRound(*player, *aiPlayer);
+
+    blackboard->SetPositions(player->GetPos(), aiPlayer->GetPos());
+    blackboard->SetRoundInfo(roundNumber, playsThisRound);
+    blackboard->SetPlayerHand(player->GetHand());
+    blackboard->SetAIHand(aiPlayer->GetHand());
+    blackboard->SetHP(player->GetHP(), MAX_Player_HP, aiPlayer->GetHP(), MAX_Player_HP);
 
     uiManager.ShowRoundStart(roundNumber);
 
     ChangeState(std::make_shared<InRoundState>());
 }
-
 // 勝利条件チェック
-// true ならゲーム終了
 bool GameManager::CheckEndCondition()
 {
     // 位置によるゴール
@@ -126,47 +139,129 @@ void GameManager::ChangeState(std::shared_ptr<StateBase> newState)
 // 「ラウンド中」の進行処理
 void GameManager::UpdateInRound()
 {
-    // 位置・ラウンドの基本情報を Blackboard に書き込む
+    // Blackboard 更新
     blackboard->SetPositions(player->GetPos(), aiPlayer->GetPos());
     blackboard->SetRoundInfo(roundNumber, playsThisRound);
+    blackboard->SetPlayerHand(player->GetHand());
+    blackboard->SetAIHand(aiPlayer->GetHand());
+    blackboard->SetHP(player->GetHP(), MAX_Player_HP, aiPlayer->GetHP(), MAX_Player_HP);
 
-    // AI 用の情報更新は AIPlayer 側に任せる
     aiPlayer->UpdateBlackboard(*blackboard, mapManager, roundNumber, playsThisRound);
 
-    // 1ターン進行
-    bool turned = turnManager.ExecuteTurn(
-        *player,
-        *aiPlayer,
-        mapManager,
-        judge,
-        *blackboard
-    );
-    if (!turned) {
-        // 何も起きなかった（カード無効など）
-        return;
+    switch (turnPhase)
+    {
+    case TurnPhase::StartTurn:
+    {
+        pendingPlayerCard = -1;
+        pendingAICard = -1;
+        turnPhase = TurnPhase::AIChooseCard;
+        break;
     }
 
-    // TurnManager からラウンド内の情報を取り出して保持
-    playsThisRound = turnManager.GetPlaysThisRound();
-    lastPlayerCard = turnManager.GetLastPlayerCard();
-    lastAiCard = turnManager.GetLastAICard();
+    case TurnPhase::AIChooseCard:
+    {
+        pendingAICard = aiPlayer->ChooseCard();
 
-    // AIカード選択時のアニメ再生
-    AnimMood mood = AnimMood::Normal;
+        if (pendingAICard <= 0 || !aiPlayer->HasCard(pendingAICard))
+        {
+            const auto& hand = aiPlayer->GetHand();
+            pendingAICard = hand.empty() ? 0 : static_cast<int>(hand.front());
+        }
 
-    // Blackboard に AIDecision の getter があるなら、あとでここを強化できる
-    // 例:
-    // if (blackboard->GetAIDecisionYolo()) mood = AnimMood::Confident;
-    // else if (blackboard->GetAIDecisionIntent() == AIIntent::HealSelf) mood = AnimMood::Desperate;
-    // else if (blackboard->GetAIDecisionIntent() == AIIntent::BlockHeal) mood = AnimMood::Confident;
+        if (pendingAICard > 0)
+        {
+            AnimMood mood = AnimMood::Normal;
+            animationManager.OnAIChooseCard(pendingAICard, mood);
+            turnPhase = TurnPhase::AIShowAnimation;
+        }
+        break;
+    }
 
-    animationManager.OnAIChooseCard(lastAiCard, mood);
+    case TurnPhase::AIShowAnimation:
+    {
+        // AIの手出しアニメが終わるまで待つ
+        if (!animationManager.IsAIShowingCard())
+        {
+            turnPhase = TurnPhase::PlayerChooseCard;
+        }
+        break;
+    }
+
+    case TurnPhase::PlayerChooseCard:
+    {
+        if (mouseInput.IsLeftTriggered())
+        {
+            const int mx = mouseInput.GetX();
+            const int my = mouseInput.GetY();
+
+            const int hitCard = uiManager.HitTestPlayerCard(mx, my, player);
+            if (hitCard > 0 && player->HasCard(hitCard))
+            {
+                selectedPlayerCard = hitCard;
+            }
+
+            if (uiManager.HitTestConfirmButton(mx, my))
+            {
+                if (selectedPlayerCard > 0 && player->HasCard(selectedPlayerCard))
+                {
+                    pendingPlayerCard = selectedPlayerCard;
+                    turnPhase = TurnPhase::ResolveTurn;
+                }
+            }
+        }
+        break;
+    }
+    case TurnPhase::ResolveTurn:
+    {
+        // ここで初めて勝敗判定・移動・効果適用
+        // TurnManager 側にこの関数を用意する想定
+        bool turned = turnManager.ResolveTurn(
+            *player,
+            *aiPlayer,
+            pendingPlayerCard,
+            pendingAICard,
+            mapManager,
+            judge,
+            *blackboard
+        );
+
+        if (!turned)
+        {
+            return;
+        }
+
+        // 表示用に保持
+        playsThisRound = turnManager.GetPlaysThisRound();
+        lastPlayerCard = pendingPlayerCard;
+        lastAiCard = pendingAICard;
+
+        // 勝敗条件チェック
+        if (CheckEndCondition())
+        {
+            return;
+        }
+
+        turnPhase = TurnPhase::TurnEnd;
+        break;
+    }
+
+    case TurnPhase::TurnEnd:
+    {
+        if (turnManager.IsRoundFinished())
+        {
+            ChangeState(std::make_shared<RoundResultState>());
+        }
+        else
+        {
+            turnPhase = TurnPhase::StartTurn;
+        }
+        break;
+    }
+    }
 }
-
-// 共通の描画処理
 void GameManager::DrawGame()
 {
-    // マップの描画（マスの色など）
+    //マップの描画
     mapManager.Draw();
 
     // AIアニメ描画
@@ -178,6 +273,9 @@ void GameManager::DrawGame()
         roundNumber, playsThisRound,
         lastPlayerCard, lastAiCard
     );
+
+    uiManager.DrawPlayerHand(player, selectedPlayerCard);
+    uiManager.DrawConfirmButton();
 }
 
 // メイン更新
@@ -187,10 +285,18 @@ void GameManager::Update()
     int dtMs = now - prevMs;
 
     if (dtMs < 0) dtMs = 0;
-    if (dtMs > 100) dtMs = 100; // 暴走防止
+    if (dtMs > 100) dtMs = 100;
 
     prevMs = now;
     deltaTime = static_cast<float>(dtMs) / 1000.0f;
+
+    // 入力更新
+    if (inputDevice)
+    {
+        inputDevice->Update();
+    }
+
+    mouseInput.Update();
 
     // アニメ更新
     animationManager.Update(deltaTime);
@@ -199,7 +305,6 @@ void GameManager::Update()
         currentState->Update(*this);
     }
 }
-
 // メイン描画
 void GameManager::Draw()
 {
@@ -223,14 +328,14 @@ bool GameManager::HasAIReachedGoal() const
     return turnManager.HasAIReachedGoal();
 }
 
-// ラウンド番号操作用の小さいヘルパ（RoundResultState から使う）
+// ラウンド番号操作
 void GameManager::NextRound()
 {
     ++roundNumber;
     StartRound();
 }
 
-// ゲーム再スタート用ヘルパ（GameEndState から使う）
+// ゲーム再スタート
 void GameManager::RestartGame()
 {
     Initialize();
