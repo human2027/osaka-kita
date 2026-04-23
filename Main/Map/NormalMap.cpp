@@ -1,9 +1,9 @@
 #include "NormalMap.h"
 #include "MapLoader.h"
 #include "InitialValue.h"
-#include <iostream>    
+#include <iostream>
 
-//コンストラクタ
+// コンストラクタ
 NormalMap::NormalMap()
 {
     path = "Data/Map.csv";
@@ -15,12 +15,11 @@ NormalMap::NormalMap(const std::string& csvPath)
 {
 }
 
-//CSV読み込み
+// CSV読み込み
 void NormalMap::Initialize()
 {
     std::vector<Tile> loadedTiles;
 
-    // CSV読み込み
     if (!MapLoader::LoadCSV(path, loadedTiles))
     {
         return;

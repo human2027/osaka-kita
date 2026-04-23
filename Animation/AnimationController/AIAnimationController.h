@@ -17,7 +17,7 @@ public:
     explicit AIAnimationController(AnimationSprite* bank);
 
     // AIがカードを選んだとき呼ぶ
-    // mood は「ブラフっぽい顔」「強気」など、演出側の気分を渡せる（不要なら AnimMood::Normal 固定でOK）
+    //「ブラフっぽい顔」「強気」など、演出側の気分を渡せる
     void OnChooseCard(int cardValue, AnimMood mood = AnimMood::Normal);
 
     void Update(float dt);
@@ -31,6 +31,6 @@ private:
     AIAnimationFrame anim;
 
     State  state = State::Idle;
-    int    shownNumber = 0;    // 表示する数字（アニメとは別）
-    AnimTag currentTag{};      // 「今なにを再生してるか」はキーじゃなくタグで管理
+    int    shownNumber = 0;    //表示する数字
+    AnimTag currentTag{};      //今なにを再生してるかのタグ
 };

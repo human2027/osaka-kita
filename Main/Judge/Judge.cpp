@@ -1,19 +1,19 @@
 #include "Judge.h"
 
-int Judge::JudgeWinner(int PlayerCard, int AICard, bool Reverse)
+JudgeResult Judge::JudgeWinner(int PlayerCard, int AICard, JudgeMode mode) const
 {
-    if (Reverse)
+    if (mode == JudgeMode::Reverse)
     {
-        //”š‚ª¬‚³‚¢•û‚ªŸ‚¿
-        if (PlayerCard < AICard) return 1;   // Player ‚ÌŸ‚¿
-        if (PlayerCard > AICard) return -1;  // AI ‚ÌŸ‚¿
+        // ”š‚ª¬‚³‚¢•û‚ªŸ‚¿
+        if (PlayerCard < AICard) return JudgeResult::PlayerWin;
+        if (PlayerCard > AICard) return JudgeResult::AIWin;
     }
     else
     {
-        //”š‚ª‘å‚«‚¢•û‚ªŸ‚¿
-        if (PlayerCard > AICard) return 1;   // Player ‚ÌŸ‚¿
-        if (PlayerCard < AICard) return -1;  // AI ‚ÌŸ‚¿
+        // ”š‚ª‘å‚«‚¢•û‚ªŸ‚¿
+        if (PlayerCard > AICard) return JudgeResult::PlayerWin;
+        if (PlayerCard < AICard) return JudgeResult::AIWin;
     }
 
-    return 0; // ˆø‚«•ª‚¯
+    return JudgeResult::Draw;
 }

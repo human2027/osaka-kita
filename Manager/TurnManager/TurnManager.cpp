@@ -5,7 +5,8 @@
 #include "InitialValue.h"
 #include "RoundRule.h"
 #include "RoundEndRule.h"
-#include "Blackboard.h" 
+#include "Blackboard.h"
+
 TurnManager::TurnManager(int maxTurnsPerRound)
     : maxTurnsPerRound(maxTurnsPerRound)
 {
@@ -106,18 +107,22 @@ bool TurnManager::ResolveTurn(
     lastPlayerCard = playerCard;
     lastAICard = aiCard;
 
+    // 元のカード値
+    // playerCard / aiCard は「何を出したか」の記録用
+    // playerMove / aiMove は補正後の勝負値・移動値
     int playerMove = playerCard;
     int aiMove = aiCard;
 
-    // アイテム発動検知
+    // アイテム発動検知（ターン開始時点）
     const bool pBoostBefore = player.IsBoostActive();
     const bool aBoostBefore = ai.IsBoostActive();
     const bool pRevBefore = player.IsReverseActive();
     const bool aRevBefore = ai.IsReverseActive();
 
+    // Boost反映
     RoundRule::ApplyBoosts(player, ai, playerMove, aiMove);
 
-    // AFTER差分で「使った」を通知
+    // 「使った」を通知
     if (!pBoostBefore && player.IsBoostActive()) bb.NotifyPlayerUsedBoost();
     if (!aBoostBefore && ai.IsBoostActive())     bb.NotifyAIUsedBoost();
     if (!pRevBefore && player.IsReverseActive()) bb.NotifyPlayerUsedReverse();
@@ -129,15 +134,18 @@ bool TurnManager::ResolveTurn(
     if (ai.IsBoostActive())
         PushUIEvent(UIMessageType::AIBoost);
 
-    bool reverse = player.IsReverseActive() || ai.IsReverseActive();
+    // Reverse判定
+    const bool reverse = player.IsReverseActive() || ai.IsReverseActive();
+    const JudgeMode mode = reverse ? JudgeMode::Reverse : JudgeMode::Normal;
 
-    // 勝敗判定
-    int result = judge.JudgeWinner(playerCard, aiCard, reverse);
+    // 勝敗判定（補正後の値で判定）
+    JudgeResult result = judge.JudgeWinner(playerMove, aiMove, mode);
 
-    // BBへ「直前ターンの事実」
+    // Blackboardには「出した元のカード」と「勝敗結果」を記録
     bb.SetLastTurn(playerCard, aiCard, result);
     bb.SetReverseActive(reverse);
 
+    // UpdateStatsOnResult が int 前提なら resultForBB を渡す
     RoundRule::UpdateStatsOnResult(
         playerCard, aiCard, result,
         playerWinsThisRound, aiWinsThisRound,
@@ -148,9 +156,15 @@ bool TurnManager::ResolveTurn(
     // 移動適用
     RoundRule::ApplyMove(player, ai, result, playerMove, aiMove);
 
-    if (result > 0)
+    // 1回限りの効果をここで解除
+    player.DeactivateBoost();
+    ai.DeactivateBoost();
+    player.DeactivateReverse();
+    ai.DeactivateReverse();
+
+    if (result == JudgeResult::PlayerWin)
         PushUIEvent(UIMessageType::PlayerWinMove, playerMove);
-    else if (result < 0)
+    else if (result == JudgeResult::AIWin)
         PushUIEvent(UIMessageType::AIWinMove, aiMove);
     else
         PushUIEvent(UIMessageType::Draw);
@@ -198,8 +212,8 @@ bool TurnManager::ResolveTurn(
 
     ++playsThisRound;
 
-    bool hadAnyDraw = (segmentDraws > 0);
-    bool hadSameNum = segmentSameNumber;
+    const bool hadAnyDraw = (segmentDraws > 0);
+    const bool hadSameNum = segmentSameNumber;
 
     bool extendedThisTurn = false;
 

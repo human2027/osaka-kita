@@ -30,6 +30,9 @@ public:
     //イベントベース
     void PushEvent(const UIEvent& e);
 
+    void ShowItemPickup(bool isPlayer, ItemType item);
+    void ShowItemUse(bool isPlayer, ItemType item);
+
     // GameManager 向けの「意味付き」メッセージ API 群
     void ShowRoundStart(int round);
     void ShowPlayerGoalWin();

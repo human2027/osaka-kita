@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "InitialValue.h"
+#include "ItemType.h"
 
 enum class TileType {
     Normal = 0,
@@ -14,6 +15,8 @@ enum class TileType {
 struct Tile {
     TileType type = TileType::Normal;
     int value = 0;
+    // Itemマスのときだけ意味を持つ
+    ItemType itemType = ItemType::Item_none;
 };
 
 class CharacterBase;
@@ -34,7 +37,7 @@ public:
     virtual const Tile& GetTile(int index) const;
     virtual void ApplyTileEffect(CharacterBase& character);
 
-    //ゴール到達
+    // ゴール到達
     virtual bool IsGoal(int pos) const {
         return pos >= Goal_pos;
     }
@@ -46,6 +49,9 @@ public:
     {
         tiles = newTiles;
     }
+
+    void SetTile(int index, const Tile& tile);
+    void SetItemTile(int index, ItemType itemType, int value = 0);
 
 protected:
     std::vector<Tile> tiles;

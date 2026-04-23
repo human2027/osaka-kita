@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "InitialValue.h"
+#include "ItemType.h"
 
 class CharacterBase {
 public:
@@ -40,16 +41,29 @@ public:
 
     //反転
     bool IsReverseActive() const { return reverseActive; }
+    
     //ブーストアイテム
-
     void ActivateBoost() { boostActive = true; }
+    
     //反転アイテム
-
     void ActivateReverse() { reverseActive = true; }
 
-    void ResetRound();  // 毎ラウンドの初期化
+    //ブースト解除用
+    void DeactivateBoost() { boostActive = false; }
+    
+    //反転解除用
+    void DeactivateReverse() { reverseActive = false; }
 
-    // --- 手札 ---
+    //所持アイテム用
+    bool HasItem() const { return heldItem != ItemType::Item_none; }
+    
+    //アイテム削除用
+    void ClearHeldItem() { heldItem = ItemType::Item_none; }
+    
+    // 毎ラウンドの初期化
+    void ResetRound();  
+
+    //手札
     void InitHand();
 
     //そのカードを所持しているか

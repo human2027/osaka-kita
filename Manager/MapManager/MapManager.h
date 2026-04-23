@@ -48,6 +48,7 @@ public:
         return currentMap ? currentMap->GetSize() : 0;
     }
 
+    void SetItemTile(int index, ItemType itemType, int value = 0);
 private:
     std::shared_ptr<MapBase> currentMap;
 };

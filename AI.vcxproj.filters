@@ -109,9 +109,6 @@
     <Filter Include="ソース ファイル\Factory\CharacterFactory">
       <UniqueIdentifier>{ccb45291-1121-4191-9d34-66388552c9c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Data\BlackBoard">
-      <UniqueIdentifier>{572094bc-1f14-4aa7-9f8f-95f9b51b9a2d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Base\StateBase">
       <UniqueIdentifier>{791511f0-f71f-48fd-acf2-d936ee960c3a}</UniqueIdentifier>
     </Filter>
@@ -162,6 +159,18 @@
     </Filter>
     <Filter Include="ソース ファイル\Base\InputBase\Mouse">
       <UniqueIdentifier>{8a218451-778e-419e-957e-0d03427e9d14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Behavior\BlackBoard">
+      <UniqueIdentifier>{572094bc-1f14-4aa7-9f8f-95f9b51b9a2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Item">
+      <UniqueIdentifier>{3135cebc-6594-40e9-95b1-62ad46c11edf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Item\ItemType">
+      <UniqueIdentifier>{fd07ec94-5f59-4b01-aac3-c048567b8861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Item\ItemSystem">
+      <UniqueIdentifier>{ad2e82fe-ee99-43f6-8f61-5fd435d49a7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -223,7 +232,7 @@
       <Filter>ソース ファイル\Factory\CharacterFactory</Filter>
     </ClCompile>
     <ClCompile Include="Data\BlackBoard\BlackBoard.cpp">
-      <Filter>ソース ファイル\Data\BlackBoard</Filter>
+      <Filter>ソース ファイル\Data\Behavior\BlackBoard</Filter>
     </ClCompile>
     <ClCompile Include="Data\AnimationTag\AnimationTag.cpp">
       <Filter>ソース ファイル\Data\Tag\Animation</Filter>
@@ -257,6 +266,9 @@
     </ClCompile>
     <ClCompile Include="Data\Mouse\MouseInput.cpp">
       <Filter>ソース ファイル\Base\InputBase\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\ItemSystem\ItemSystem.cpp">
+      <Filter>ソース ファイル\Data\Item\ItemSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -330,7 +342,7 @@
       <Filter>ソース ファイル\Factory\CharacterFactory</Filter>
     </ClInclude>
     <ClInclude Include="Data\BlackBoard\BlackBoard.h">
-      <Filter>ソース ファイル\Data\BlackBoard</Filter>
+      <Filter>ソース ファイル\Data\Behavior\BlackBoard</Filter>
     </ClInclude>
     <ClInclude Include="Data\AnimationTag\AnimationTag.h">
       <Filter>ソース ファイル\Data\Tag\Animation</Filter>
@@ -373,6 +385,12 @@
     </ClInclude>
     <ClInclude Include="Data\Mouse\MouseInput.h">
       <Filter>ソース ファイル\Base\InputBase\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\ItemType\ItemType.h">
+      <Filter>ソース ファイル\Data\Item\ItemType</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\ItemSystem\ItemSystem.h">
+      <Filter>ソース ファイル\Data\Item\ItemSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

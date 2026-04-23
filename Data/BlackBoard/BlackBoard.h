@@ -3,6 +3,7 @@
 #include <array>
 #include "MapBase.h"
 #include "AITypes.h"
+#include "Judge.h"
 
 enum class AIIntent : int
 {
@@ -11,6 +12,7 @@ enum class AIIntent : int
     BlockHeal,
     Neutral
 };
+
 class Blackboard
 {
 public:
@@ -19,7 +21,7 @@ public:
     // 位置情報
     void SetPositions(int playerPos, int aiPos);
     int  GetPlayerPos() const;
-    int  GetAIPos()     const;
+    int  GetAIPos() const;
 
     // ラウンド／ターン情報
     void SetRoundInfo(int round, int turnInRound);
@@ -36,7 +38,7 @@ public:
     // アイテム保持
     void SetItemFlags(bool playerHas, bool aiHas);
     bool PlayerHasItem() const;
-    bool AIHasItem()     const;
+    bool AIHasItem() const;
 
     // 5マス先のタイル情報
     void SetPlayerForwardTiles(const std::array<TileInfoForAI, 5>& tiles);
@@ -45,8 +47,7 @@ public:
     const std::array<TileInfoForAI, 5>& GetAIForwardTiles() const;
 
     // HP情報
-    void SetHP(int playerHP, int playerMaxHP,
-        int aiHP, int aiMaxHP);
+    void SetHP(int playerHP, int playerMaxHP, int aiHP, int aiMaxHP);
     int  GetPlayerHP() const;
     int  GetPlayerMaxHP() const;
     int  GetAIHP() const;
@@ -55,11 +56,11 @@ public:
     bool IsAIDangerHP(float ratio = 0.3f) const;
     bool IsAICriticalHP(float ratio = 0.15f) const;
 
-    // 直前ターン情報（要件2,3,4で効く）
-    void SetLastTurn(int playerCard, int aiCard, int result);
+    // 直前ターン情報
+    void SetLastTurn(int playerCard, int aiCard, JudgeResult result);
     int  GetLastPlayerCard() const;
     int  GetLastAICard() const;
-    int  GetLastResult() const;
+    JudgeResult GetLastResult() const;
 
     void SetReverseActive(bool active);
     bool IsReverseActive() const;
@@ -76,7 +77,7 @@ public:
     bool PlayerUsedReverseThisTurn() const;
     bool AIUsedReverseThisTurn() const;
 
-    //Aiの今回の札だし情報
+    // AIの今回の札だし情報
     void SetAIDecision(AIIntent intent, int choseCard, bool yolo);
     AIIntent GetAIIntent() const;
     int GetAIChoseCard() const;
@@ -106,7 +107,7 @@ private:
     // last turn
     int lastPlayerCard = 0;
     int lastAICard = 0;
-    int lastResult = 0;
+    JudgeResult lastResult = JudgeResult::Draw;
 
     bool reverseActive = false;
 

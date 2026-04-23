@@ -1,4 +1,5 @@
 #include "Blackboard.h"
+#include "Judge.h"
 
 // コンストラクタ
 Blackboard::Blackboard()
@@ -12,6 +13,7 @@ Blackboard::Blackboard()
     , playerMaxHP(1)
     , aiHP(0)
     , aiMaxHP(1)
+    , lastResult(JudgeResult::Draw)
 {
 }
 
@@ -152,7 +154,7 @@ const std::vector<int>& Blackboard::GetAIHand() const
 }
 
 // 直前ターン情報
-void Blackboard::SetLastTurn(int playerCard, int aiCard, int result)
+void Blackboard::SetLastTurn(int playerCard, int aiCard, JudgeResult result)
 {
     lastPlayerCard = playerCard;
     lastAICard = aiCard;
@@ -169,7 +171,7 @@ int Blackboard::GetLastAICard() const
     return lastAICard;
 }
 
-int Blackboard::GetLastResult() const
+JudgeResult Blackboard::GetLastResult() const
 {
     return lastResult;
 }

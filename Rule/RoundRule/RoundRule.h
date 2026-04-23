@@ -1,6 +1,7 @@
 #pragma once
 #include "CharacterBase.h"
 #include "MapManager.h"
+#include "Judge.h"
 
 // ラウンドのルール判定をまとめたクラス
 class RoundRule
@@ -18,7 +19,7 @@ public:
     static void UpdateStatsOnResult(
         int playerCard,
         int aiCard,
-        int result,
+        JudgeResult result,
         int& playerWinsThisRound,
         int& aiWinsThisRound,
         int& drawsThisRound,
@@ -31,7 +32,7 @@ public:
     static void ApplyMove(
         CharacterBase& player,
         CharacterBase& ai,
-        int result,
+        JudgeResult result,
         int playerMove,
         int aiMove
     );

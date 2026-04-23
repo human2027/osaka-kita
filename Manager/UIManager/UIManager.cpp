@@ -3,6 +3,7 @@
 #include "DxLib.h"
 #include <algorithm>
 
+#include "ItemType.h"
 namespace
 {
     // 手札UI
@@ -17,6 +18,16 @@ namespace
     constexpr int kConfirmY = 580;
     constexpr int kConfirmW = 120;
     constexpr int kConfirmH = 50;
+    static std::string GetItemName(ItemType item)
+    {
+        switch (item)
+        {
+        case ItemType::Item_heal:    return "回復";
+        case ItemType::Item_boost:   return "ブースト";
+        case ItemType::Item_reverse: return "反転";
+        default:                     return "なし";
+        }
+    }
 }
 
 // 描画
@@ -335,4 +346,20 @@ bool UIManager::HitTestConfirmButton(int mouseX, int mouseY) const
 {
     return mouseX >= kConfirmX && mouseX <= kConfirmX + kConfirmW &&
         mouseY >= kConfirmY && mouseY <= kConfirmY + kConfirmH;
+}
+
+void UIManager::ShowItemPickup(bool isPlayer, ItemType item)
+{
+    std::string who = isPlayer ? "プレイヤー" : "AI";
+    std::string text = who + "は「" + GetItemName(item) + "」を拾った！";
+
+    AddMessage(text, kDurMiddle);
+}
+
+void UIManager::ShowItemUse(bool isPlayer, ItemType item)
+{
+    std::string who = isPlayer ? "プレイヤー" : "AI";
+    std::string text = who + "の「" + GetItemName(item) + "」発動！";
+
+    AddMessage(text, kDurMiddle);
 }

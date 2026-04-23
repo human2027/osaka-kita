@@ -1,6 +1,22 @@
 #pragma once
 
-class Judge {
+// Ÿ”s”»’èƒ‚[ƒh
+enum class JudgeMode
+{
+    Normal,   // ‘å‚«‚¢”š‚ªŸ‚¿
+    Reverse   // ¬‚³‚¢”š‚ªŸ‚¿
+};
+
+// ”»’èŒ‹‰Ê
+enum class JudgeResult
+{
+    PlayerWin,
+    AIWin,
+    Draw
+};
+
+class Judge
+{
 public:
-    static int JudgeWinner(int p, int ai, bool reverse);
+    JudgeResult JudgeWinner(int playerCard, int aiCard, JudgeMode mode = JudgeMode::Normal) const;
 };

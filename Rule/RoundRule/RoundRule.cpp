@@ -1,7 +1,7 @@
 #include "RoundRule.h"
 #include "CharacterBase.h"
 #include "MapManager.h"
-#include "InitialValue.h" 
+#include "InitialValue.h"
 
 // ブースト処理
 void RoundRule::ApplyBoosts(
@@ -26,7 +26,7 @@ void RoundRule::ApplyBoosts(
 void RoundRule::UpdateStatsOnResult(
     int playerCard,
     int aiCard,
-    int result,
+    JudgeResult result,
     int& playerWinsThisRound,
     int& aiWinsThisRound,
     int& drawsThisRound,
@@ -35,11 +35,11 @@ void RoundRule::UpdateStatsOnResult(
     bool& segmentSameNumber
 )
 {
-    if (result > 0)
+    if (result == JudgeResult::PlayerWin)
     {
         ++playerWinsThisRound;
     }
-    else if (result < 0)
+    else if (result == JudgeResult::AIWin)
     {
         ++aiWinsThisRound;
     }
@@ -47,12 +47,13 @@ void RoundRule::UpdateStatsOnResult(
     {
         ++drawsThisRound;
         ++segmentDraws;
+    }
 
-        if (playerCard == aiCard)
-        {
-            sameNumberOccurred = true;
-            segmentSameNumber = true;
-        }
+    // 「同じ数字が出た」は勝敗に関係なく事実として記録
+    if (playerCard == aiCard)
+    {
+        sameNumberOccurred = true;
+        segmentSameNumber = true;
     }
 }
 
@@ -60,22 +61,22 @@ void RoundRule::UpdateStatsOnResult(
 void RoundRule::ApplyMove(
     CharacterBase& player,
     CharacterBase& ai,
-    int result,
+    JudgeResult result,
     int playerMove,
     int aiMove
 )
 {
-    if (result > 0)
+    if (result == JudgeResult::PlayerWin)
     {
         player.MovePos(playerMove);
     }
-    else if (result < 0)
+    else if (result == JudgeResult::AIWin)
     {
         ai.MovePos(aiMove);
     }
     else
     {
-        // 引き分け 誰も動かない
+        // 引き分け：誰も動かない
     }
 }
 
@@ -106,7 +107,6 @@ void RoundRule::CheckGoal(
         roundEndedThisTurn = true;
     }
 }
-
 
 // ターン上限と延長ロジック
 void RoundRule::HandleTurnLimitAndExtension(

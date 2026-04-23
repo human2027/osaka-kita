@@ -6,12 +6,12 @@
 #include <array>
 #include <vector>
 #include <AnimationTag.h>
+#include <iostream>
 
 AIPlayer::AIPlayer(std::shared_ptr<Blackboard> bb)
     : blackboard(std::move(bb))
 {
 }
-
 
 void AIPlayer::UpdateBlackboard(Blackboard& bb, const MapManager& map, int /*roundNumber*/, int /*playsThisRound*/)
 {
@@ -32,6 +32,7 @@ void AIPlayer::UpdateBlackboard(Blackboard& bb, const MapManager& map, int /*rou
             info.index = -1;
             info.type = TileType::Normal;
             info.value = 0;
+            info.itemId = static_cast<int>(ItemType::Item_none);
         }
         else
         {
@@ -39,6 +40,7 @@ void AIPlayer::UpdateBlackboard(Blackboard& bb, const MapManager& map, int /*rou
             info.index = tileIndex;
             info.type = t.type;
             info.value = t.value;
+            info.itemId = static_cast<int>(t.itemType);   // ← 追加
         }
         aiForward[steps - 1] = info;
     }
@@ -58,6 +60,7 @@ void AIPlayer::UpdateBlackboard(Blackboard& bb, const MapManager& map, int /*rou
             info.index = -1;
             info.type = TileType::Normal;
             info.value = 0;
+            info.itemId = static_cast<int>(ItemType::Item_none);
         }
         else
         {
@@ -65,12 +68,28 @@ void AIPlayer::UpdateBlackboard(Blackboard& bb, const MapManager& map, int /*rou
             info.index = tileIndex;
             info.type = t.type;
             info.value = t.value;
+            info.itemId = static_cast<int>(t.itemType);
         }
         plForward[steps - 1] = info;
     }
     bb.SetPlayerForwardTiles(plForward);
-}
+    std::cout << "=== AI Forward Raw ===\n";
+    std::cout << "aiPos=" << aiPos << "\n";
 
+    for (int steps = AI_Card_Min; steps <= AI_Card_Max; ++steps)
+    {
+        const int tileIndex = aiPos + steps;
+        const Tile& t = map.GetTile(tileIndex);
+
+        std::cout
+            << "steps=" << steps
+            << " tileIndex=" << tileIndex
+            << " type=" << static_cast<int>(t.type)
+            << " item=" << static_cast<int>(t.itemType)
+            << " value=" << t.value
+            << "\n";
+    }
+}
 
 // タイル評価（可視化用途）
 int AIPlayer::EvaluateTile(const TileInfoForAI& info) const
@@ -79,23 +98,43 @@ int AIPlayer::EvaluateTile(const TileInfoForAI& info) const
         return Nothing_Score;
 
     int score = 0;
+
     switch (info.type)
     {
     case TileType::Damage:
         score -= AI_Neutral_W_Damage_Avoid;
-        score -= info.value;
         break;
+
     case TileType::Heal:
         score += AI_Neutral_W_Heal;
-        score += info.value;
         break;
+
     case TileType::Item:
-        score += AI_Neutral_W_Iteam;
+    {
+        const ItemType item = static_cast<ItemType>(info.itemId);
+
+        switch (item)
+        {
+        case ItemType::Item_heal:
+            score += AI_Neutral_W_Item_Heal;
+            break;
+        case ItemType::Item_boost:
+            score += AI_Neutral_W_Item_Boost;
+            break;
+        case ItemType::Item_reverse:
+            score += AI_Neutral_W_Item_Reverse;
+            break;
+        default:
+            break;
+        }
         break;
+    }
+
     case TileType::Normal:
     default:
         break;
     }
+
     return score;
 }
 
@@ -121,7 +160,6 @@ std::vector<AIPlayer::AITileEval> AIPlayer::GetForwardEvaluation() const
     }
     return result;
 }
-
 
 int AIPlayer::ChooseCard()
 {

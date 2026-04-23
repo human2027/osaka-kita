@@ -55,7 +55,6 @@ void MapManager::Draw()
 
 const Tile& MapManager::GetTile(int index) const
 {
-    // ★範囲外用のダミーは必ず初期化しておく（AI評価が安定する）
     static Tile empty = []()
         {
             Tile t{};
@@ -70,4 +69,19 @@ const Tile& MapManager::GetTile(int index) const
     if (index < 0 || index >= size) return empty;
 
     return currentMap->GetTile(index);
+}
+
+void MapManager::SetItemTile(int index, ItemType itemType, int value)
+{
+    if (!currentMap) return;
+
+    const int size = currentMap->GetSize();
+    if (index < 0 || index >= size) return;
+
+    Tile tile = currentMap->GetTile(index);
+    tile.type = TileType::Item;
+    tile.itemType = itemType;
+    tile.value = value;
+
+    currentMap->SetTile(index, tile);
 }

@@ -28,7 +28,7 @@ void GameManager::Initialize()
 
     // アニメ初期化
     animationManager.Initialize();
-    animationManager.SetAIDrawPosition(AIDraw_X, AIDraw_Y);
+    animationManager.SetAIDrawPosition(AI_Draw_X, AI_Draw_Y);
 
     // プレイヤー / AI 生成
     player = std::make_shared<Player>();
