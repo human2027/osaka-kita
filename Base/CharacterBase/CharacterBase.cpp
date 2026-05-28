@@ -30,6 +30,21 @@ void CharacterBase::ResetRound() {
     InitHand();
     roundHistory.clear();
 }
+
+//ゲーム開始・リトライ時の完全初期化
+void CharacterBase::ResetGame()
+{
+    hp = MAX_Player_HP;
+    pos = 0;
+
+    heldItem = ItemType::Item_none;
+    boostActive = false;
+    reverseActive = false;
+
+    InitHand();
+    roundHistory.clear();
+}
+
 //手札の初期化
 void CharacterBase::InitHand() {
     hand = { 1,2,3,4,5 };

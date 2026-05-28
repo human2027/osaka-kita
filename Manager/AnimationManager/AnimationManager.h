@@ -4,6 +4,7 @@
 #include "AIAnimationController.h"
 #include "AnimationTag.h"
 #include "InitialValue.h"
+#include "PlayerAnimationController.h"
 
 class AnimationManager
 {
@@ -26,9 +27,33 @@ public:
     void SetAIDrawPosition(int x, int y);
 
     bool IsAIShowingCard() const;
+
+    void OnPlayerTurnWin();
+    void SetPlayerDrawPosition(int x, int y);
+    bool IsPlayerTurnWinPlaying() const;
+    //プレイヤーWIN
+    void StopPlayerTurnWin();
+
+    //敵マップアニメーション
+    void DrawEnemyMapChar(int centerX, int centerY) const;
+    void PlayEnemyMapAnimation();
+    void DrawPlayerMapChar(int centerX, int centerY) const;
+   
+
 private:
     AnimationSprite aiBank;
     AIAnimationController aiController;
+
+    AnimationSprite playerBank;
+    PlayerAnimationController playerController;
+    //マップ上の敵表示用アニメ
+    AIAnimationFrame enemyMapAnim;
+    //マップ上のプレイヤー表示用アニメ
+    AIAnimationFrame playerMapAnim;
+
     int aiDrawX = 0;
     int aiDrawY = 0;
+
+    int playerDrawX = 0;
+    int playerDrawY = 0;
 };

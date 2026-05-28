@@ -161,13 +161,19 @@ bool TurnManager::ResolveTurn(
     ai.DeactivateBoost();
     player.DeactivateReverse();
     ai.DeactivateReverse();
-
     if (result == JudgeResult::PlayerWin)
+    {
+        PushUIEvent(UIMessageType::PlayerTurnWinAnim);
         PushUIEvent(UIMessageType::PlayerWinMove, playerMove);
+    }
     else if (result == JudgeResult::AIWin)
+    {
         PushUIEvent(UIMessageType::AIWinMove, aiMove);
+    }
     else
+    {
         PushUIEvent(UIMessageType::Draw);
+    }
 
     // ŽèŽDŠm’è
     player.RemoveCard(playerCard);

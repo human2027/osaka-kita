@@ -13,7 +13,7 @@ enum class UIMessageType
 
     PlayerReachGoal,    // プレイヤーがゴール
     AIReachGoal,        // AI がゴール
-
+    PlayerTurnWinAnim,  //プレイヤーのターン勝利
     RoundExtended,      // ラウンド延長（value1 = 次のターン上限など）
     RoundEndQuick,      // 引き分けなしで早期決着（value1 = 使ったターン数）
     RoundEndMaxTurn,    // 最大ターンに達した（value1 = 最大ターン数）

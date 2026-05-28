@@ -26,15 +26,43 @@ constexpr int Tile_Damage_Value = 10;
 // 回復マスで増えるHP
 constexpr int Tile_Heal_Value = 10;      
 
-////マップ
-
  // ゴール地点
-
 constexpr int Goal_pos = 50;             
-////UI
+
+////UI-------------------------------------------------
 constexpr int Count_Position_x = 100;
 constexpr int Count_Position_y = 40;
 
+// UIメッセージ：メイン表示
+constexpr int MainMessage_Y = 430;
+constexpr int MainMessage_FontSize = 48;
+constexpr int MainMessage_FontThickness = 5;
+
+// UIメッセージ：通常表示
+constexpr int SubMessage_X = 550;
+constexpr int SubMessage_Y = 932;
+constexpr int SubMessage_FontSize = 28;
+constexpr int SubMessage_FontThickness = 3;
+constexpr int SubMessage_LineHeight = 38;
+
+// UIメッセージ：通常表示の背景
+constexpr int SubMessage_Box_X = 520;
+constexpr int SubMessage_Box_Y = 910;
+constexpr int SubMessage_Box_W = 900;
+constexpr int SubMessage_Box_H = 80;
+
+// UIメッセージ：影のずらし量
+constexpr int Message_Shadow_Offset = 3;
+// UIメッセージ：表示時間
+constexpr int Message_Dur_Short = 210;
+constexpr int Message_Dur_Middle = 220;
+constexpr int Message_Dur_Long = 330;
+
+// UIメッセージ：メイン表示時間
+constexpr int MainMessage_Dur_Short = 150;
+constexpr int MainMessage_Dur_Middle = 200;
+constexpr int MainMessage_Dur_Long = 320;
+//-----------------------------------------
 //プレイヤーとAI
 constexpr int MAX_Player_HP = 100;
 
@@ -60,7 +88,7 @@ constexpr int AI_Card_Max = 5;
 
 //Weights: Neutral（通常）
 constexpr int AI_Neutral_W_Item = 0;
-constexpr int AI_Neutral_W_Item_Heal = 20;
+constexpr int AI_Neutral_W_Item_Heal = 0;
 constexpr int AI_Neutral_W_Item_Boost = 30;
 constexpr int AI_Neutral_W_Item_Reverse = 25;
 
@@ -120,6 +148,15 @@ constexpr int AI_Behind_Yolo_Min_Diff = 5;
 //YOLO時に切る札
 constexpr int AI_Yolo_Card = AI_Card_Max;
 
-//描画位置
-constexpr int AI_Draw_X = 500;
+////描画位置
+constexpr int AI_Draw_X = 420;
 constexpr int AI_Draw_Y = 150;
+constexpr int Player_Draw_X = 200;
+constexpr int Player_Draw_Y = 150;
+
+//マップキャラの位置
+constexpr int MapChar_drawOffsetX = 28;
+constexpr int MapChar_drawOffsetY = 28;
+
+/// ターン結果メッセージを見せる待機時間
+constexpr int Turn_Wait_After_Result = 120;

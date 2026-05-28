@@ -6,11 +6,18 @@
 #include "MapBase.h"
 #include "MapLoader.h"
 #include "CharacterBase.h" 
+#include "AnimationManager.h"
+
 class MapManager
 {
 public:
     MapManager() = default;
     ~MapManager() = default;
+    void DrawLargeMap(
+        int playerPos,
+        int aiPos,
+        const AnimationManager& animationManager
+    ) const;
 
     // ƒ}ƒbƒvØ‚è‘Ö‚¦
     void SetMap(std::shared_ptr<MapBase> map)

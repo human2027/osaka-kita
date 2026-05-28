@@ -14,8 +14,36 @@
 #include <cstdlib>
 #include <ctime>
 #include "MouseInput.h"
+#include "TitleState.h"
+#include "ClearState.h"
+#include "GameOverState.h"
+#include "ItemSystem.h"
+
 GameManager::GameManager()
 {
+}
+static AnimMood DecideAIMood(const AIPlayer& aiPlayer, int aiCard)
+{
+    // 低HPなら焦り
+    if (aiPlayer.GetHP() <= 30)
+    {
+        return AnimMood::Desperate;
+    }
+
+    // 強いカードなら自信あり
+    if (aiCard >= 4)
+    {
+        return AnimMood::Confident;
+    }
+
+    // 弱いカードなら自信なし
+    if (aiCard <= 2)
+    {
+        return AnimMood::NoConfident;
+    }
+
+    // それ以外は通常
+    return AnimMood::Normal;
 }
 
 // 初期化
@@ -29,6 +57,7 @@ void GameManager::Initialize()
     // アニメ初期化
     animationManager.Initialize();
     animationManager.SetAIDrawPosition(AI_Draw_X, AI_Draw_Y);
+    animationManager.SetPlayerDrawPosition(Player_Draw_X, Player_Draw_Y);
 
     // プレイヤー / AI 生成
     player = std::make_shared<Player>();
@@ -38,10 +67,13 @@ void GameManager::Initialize()
     inputDevice = std::make_shared<KeyboardInput>();
     player->SetInput(inputDevice);
     selectedPlayerCard = 0;
+
     // マップ生成 & 設定
     auto fixedMap = std::make_shared<NormalMap>();
     mapManager.SetMap(fixedMap);
     mapManager.Initialize();
+
+    uiManager.LoadImages();
 
     roundNumber = 1;
     playsThisRound = 0;
@@ -59,15 +91,21 @@ void GameManager::Initialize()
     prevMs = GetNowCount();
     deltaTime = 0.0f;
 
-    // TurnManager → UI へのイベントコールバック
+    // TurnManager → UI / Animation へのイベントコールバック
     turnManager.SetUIEventCallback(
         [this](const UIEvent& e)
         {
+            if (e.type == UIMessageType::PlayerTurnWinAnim)
+            {
+                animationManager.OnPlayerTurnWin();
+                return;
+            }
+
             uiManager.PushEvent(e);
         }
     );
 
-    StartRound();
+    ChangeState(std::make_shared<TitleState>());
 }
 
 // ラウンド開始処理
@@ -92,38 +130,72 @@ void GameManager::StartRound()
 
     ChangeState(std::make_shared<InRoundState>());
 }
+void GameManager::StartGame()
+{
+    roundNumber = 1;
+    playsThisRound = 0;
+    lastPlayerCard = 0;
+    lastAiCard = 0;
+
+    pendingPlayerCard = -1;
+    pendingAICard = -1;
+    selectedPlayerCard = 0;
+    turnPhase = TurnPhase::StartTurn;
+
+    if (player)
+    {
+        player->ResetGame(); 
+        player->ResetRound();
+    }
+
+    if (aiPlayer)
+    {
+        aiPlayer->ResetGame(); 
+        aiPlayer->ResetRound();
+    }
+
+    StartRound();
+}
+void GameManager::BackToTitle()
+{
+}
 // 勝利条件チェック
 bool GameManager::CheckEndCondition()
 {
-    // 位置によるゴール
-    if (mapManager.IsGoal(player->GetPos())) {
+    // プレイヤーがゴールしたらクリア
+    if (mapManager.IsGoal(player->GetPos()))
+    {
         uiManager.ShowPlayerGoalWin();
-        ChangeState(std::make_shared<GameEndState>());
+        ChangeState(std::make_shared<ClearState>());
         return true;
     }
 
-    if (mapManager.IsGoal(aiPlayer->GetPos())) {
+    // AIがゴールしたらゲームオーバー
+    if (mapManager.IsGoal(aiPlayer->GetPos()))
+    {
         uiManager.ShowAIGoalWin();
-        ChangeState(std::make_shared<GameEndState>());
+        ChangeState(std::make_shared<GameOverState>());
         return true;
     }
 
-    // HPによる決着
-    if (player->GetHP() <= 0) {
+    // プレイヤーHP0ならゲームオーバー
+    if (player->GetHP() <= 0)
+    {
         uiManager.ShowPlayerHPZeroLose();
-        ChangeState(std::make_shared<GameEndState>());
+        ChangeState(std::make_shared<GameOverState>());
         return true;
     }
 
-    if (aiPlayer->GetHP() <= 0) {
+    // AI HP0ならクリア
+    if (aiPlayer->GetHP() <= 0)
+    {
         uiManager.ShowAIHPZeroLose();
-        ChangeState(std::make_shared<GameEndState>());
+        ChangeState(std::make_shared<ClearState>());
         return true;
     }
 
     return false;
 }
-
 // 状態切り替え
 void GameManager::ChangeState(std::shared_ptr<StateBase> newState)
 {
@@ -152,8 +224,8 @@ void GameManager::UpdateInRound()
     {
     case TurnPhase::StartTurn:
     {
-        pendingPlayerCard = -1;
-        pendingAICard = -1;
+        uiManager.ClearMessages();
+
         turnPhase = TurnPhase::AIChooseCard;
         break;
     }
@@ -168,9 +240,29 @@ void GameManager::UpdateInRound()
             pendingAICard = hand.empty() ? 0 : static_cast<int>(hand.front());
         }
 
+        // AIのアイテム自動使用
+        if (aiPlayer->HasItem())
+        {
+            const ItemType usedItem = aiPlayer->GetHeldItem();
+
+            const bool shouldUse =
+                usedItem == ItemType::Item_boost ||
+                usedItem == ItemType::Item_reverse ||
+                (usedItem == ItemType::Item_heal && aiPlayer->GetHP() < aiPlayer->GetMaxHP());
+
+            if (shouldUse)
+            {
+                if (ItemSystem::UseItem(*aiPlayer))
+                {
+                    uiManager.ShowItemUse(false, usedItem);
+                }
+            }
+        }
+
         if (pendingAICard > 0)
         {
-            AnimMood mood = AnimMood::Normal;
+            AnimMood mood = DecideAIMood(*aiPlayer, pendingAICard);
+
             animationManager.OnAIChooseCard(pendingAICard, mood);
             turnPhase = TurnPhase::AIShowAnimation;
         }
@@ -198,6 +290,20 @@ void GameManager::UpdateInRound()
             if (hitCard > 0 && player->HasCard(hitCard))
             {
                 selectedPlayerCard = hitCard;
+            }
+
+            // アイテム使用ボタン
+            if (uiManager.HitTestUseItemButton(mx, my))
+            {
+                if (player->HasItem())
+                {
+                    ItemType usedItem = player->GetHeldItem();
+
+                    if (ItemSystem::UseItem(*player))
+                    {
+                        uiManager.ShowItemUse(true, usedItem);
+                    }
+                }
             }
 
             if (uiManager.HitTestConfirmButton(mx, my))
@@ -241,12 +347,29 @@ void GameManager::UpdateInRound()
             return;
         }
 
+        phaseTimer = Turn_Wait_After_Result;
+        turnPhase = TurnPhase::WaitAfterResult;
+        break;
+    }
+    case TurnPhase::WaitAfterResult:
+    {
+        if (phaseTimer > 0)
+        {
+            --phaseTimer;
+            break;
+        }
+
         turnPhase = TurnPhase::TurnEnd;
         break;
     }
-
     case TurnPhase::TurnEnd:
     {
+        // プレイヤー勝利アニメが再生中なら、次ターンへ進まない
+        if (animationManager.IsPlayerTurnWinPlaying())
+        {
+            break;
+        }
+
         if (turnManager.IsRoundFinished())
         {
             ChangeState(std::make_shared<RoundResultState>());
@@ -276,6 +399,21 @@ void GameManager::DrawGame()
 
     uiManager.DrawPlayerHand(player, selectedPlayerCard);
     uiManager.DrawConfirmButton();
+    uiManager.DrawUseItemButton(player);
+
+    uiManager.DrawAIHand(aiPlayer);
+    uiManager.DrawPlayerHand(player, selectedPlayerCard);
+    uiManager.DrawConfirmButton();
+    uiManager.DrawUseItemButton(player);
+
+    if (CheckHitKey(KEY_INPUT_TAB))
+    {
+        mapManager.DrawLargeMap(
+            player->GetPos(),
+            aiPlayer->GetPos(),
+            animationManager
+        );
+    }
 }
 
 // メイン更新

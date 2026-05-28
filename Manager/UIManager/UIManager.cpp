@@ -1,365 +1,181 @@
 #include "UIManager.h"
 
 #include "DxLib.h"
-#include <algorithm>
+#include "UIConfig.h"
+#include "InitialValue.h"
 
-#include "ItemType.h"
-namespace
+bool UIManager::LoadImages()
 {
-    // 手札UI
-    constexpr int kHandStartX = 180;
-    constexpr int kHandY = 560;
-    constexpr int kCardW = 80;
-    constexpr int kCardH = 100;
-    constexpr int kCardGap = 20;
+    const bool imageOk = imageBank.Load();
+    const bool fontOk = fontBank.Load();
 
-    // 決定ボタンUI
-    constexpr int kConfirmX = 700;
-    constexpr int kConfirmY = 580;
-    constexpr int kConfirmW = 120;
-    constexpr int kConfirmH = 50;
-    static std::string GetItemName(ItemType item)
-    {
-        switch (item)
-        {
-        case ItemType::Item_heal:    return "回復";
-        case ItemType::Item_boost:   return "ブースト";
-        case ItemType::Item_reverse: return "反転";
-        default:                     return "なし";
-        }
-    }
+    return imageOk && fontOk;
+}
+void UIManager::ClearImages()
+{
+    imageBank.Clear();
+    fontBank.Clear();
 }
 
-// 描画
-void UIManager::Draw(const std::shared_ptr<Player>& player,
+void UIManager::Draw(
+    const std::shared_ptr<Player>& player,
     const std::shared_ptr<AIPlayer>& ai,
-    int round, int plays,
-    int lastPlayerCard, int lastAICard)
+    int round,
+    int plays,
+    int lastPlayerCard,
+    int lastAICard
+)
 {
-    const int white = GetColor(255, 255, 255);
-    const int yellow = GetColor(255, 255, 0);
-    const int cyan = GetColor(0, 255, 255);
-
-    int x = kBaseX;
-    int y = kBaseY;
-
-    // 基本情報表示
-    DrawFormatString(x, y, yellow, "Round %d  Turn %d", round, plays);
-    y += kLineHeight;
-
-    if (player)
-    {
-        DrawFormatString(x, y, white, "Player HP: %d", player->GetHP());
-        y += kLineHeight;
-    }
-
-    if (ai)
-    {
-        DrawFormatString(x, y, white, "AI HP: %d", ai->GetHP());
-        y += kLineHeight;
-    }
-
-    DrawFormatString(
-        x, y, white,
-        "Player Last: %d  AI Last: %d",
-        lastPlayerCard, lastAICard
+    statusPanelUI.Draw(
+        player,
+        ai,
+        round,
+        plays,
+        lastPlayerCard,
+        lastAICard,
+        fontBank
     );
-    y += kLineHeight;
 
-    // AI の前方評価の可視化
-    if (ai)
-    {
-        auto evals = ai->GetForwardEvaluation();
+    DrawRightImage();
 
-        int evalY = kForwardEvalOffsetY;
-        DrawString(x, evalY, "AI Forward Eval (steps / type / score):", cyan);
-        evalY += kLineHeight;
-
-        for (const auto& e : evals)
-        {
-            DrawFormatString(
-                x, evalY, white,
-                " %d: type=%d score=%d",
-                e.steps,
-                static_cast<int>(e.type),
-                e.score
-            );
-            evalY += kLineHeight;
-        }
-    }
-
-    // システムメッセージ一覧を描画
-    int yMsg = kMessageOffsetY;
-    for (auto& msg : m_messages)
-    {
-        DrawString(x, yMsg, msg.text.c_str(), yellow);
-        yMsg += kLineHeight;
-
-        if (msg.timer > 0)
-        {
-            --msg.timer;
-        }
-    }
-
-    // 時間が切れたメッセージを削除
-    m_messages.erase(
-        std::remove_if(
-            m_messages.begin(),
-            m_messages.end(),
-            [](const UIMessage& msg) { return msg.timer <= 0; }),
-        m_messages.end()
+    messageManager.Draw(
+        UIConfig::StatusPanelX + 8,
+        UIConfig::StatusPanelY + UIConfig::StatusPanelH + 12,
+        UIConfig::LineHeight
     );
 }
-
-// 内部共通：メッセージ追加
-void UIManager::AddMessage(const std::string& text, int duration)
+void UIManager::DrawRightImage() const
 {
-    UIMessage msg;
-    msg.text = text;
-    msg.timer = duration;
-    m_messages.push_back(msg);
-}
+    const int right = imageBank.GetRightHandle();
 
-// 汎用メッセージ追加（生テキスト）
-void UIManager::PushSystemMessage(const std::string& text, int duration)
-{
-    AddMessage(text, duration);
-}
-
-// TurnManager などからのイベントを処理
-void UIManager::PushEvent(const UIEvent& e)
-{
-    int dur = (e.duration > 0) ? e.duration : 0;
-
-    switch (e.type)
+    if (right == -1)
     {
-    case UIMessageType::InvalidCard:
-        if (dur == 0) dur = kDurShort;
-        AddMessage("そのカードはもう使えません。", dur);
-        break;
+        DrawString(1600, 180, "Right.png load failed", GetColor(255, 0, 0));
+        return;
+    }
 
-    case UIMessageType::PlayerBoost:
-        if (dur == 0) dur = kDurMiddle;
-        AddMessage("プレイヤーのブースト発動！ +2マス移動！", dur);
-        break;
+    int imageW = 0;
+    int imageH = 0;
+    GetGraphSize(right, &imageW, &imageH);
 
-    case UIMessageType::AIBoost:
-        if (dur == 0) dur = kDurMiddle;
-        AddMessage("AIのブースト発動！ +2マス移動！", dur);
-        break;
+    const int marginRight = 80;
+    const int y = 180;
 
-    case UIMessageType::PlayerWinMove:
-        if (dur == 0) dur = kDurShort;
-        AddMessage(
-            "プレイヤーの勝利！ " + std::to_string(e.value1) + "マス進んだ！",
-            dur
+    const int x = static_cast<int>(Window_screen_W) - imageW - marginRight;
+
+    DrawGraph(x, y, right, TRUE);
+}
+void UIManager::DrawTitleScreen() const
+{
+    const int title = imageBank.GetTitleHandle();
+
+    if (title != -1)
+    {
+        DrawGraph(0, 0, title, TRUE);
+    }
+    else
+    {
+        DrawBox(
+            0,
+            0,
+            static_cast<int>(Window_screen_W),
+            static_cast<int>(Window_screen_H),
+            GetColor(0, 0, 0),
+            TRUE
         );
-        break;
 
-    case UIMessageType::AIWinMove:
-        if (dur == 0) dur = kDurShort;
-        AddMessage(
-            "プレイヤーの敗北… AIが " + std::to_string(e.value1) + "マス進んだ！",
-            dur
-        );
-        break;
-
-    case UIMessageType::Draw:
-        if (dur == 0) dur = kDurShort;
-        AddMessage("引き分け。", dur);
-        break;
-
-    case UIMessageType::PlayerReachGoal:
-        if (dur == 0) dur = kDurMiddle;
-        AddMessage("プレイヤーがゴールに到達！", dur);
-        break;
-
-    case UIMessageType::AIReachGoal:
-        if (dur == 0) dur = kDurMiddle;
-        AddMessage("AIがゴールに到達！", dur);
-        break;
-
-    case UIMessageType::RoundExtended:
-        if (dur == 0) dur = kDurMiddle;
-        AddMessage(
-            "決着つかず… 引き分け扱いで延長！ 次は" +
-            std::to_string(e.value1) + "回目まで続行！",
-            dur
-        );
-        break;
-
-    case UIMessageType::RoundEndQuick:
-        if (dur == 0) dur = kDurMiddle;
-        AddMessage(
-            std::to_string(e.value1) +
-            "回の勝負で決着がついた！ ラウンド終了。",
-            dur
-        );
-        break;
-
-    case UIMessageType::RoundEndMaxTurn:
-        if (dur == 0) dur = kDurMiddle;
-        AddMessage(
-            "このラウンドのターン上限（最大" +
-            std::to_string(e.value1) + "回）に達しました。",
-            dur
-        );
-        break;
-
-    case UIMessageType::RoundHpPenalty:
-        if (dur == 0) dur = kDurMiddle;
-        AddMessage(
-            "ラウンド終了！ 時間経過で双方に " +
-            std::to_string(e.value1) + " ダメージ！",
-            dur
-        );
-        break;
-
-    case UIMessageType::BothGoalDraw:
-        if (dur == 0) dur = kDurLong;
-        AddMessage("両者ゴール！ 引き分け！", dur);
-        break;
-
-    case UIMessageType::PlayerGoalWin:
-        if (dur == 0) dur = kDurLong;
-        AddMessage("プレイヤーのゴール勝利！", dur);
-        break;
-
-    case UIMessageType::AIGoalWin:
-        if (dur == 0) dur = kDurLong;
-        AddMessage("AIのゴール勝利！", dur);
-        break;
-
-    case UIMessageType::BothDeadDraw:
-        if (dur == 0) dur = kDurLong;
-        AddMessage("両者倒れた！ 引き分け！", dur);
-        break;
-
-    case UIMessageType::PlayerDeadLose:
-        if (dur == 0) dur = kDurLong;
-        AddMessage("プレイヤーは倒れた… AIの勝利！", dur);
-        break;
-
-    case UIMessageType::AIDeadLose:
-        if (dur == 0) dur = kDurLong;
-        AddMessage("AIは倒れた！ プレイヤーの勝利！", dur);
-        break;
+        DrawString(100, 100, "CARD BOARD GAME", GetColor(255, 255, 255));
+        DrawString(100, 160, "Press ENTER or Click to Start", GetColor(255, 255, 255));
     }
 }
 
-// ===== GameManager 向けの「意味付き」メッセージ API 群 =====
-
-void UIManager::ShowRoundStart(int round)
+void UIManager::DrawPlayerHand(
+    const std::shared_ptr<Player>& player,
+    int selectedCard
+) const
 {
-    std::string text = "ラウンド " + std::to_string(round) + " 開始！";
-    AddMessage(text, kDurShort);
+    handUI.DrawPlayerHand(player, selectedCard, imageBank);
 }
 
-void UIManager::ShowPlayerGoalWin()
+void UIManager::DrawAIHand(const std::shared_ptr<AIPlayer>& ai) const
 {
-    AddMessage("あなたがゴール！勝利！", kDurMiddle);
+    handUI.DrawAIHand(ai, imageBank);
 }
 
-void UIManager::ShowAIGoalWin()
+int UIManager::HitTestPlayerCard(
+    int mouseX,
+    int mouseY,
+    const std::shared_ptr<Player>& player
+) const
 {
-    AddMessage("AIがゴール！あなたの負け…", kDurMiddle);
-}
-
-void UIManager::ShowPlayerHPZeroLose()
-{
-    AddMessage("HPが0！AIの勝利！", kDurMiddle);
-}
-
-void UIManager::ShowAIHPZeroLose()
-{
-    AddMessage("AIのHPが0！あなたの勝利！", kDurMiddle);
-}
-
-// ===== 追加：手札UI描画 =====
-
-void UIManager::DrawPlayerHand(const std::shared_ptr<Player>& player, int selectedCard) const
-{
-    if (!player) return;
-
-    const auto& hand = player->GetHand();
-
-    const int white = GetColor(255, 255, 255);
-    const int yellow = GetColor(255, 255, 0);
-    const int gray = GetColor(160, 160, 160);
-
-    DrawString(kHandStartX, kHandY - 28, "手札", white);
-
-    for (int i = 0; i < static_cast<int>(hand.size()); ++i)
-    {
-        const int card = hand[i];
-        const int x = kHandStartX + i * (kCardW + kCardGap);
-        const int y = kHandY;
-
-        DrawBox(x, y, x + kCardW, y + kCardH, gray, TRUE);
-        DrawBox(x, y, x + kCardW, y + kCardH, white, FALSE);
-
-        DrawFormatString(x + 30, y + 38, white, "%d", card);
-
-        if (card == selectedCard)
-        {
-            DrawBox(x - 3, y - 3, x + kCardW + 3, y + kCardH + 3, yellow, FALSE);
-            DrawBox(x - 2, y - 2, x + kCardW + 2, y + kCardH + 2, yellow, FALSE);
-        }
-    }
+    return handUI.HitTestPlayerCard(mouseX, mouseY, player);
 }
 
 void UIManager::DrawConfirmButton() const
 {
-    const int white = GetColor(255, 255, 255);
-    const int cyan = GetColor(0, 255, 255);
-
-    DrawBox(kConfirmX, kConfirmY, kConfirmX + kConfirmW, kConfirmY + kConfirmH, cyan, TRUE);
-    DrawBox(kConfirmX, kConfirmY, kConfirmX + kConfirmW, kConfirmY + kConfirmH, white, FALSE);
-    DrawString(kConfirmX + 20, kConfirmY + 16, "ターン終了", white);
-}
-
-// ===== 追加：当たり判定 =====
-
-int UIManager::HitTestPlayerCard(int mouseX, int mouseY, const std::shared_ptr<Player>& player) const
-{
-    if (!player) return 0;
-
-    const auto& hand = player->GetHand();
-
-    for (int i = 0; i < static_cast<int>(hand.size()); ++i)
-    {
-        const int card = hand[i];
-        const int x = kHandStartX + i * (kCardW + kCardGap);
-        const int y = kHandY;
-
-        if (mouseX >= x && mouseX <= x + kCardW &&
-            mouseY >= y && mouseY <= y + kCardH)
-        {
-            return card;
-        }
-    }
-
-    return 0;
+    buttonUI.DrawConfirmButton(imageBank);
 }
 
 bool UIManager::HitTestConfirmButton(int mouseX, int mouseY) const
 {
-    return mouseX >= kConfirmX && mouseX <= kConfirmX + kConfirmW &&
-        mouseY >= kConfirmY && mouseY <= kConfirmY + kConfirmH;
+    return buttonUI.HitTestConfirmButton(mouseX, mouseY);
+}
+
+void UIManager::DrawUseItemButton(const std::shared_ptr<Player>& player) const
+{
+    buttonUI.DrawUseItemButton(player, imageBank);
+}
+
+bool UIManager::HitTestUseItemButton(int mx, int my) const
+{
+    return buttonUI.HitTestUseItemButton(mx, my);
+}
+
+void UIManager::PushSystemMessage(const std::string& text, int duration)
+{
+    messageManager.PushSystemMessage(text, duration);
+}
+
+void UIManager::PushEvent(const UIEvent& e)
+{
+    messageManager.PushEvent(e);
+}
+
+void UIManager::ShowRoundStart(int round)
+{
+    messageManager.ShowRoundStart(round);
+}
+
+void UIManager::ShowPlayerGoalWin()
+{
+    messageManager.ShowPlayerGoalWin();
+}
+
+void UIManager::ShowAIGoalWin()
+{
+    messageManager.ShowAIGoalWin();
+}
+
+void UIManager::ShowPlayerHPZeroLose()
+{
+    messageManager.ShowPlayerHPZeroLose();
+}
+
+void UIManager::ShowAIHPZeroLose()
+{
+    messageManager.ShowAIHPZeroLose();
 }
 
 void UIManager::ShowItemPickup(bool isPlayer, ItemType item)
 {
-    std::string who = isPlayer ? "プレイヤー" : "AI";
-    std::string text = who + "は「" + GetItemName(item) + "」を拾った！";
-
-    AddMessage(text, kDurMiddle);
+    messageManager.ShowItemPickup(isPlayer, item);
 }
 
 void UIManager::ShowItemUse(bool isPlayer, ItemType item)
 {
-    std::string who = isPlayer ? "プレイヤー" : "AI";
-    std::string text = who + "の「" + GetItemName(item) + "」発動！";
-
-    AddMessage(text, kDurMiddle);
+    messageManager.ShowItemUse(isPlayer, item);
+}
+void UIManager::ClearMessages()
+{
+    messageManager.ClearMessages();
 }

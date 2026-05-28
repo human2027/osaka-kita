@@ -19,7 +19,11 @@ enum class AnimAction
     StrongAtk,
     ItemUse,
     Bluff,
-    ShowHand
+    ShowHand,
+    Map,
+
+    // ターンごとの数字勝負に勝った時の演出
+    TurnWin,
 };
 
 // 感情・雰囲気
@@ -30,6 +34,7 @@ enum class AnimMood
     Confident,
     Desperate,
     Bluffing,
+    NoConfident
 };
 
 // 3軸タグ（variant無し）
@@ -43,7 +48,9 @@ struct AnimTag
 // 等価比較（vector探索に必要）
 inline bool operator==(const AnimTag& a, const AnimTag& b) noexcept
 {
-    return a.group == b.group && a.action == b.action && a.mood == b.mood;
+    return a.group == b.group &&
+        a.action == b.action &&
+        a.mood == b.mood;
 }
 
 // キーからタグを取得（必要なら）

@@ -21,6 +21,9 @@ enum class TurnPhase
     AIShowAnimation,
     PlayerChooseCard,
     ResolveTurn,
+
+    WaitAfterResult, 
+
     TurnEnd
 };
 
@@ -33,6 +36,10 @@ public:
     void Update();
     void Draw();
 
+    // UIManager取得
+    UIManager& GetUIManager() { return uiManager; }
+    const UIManager& GetUIManager() const { return uiManager; }
+
     bool IsRoundFinished() const;
     bool HasPlayerReachedGoal() const;
     bool HasAIReachedGoal() const;
@@ -44,8 +51,11 @@ public:
     void UpdateInRound();
     void DrawGame();
 
-    // ゲームの進行
     void StartRound();
+
+    // ゲームの進行
+    void StartGame();
+    void BackToTitle();
     bool CheckEndCondition();
 
     void NextRound();
@@ -68,7 +78,6 @@ public:
 
     int roundNumber = 1;
     int playsThisRound = 0;
-
     int lastPlayerCard = 0;
     int lastAiCard = 0;
 
@@ -84,9 +93,13 @@ private:
 
     int pendingPlayerCard = -1;
     int pendingAICard = -1;
-
+private:
+    int phaseTimer = 0;
+    bool resultResolved = false;
+    bool resultMessageShown = false;
     // プレイヤーが今UI上で選択しているカード
     int selectedPlayerCard = 0;
 
     MouseInput mouseInput;
+
 };

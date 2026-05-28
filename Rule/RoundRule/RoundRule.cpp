@@ -13,12 +13,12 @@ void RoundRule::ApplyBoosts(
 {
     if (player.IsBoostActive())
     {
-        playerMove += 2;
+        playerMove += Item_plus;
     }
 
     if (ai.IsBoostActive())
     {
-        aiMove += 2;
+        aiMove += Item_plus;
     }
 }
 

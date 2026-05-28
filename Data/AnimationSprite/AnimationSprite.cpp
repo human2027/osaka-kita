@@ -13,16 +13,16 @@ void AnimationSprite::InitializeForBoardGame()
 {
     LoadSequence(
         "Enemy_Idle",
-        "../AI/Material/Animation/ude doya",
+        "Material/Animation/nomal",
         "frame_",
-        1, 30,
+        1, 2,
         ".png",
         5
     );
 
     LoadSequence(
         "Enemy_ShowHand",
-        "../AI/Material/Animation/nomal",
+        "Material/Animation/nomal",
         "frame_",
         1, 30,
         ".png",
@@ -31,7 +31,7 @@ void AnimationSprite::InitializeForBoardGame()
 
     LoadSequence(
         "Enemy_ShowHand_Confident",
-        "../AI/Material/Animation/mesorasi",
+        "Material/Animation/ude doya",
         "frame_",
         1, 30,
         ".png",
@@ -40,7 +40,7 @@ void AnimationSprite::InitializeForBoardGame()
 
     LoadSequence(
         "Enemy_ShowHand_Desperate",
-        "../AI/Material/Animation/sinikake",
+        "Material/Animation/sinikake",
         "frame_",
         1, 30,
         ".png",
@@ -49,12 +49,46 @@ void AnimationSprite::InitializeForBoardGame()
 
     LoadSequence(
         "Enemy_ShowHand_Bluffing",
-        "../AI/Material/Animation/bibiri",
+        "Material/Animation/bibiri",
         "frame_",
         1, 30,
         ".png",
         5
     );
+    LoadSequence(
+        "Enemy_ShowHand_NoConfident",
+        "Material/Animation/bibiri",
+        "frame_",
+        1, 30,
+        ".png",
+        5
+    );
+
+    LoadSequence(
+        "Player_TurnWini",
+        "Material/Animation/PlayerWIN",
+        "frame_",
+        1, 5,
+        ".png",
+        5
+    );
+    LoadSequence(
+        "Enemy_Map_char",
+        "Material/Animation/EnemyMapChar",
+        "frame_",
+        1, 2,
+        ".png",
+        5
+    );
+    LoadSequence(
+        "Player_Map_char",
+        "Material/Animation/PlayerMapChar",
+        "frame_",
+        1, 2,
+        ".png",
+        5
+    );
+  
 }
 // ì‡ïîêÍópÅFòAî‘âÊëúÇÃì«Ç›çûÇ›
 bool AnimationSprite::LoadSequence(

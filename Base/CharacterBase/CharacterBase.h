@@ -63,6 +63,9 @@ public:
     // 毎ラウンドの初期化
     void ResetRound();  
 
+    // ゲーム開始・リトライ時の完全初期化
+    void ResetGame();
+
     //手札
     void InitHand();
 

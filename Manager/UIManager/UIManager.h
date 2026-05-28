@@ -1,66 +1,66 @@
 #pragma once
 
 #include <memory>
-#include <deque>
 #include <string>
 
 #include "Player.h"
 #include "AIPlayer.h"
+#include "ItemType.h"
 #include "UIEvent.h"
 
-// UI に表示する 1 件分のメッセージ
-struct UIMessage
-{
-    std::string text;  // 表示テキスト
-    int         timer; // 残り表示フレーム数
-};
+#include "UIImageBank.h"
+#include "UIMessageManager.h"
+#include "HandUI.h"
+#include "ButtonUI.h"
+#include "StatusPanelUI.h"
+#include "UIFontBank.h"
 
 class UIManager
 {
 public:
-    // メインの描画処理
-    void Draw(const std::shared_ptr<Player>& player,
+    UIManager() = default;
+
+    bool LoadImages();
+    void ClearImages();
+    void ClearMessages();
+    void Draw(
+        const std::shared_ptr<Player>& player,
         const std::shared_ptr<AIPlayer>& ai,
-        int round, int plays,
-        int lastPlayerCard, int lastAICard);
+        int round,
+        int plays,
+        int lastPlayerCard,
+        int lastAICard
+    );
 
-    // TurnManager / GameManager からの生テキスト（デバッグ用など）
+    void DrawTitleScreen() const;
+
+    void DrawPlayerHand(const std::shared_ptr<Player>& player, int selectedCard) const;
+    void DrawAIHand(const std::shared_ptr<AIPlayer>& ai) const;
+    int HitTestPlayerCard(int mouseX, int mouseY, const std::shared_ptr<Player>& player) const;
+
+    void DrawConfirmButton() const;
+    bool HitTestConfirmButton(int mouseX, int mouseY) const;
+
+    void DrawUseItemButton(const std::shared_ptr<Player>& player) const;
+    bool HitTestUseItemButton(int mx, int my) const;
+
     void PushSystemMessage(const std::string& text, int duration);
-
-    //イベントベース
     void PushEvent(const UIEvent& e);
-
-    void ShowItemPickup(bool isPlayer, ItemType item);
-    void ShowItemUse(bool isPlayer, ItemType item);
-
-    // GameManager 向けの「意味付き」メッセージ API 群
+    void DrawRightImage() const;
     void ShowRoundStart(int round);
     void ShowPlayerGoalWin();
     void ShowAIGoalWin();
     void ShowPlayerHPZeroLose();
     void ShowAIHPZeroLose();
 
-    //マウス用
-    int HitTestPlayerCard(int mouseX, int mouseY, const std::shared_ptr<Player>& player) const;
-    bool HitTestConfirmButton(int mouseX, int mouseY) const;
-    void DrawPlayerHand(const std::shared_ptr<Player>& player, int selectedCard) const;
-    void DrawConfirmButton() const;
-private:
-    // 実際にメッセージキューへ積む共通処理
-    void AddMessage(const std::string& text, int duration);
+    void ShowItemPickup(bool isPlayer, ItemType item);
+    void ShowItemUse(bool isPlayer, ItemType item);
 
 private:
-    std::deque<UIMessage> m_messages;
-
-    // 画面レイアウト用の定数
-    static constexpr int kBaseX = 20;   // 左マージン
-    static constexpr int kBaseY = 20;   // 一番上の行
-    static constexpr int kLineHeight = 20;   // 行間
-    static constexpr int kForwardEvalOffsetY = 180;  // AI 評価表示の Y 開始位置
-    static constexpr int kMessageOffsetY = 140;  // システムメッセージの Y 開始位置
-
-    // メッセージ表示時間（フレーム）
-    static constexpr int kDurShort = 120;  // 短め（2 秒相当）
-    static constexpr int kDurMiddle = 180;  // やや長め（3 秒相当）
-    static constexpr int kDurLong = 240;  // 長め
+    UIImageBank imageBank;
+    UIMessageManager messageManager;
+    HandUI handUI;
+    ButtonUI buttonUI;
+    StatusPanelUI statusPanelUI;
+    UIFontBank fontBank;
 };

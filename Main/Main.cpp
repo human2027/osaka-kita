@@ -4,10 +4,7 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
     // DxLib 初期化
-    if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
-    {
-        return -1;			// エラーが起きたら直ちに終了
-    }
+    SetOutApplicationLogValidFlag(FALSE);   // ログを出さない
     ChangeWindowMode(TRUE);                 // ウィンドウモード
     SetBackgroundColor(0, 0, 0);            // 背景色
     SetGraphMode(Window_screen_W, Window_screen_H, 32);             // 画面サイズ
@@ -20,7 +17,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     game.Initialize();
 
     // メインループ
-    while (ProcessMessage() == 0)
+    while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
     {
         ClearDrawScreen();   // 画面クリア
 

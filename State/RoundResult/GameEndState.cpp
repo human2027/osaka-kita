@@ -10,7 +10,7 @@ void GameEndState::Enter(GameManager& gm)
 void GameEndState::Update(GameManager& gm)
 {
     // ゲーム終了中：スペースで最初からやり直し
-    if (CheckHitKey(KEY_INPUT_SPACE))
+    if (CheckHitKey(KEY_INPUT_Z))
     {
         gm.RestartGame();
     }

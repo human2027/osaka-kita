@@ -49,23 +49,11 @@
     <Filter Include="ソース ファイル\Main\Character\Player">
       <UniqueIdentifier>{aad7cee2-8937-432e-a64b-f1a889730d5a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Manager">
-      <UniqueIdentifier>{84646bcd-ab14-463d-9257-c8befc9fc086}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Base\AnimationBase">
       <UniqueIdentifier>{b9067c2a-701f-452b-a3cb-ec9483ee3fa1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Manager\GameManager">
-      <UniqueIdentifier>{e6cbf7b6-f6c7-45ef-ae02-3198766d3c01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Manager\MapManager">
-      <UniqueIdentifier>{e53e023f-0e27-4ceb-8e5b-5bf57121a075}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Factory">
       <UniqueIdentifier>{ae4989d4-836e-44be-a0e7-0c6137fff974}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Factory\AnimationFactory">
-      <UniqueIdentifier>{edca2f71-6182-4092-9636-322929bfd0ba}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Factory\ItemFactory">
       <UniqueIdentifier>{e162e95c-079a-4bc6-af65-d06ce1a30ee9}</UniqueIdentifier>
@@ -75,9 +63,6 @@
     </Filter>
     <Filter Include="ソース ファイル\Main\UI\NewFilter1">
       <UniqueIdentifier>{5cd73a91-b6be-4480-8078-653d7f102899}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Manager\UIManager">
-      <UniqueIdentifier>{f7f6d593-fdb9-49ab-9e3b-99c4e7f7187e}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\Data">
       <UniqueIdentifier>{a6a335c1-cc83-4854-9fa3-790db601ea0d}</UniqueIdentifier>
@@ -90,9 +75,6 @@
     </Filter>
     <Filter Include="ソース ファイル\Data\InitialValue">
       <UniqueIdentifier>{c70c4aae-1906-4c4e-afe6-0dd4a94d7525}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Manager\TurnManager">
-      <UniqueIdentifier>{f38d4f4d-bff0-4c93-b09d-dea0e55f2090}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\State">
       <UniqueIdentifier>{ca71deed-5e35-4155-9385-d951eaacafd0}</UniqueIdentifier>
@@ -136,9 +118,6 @@
     <Filter Include="ソース ファイル\Main\RoundRule\RoundEndRule">
       <UniqueIdentifier>{c6be1435-b644-4a72-ba08-0b72de2287ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Data\UIEvent">
-      <UniqueIdentifier>{ecad16a3-293a-4063-ad2b-e60314b2139b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Data\Behavior">
       <UniqueIdentifier>{92ef1167-b847-4c4f-81e8-6328e6efcd8b}</UniqueIdentifier>
     </Filter>
@@ -154,9 +133,6 @@
     <Filter Include="ソース ファイル\Main\Character\AI\AnimDB">
       <UniqueIdentifier>{2dc3614b-66c8-43ff-bd78-0c56d20674d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Manager\AnimationManager">
-      <UniqueIdentifier>{1281816d-9590-4a24-831c-e80a9e8e0265}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Base\InputBase\Mouse">
       <UniqueIdentifier>{8a218451-778e-419e-957e-0d03427e9d14}</UniqueIdentifier>
     </Filter>
@@ -171,6 +147,69 @@
     </Filter>
     <Filter Include="ソース ファイル\Data\Item\ItemSystem">
       <UniqueIdentifier>{ad2e82fe-ee99-43f6-8f61-5fd435d49a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Title">
+      <UniqueIdentifier>{402b2f3e-f265-4510-8ddf-7a4f5d9dd351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\Clear">
+      <UniqueIdentifier>{cd4a5e20-745e-44f8-b83e-beffa23d7c9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\State\GameOver">
+      <UniqueIdentifier>{687ca5db-784f-427b-a4bf-d02a361c57f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Tag\Image">
+      <UniqueIdentifier>{2402f6e5-971f-45e3-9bdd-48ced80e657e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\UI">
+      <UniqueIdentifier>{475d2e75-05be-4926-85cf-673d7da722a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\UI\HandUI">
+      <UniqueIdentifier>{eef5c7a8-8e48-45a1-962e-79603c53e04a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\UI\StatusPanelUI">
+      <UniqueIdentifier>{cbaf4417-c727-4ca9-be20-03c5ef7fcf5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\UI\UIConfig">
+      <UniqueIdentifier>{0bf4a851-f2f5-4bc6-a463-6b55d0b5a6ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\UI\UIAssets">
+      <UniqueIdentifier>{a1c343b5-60a1-4a85-b831-ab5cb01a5557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\UI\UIImageBank">
+      <UniqueIdentifier>{446d3c24-ec8b-4791-951b-7e3e83928bc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\UI\UIEvent">
+      <UniqueIdentifier>{ecad16a3-293a-4063-ad2b-e60314b2139b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\UI\BottonUI">
+      <UniqueIdentifier>{be02dd87-72e8-4b55-8943-5192a0d17937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Data\Font">
+      <UniqueIdentifier>{5b4b45e8-0455-40f5-b5c2-2a43faafa4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Character\Player\Animation">
+      <UniqueIdentifier>{6a0753d3-6b4f-4cbc-8d80-dd1db6cf13cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Manager">
+      <UniqueIdentifier>{84646bcd-ab14-463d-9257-c8befc9fc086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Manager\GameManager">
+      <UniqueIdentifier>{e6cbf7b6-f6c7-45ef-ae02-3198766d3c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Manager\MapManager">
+      <UniqueIdentifier>{e53e023f-0e27-4ceb-8e5b-5bf57121a075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Manager\UIManager">
+      <UniqueIdentifier>{f7f6d593-fdb9-49ab-9e3b-99c4e7f7187e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Manager\AnimationManager">
+      <UniqueIdentifier>{1281816d-9590-4a24-831c-e80a9e8e0265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Manager\TurnManager">
+      <UniqueIdentifier>{f38d4f4d-bff0-4c93-b09d-dea0e55f2090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Main\Manager\UIMessageManager">
+      <UniqueIdentifier>{ea1d9943-8fd9-4846-a1d5-b038e7841b23}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -196,10 +235,10 @@
       <Filter>ソース ファイル\Base\CharacterBase</Filter>
     </ClCompile>
     <ClCompile Include="Manager\GameManager\GameManager.cpp">
-      <Filter>ソース ファイル\Manager\GameManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\GameManager</Filter>
     </ClCompile>
     <ClCompile Include="Manager\MapManager\MapManager.cpp">
-      <Filter>ソース ファイル\Manager\MapManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\MapManager</Filter>
     </ClCompile>
     <ClCompile Include="Main\UI\SimpleUI.cpp">
       <Filter>ソース ファイル\Main\UI\NewFilter1</Filter>
@@ -211,13 +250,13 @@
       <Filter>ソース ファイル\Main\Judge</Filter>
     </ClCompile>
     <ClCompile Include="Manager\UIManager\UIManager.cpp">
-      <Filter>ソース ファイル\Manager\UIManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\UIManager</Filter>
     </ClCompile>
     <ClCompile Include="Data\MapLoad\MapLoader.cpp">
       <Filter>ソース ファイル\Data\Map\LoadMap</Filter>
     </ClCompile>
     <ClCompile Include="Manager\TurnManager\TurnManager.cpp">
-      <Filter>ソース ファイル\Manager\TurnManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\TurnManager</Filter>
     </ClCompile>
     <ClCompile Include="State\InRound\InRoundState.cpp">
       <Filter>ソース ファイル\State\InRound</Filter>
@@ -262,13 +301,43 @@
       <Filter>ソース ファイル\Main\Character\AI\AnimDB</Filter>
     </ClCompile>
     <ClCompile Include="Manager\AnimationManager\AnimationManager.cpp">
-      <Filter>ソース ファイル\Manager\AnimationManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\AnimationManager</Filter>
     </ClCompile>
     <ClCompile Include="Data\Mouse\MouseInput.cpp">
       <Filter>ソース ファイル\Base\InputBase\Mouse</Filter>
     </ClCompile>
     <ClCompile Include="Data\ItemSystem\ItemSystem.cpp">
       <Filter>ソース ファイル\Data\Item\ItemSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="State\Clear\ClearState.cpp">
+      <Filter>ソース ファイル\State\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="State\GameOver\GameOverState.cpp">
+      <Filter>ソース ファイル\State\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="State\Title\TitleState.cpp">
+      <Filter>ソース ファイル\State\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\UIImageBank\UIImageBank.cpp">
+      <Filter>ソース ファイル\Data\UI\UIImageBank</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\UIMessageManager\UIMessageManager.cpp">
+      <Filter>ソース ファイル\Main\Manager\UIMessageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\UIConfig\HandUI.cpp">
+      <Filter>ソース ファイル\Data\UI\HandUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\StatusPanelUI\StatusPanelUI.cpp">
+      <Filter>ソース ファイル\Data\UI\StatusPanelUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\ButtonUI\ButtonUI.cpp">
+      <Filter>ソース ファイル\Data\UI\BottonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\Font\UIFontBank.cpp">
+      <Filter>ソース ファイル\Data\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\AnimationController\PlayerAnimationController.cpp">
+      <Filter>ソース ファイル\Main\Character\Player\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -300,10 +369,10 @@
       <Filter>ソース ファイル\Base\CharacterBase</Filter>
     </ClInclude>
     <ClInclude Include="Manager\GameManager\GameManager.h">
-      <Filter>ソース ファイル\Manager\GameManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\GameManager</Filter>
     </ClInclude>
     <ClInclude Include="Manager\MapManager\MapManager.h">
-      <Filter>ソース ファイル\Manager\MapManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\MapManager</Filter>
     </ClInclude>
     <ClInclude Include="Main\UI\SimpleUI.h">
       <Filter>ソース ファイル\Main\UI\NewFilter1</Filter>
@@ -315,7 +384,7 @@
       <Filter>ソース ファイル\Main\Judge</Filter>
     </ClInclude>
     <ClInclude Include="Manager\UIManager\UIManager.h">
-      <Filter>ソース ファイル\Manager\UIManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\UIManager</Filter>
     </ClInclude>
     <ClInclude Include="Data\MapLoad\MapLoader.h">
       <Filter>ソース ファイル\Data\Map\LoadMap</Filter>
@@ -327,7 +396,7 @@
       <Filter>ソース ファイル\Base\InputBase</Filter>
     </ClInclude>
     <ClInclude Include="Manager\TurnManager\TurnManager.h">
-      <Filter>ソース ファイル\Manager\TurnManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\TurnManager</Filter>
     </ClInclude>
     <ClInclude Include="State\InRound\InRoundState.h">
       <Filter>ソース ファイル\State\InRound</Filter>
@@ -360,7 +429,7 @@
       <Filter>ソース ファイル\Main\RoundRule\RoundEndRule</Filter>
     </ClInclude>
     <ClInclude Include="Data\UIEvent\UIEvent.h">
-      <Filter>ソース ファイル\Data\UIEvent</Filter>
+      <Filter>ソース ファイル\Data\UI\UIEvent</Filter>
     </ClInclude>
     <ClInclude Include="Rule\RoundRule\RoundRule.h">
       <Filter>ソース ファイル\Main\RoundRule\RoundRule</Filter>
@@ -378,7 +447,7 @@
       <Filter>ソース ファイル\Main\Character\AI\AnimDB</Filter>
     </ClInclude>
     <ClInclude Include="Manager\AnimationManager\AnimationManager.h">
-      <Filter>ソース ファイル\Manager\AnimationManager</Filter>
+      <Filter>ソース ファイル\Main\Manager\AnimationManager</Filter>
     </ClInclude>
     <ClInclude Include="Data\Key\KeyboardInput.h">
       <Filter>ソース ファイル\Base\InputBase</Filter>
@@ -391,6 +460,45 @@
     </ClInclude>
     <ClInclude Include="Data\ItemSystem\ItemSystem.h">
       <Filter>ソース ファイル\Data\Item\ItemSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="State\Clear\ClearState.h">
+      <Filter>ソース ファイル\State\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="State\GameOver\GameOverState.h">
+      <Filter>ソース ファイル\State\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="State\Title\TitleState.h">
+      <Filter>ソース ファイル\State\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\UIImageBank\UIImageBank.h">
+      <Filter>ソース ファイル\Data\UI\UIImageBank</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\UITag\UIAssetTag.h">
+      <Filter>ソース ファイル\Data\Tag\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\UIAssets\UIAssets.h">
+      <Filter>ソース ファイル\Data\UI\UIAssets</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\UIMessageManager\UIMessageManager.h">
+      <Filter>ソース ファイル\Main\Manager\UIMessageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\UIConfig\UIConfig.h">
+      <Filter>ソース ファイル\Data\UI\UIConfig</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\UIConfig\HandUI.h">
+      <Filter>ソース ファイル\Data\UI\HandUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\StatusPanelUI\StatusPanelUI.h">
+      <Filter>ソース ファイル\Data\UI\StatusPanelUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\ButtonUI\ButtonUI.h">
+      <Filter>ソース ファイル\Data\UI\BottonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\Font\UIFontBank.h">
+      <Filter>ソース ファイル\Data\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\AnimationController\PlayerAnimationController.h">
+      <Filter>ソース ファイル\Main\Character\Player\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

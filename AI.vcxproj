@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule;$(PlayerDir)Data\Key;$(PlayerDir)Data\Aitype;$(PlayerDir)Data\AnimDB;$(PlayerDir)Animation\AnimationController;$(ProjectDir)Manager\AnimationManager;$(ProjectDir)Data\Mouse;$(ProjectDir)Data\ItemType</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule;$(PlayerDir)Data\Key;$(PlayerDir)Data\Aitype;$(PlayerDir)Data\AnimDB;$(PlayerDir)Animation\AnimationController;$(ProjectDir)Manager\AnimationManager;$(ProjectDir)Data\Mouse;$(ProjectDir)Data\ItemType;$(ProjectDir)State\Title;$(ProjectDir)State\GameOver;$(ProjectDir)State\Clear;$(ProjectDir)Data\ItemSystem;$(ProjectDir)Data\UIImageBank;$(ProjectDir)Data\UITag;$(ProjectDir)Data\UIAssets;$(PlayerDir)Manager\UIMessageManager;$(ProjectDir)Data\UIConfig;$(PlayerDir)Data\StatusPanelUI;$(PlayerDir)Data\ButtonUI;$(ProjectDir)Data\Font</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -94,7 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>"D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用";$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule;$(PlayerDir)Base\MapBase;$(PlayerDir)Animation\AnimationController;$(PlayerDir)Animation\AnimationFrame;$(PlayerDir)Data\InitialValue;$(PlayerDir)Base\AnimationBase;$(PlayerDir)Base\StateBase;$(PlayerDir)Base\UIBase;$(PlayerDir)Data\AIType;$(PlayerDir)Data\AnimationSprite;$(PlayerDir)Data\AnimationTag;$(PlayerDir)Data\AnimDB;$(PlayerDir)Data\BlackBoard;$(PlayerDir)Data\ItemSystem;$(PlayerDir)Data\ItemType;$(PlayerDir)Data\MapLoad;$(PlayerDir)Data\Mouse;$(PlayerDir)Data\Key;$(PlayerDir)Base\CharacterBase;$(PlayerDir)Manager\GameManager;$(PlayerDir)Base\InputBase;$(PlayerDir)Manager\MapManager;$(PlayerDir)Main\Character\AI;$(PlayerDir)Main\Character\Player;$(PlayerDir)Main\Judge;$(PlayerDir)Manager\UIManager;$(PlayerDir)Manager\TurnManager;$(PlayerDir)Manager\AnimationManager;$(PlayerDir)State\Clear;$(PlayerDir)State\GameOver;$(PlayerDir)State\Title;$(PlayerDir)State\InRound;$(PlayerDir)State\RoundResult;$(PlayerDir)Main\Map;$(ProjectDir)Data\UIImageBank;$(ProjectDir)Data\UITag;($PlayerDir)Data\UITag;$(ProjectDir)Data\UIAssets;$(PlayerDir)Manager\UIMessageManager;$(ProjectDir)Data\UIConfig;$(PlayerDir)Data\StatusPanelUI;$(PlayerDir)Data\ButtonUI;$(ProjectDir)Data\Font</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule;$(PlayerDir)Data\Key;$(PlayerDir)Data\Aitype;$(PlayerDir)Data\AnimDB;$(PlayerDir)Animation\AnimationController;$(ProjectDir)Manager\AnimationManager;$(ProjectDir)Data\Mouse;$(ProjectDir)Data\ItemType</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Base\CharacterBase;$(ProjectDir)Base\MapBase;$(ProjectDir)Base\UIBase;$(ProjectDir)Base\ObjectBase;$(ProjectDir)Base\InputBase;$(ProjectDir)Base\AnimationBase;$(ProjectDir)Base\StateBase;$(ProjectDir)Data\InitialValue;$(ProjectDir)Data\MapLoad;$(ProjectDir)Manager\MapManager;$(ProjectDir)Main\Character\Player;$(ProjectDir)Main\Character\AI;$(ProjectDir)Main\UI;$(ProjectDir)Main\Map;$(ProjectDir)Main\Judge;$(ProjectDir)Manager\UIManager;$(ProjectDir)Manager\GameManager;$(ProjectDir)Manager\TurnManager;$(ProjectDir)State\InRound;$(ProjectDir)State\RoundResult;$(ProjectDir)Data\AnimationTag;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule;$(PlayerDir)Data\Key;$(PlayerDir)Data\Aitype;$(PlayerDir)Data\AnimDB;$(PlayerDir)Animation\AnimationController;$(ProjectDir)Manager\AnimationManager;$(ProjectDir)Data\Mouse;$(ProjectDir)Data\ItemType;$(ProjectDir)State\Title;$(ProjectDir)State\GameOver;$(ProjectDir)State\Clear;$(ProjectDir)Data\ItemSystem;$(ProjectDir)Data\UIImageBank;$(ProjectDir)Data\UITag;$(ProjectDir)Data\UIAssets;$(PlayerDir)Manager\UIMessageManager;$(ProjectDir)Data\UIConfig;$(PlayerDir)Data\StatusPanelUI;$(PlayerDir)Data\ButtonUI;$(ProjectDir)Data\Font</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -128,7 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>"D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用";$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DxLib_VC3_24d\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(ProjectDir)Data\BlackBoard;($PlayerDir)Data\AnimationSprite;$(ProjectDir)Data\AnimationSprite;$(ProjectDir)Animation\AnimationFrame;$(PlayerDir)Rule\RoundRule;$(PlayerDir)Data\UIEvent;$(PlayerDir)Rule\RoundEndRule;$(PlayerDir)Base\MapBase;$(PlayerDir)Animation\AnimationController;$(PlayerDir)Animation\AnimationFrame;$(PlayerDir)Data\InitialValue;$(PlayerDir)Base\AnimationBase;$(PlayerDir)Base\StateBase;$(PlayerDir)Base\UIBase;$(PlayerDir)Data\AIType;$(PlayerDir)Data\AnimationSprite;$(PlayerDir)Data\AnimationTag;$(PlayerDir)Data\AnimDB;$(PlayerDir)Data\BlackBoard;$(PlayerDir)Data\ItemSystem;$(PlayerDir)Data\ItemType;$(PlayerDir)Data\MapLoad;$(PlayerDir)Data\Mouse;$(PlayerDir)Data\Key;$(PlayerDir)Base\CharacterBase;$(PlayerDir)Manager\GameManager;$(PlayerDir)Base\InputBase;$(PlayerDir)Manager\MapManager;$(PlayerDir)Main\Character\AI;$(PlayerDir)Main\Character\Player;$(PlayerDir)Main\Judge;$(PlayerDir)Manager\UIManager;$(PlayerDir)Manager\TurnManager;$(PlayerDir)Manager\AnimationManager;$(PlayerDir)State\Clear;$(PlayerDir)State\GameOver;$(PlayerDir)State\Title;$(PlayerDir)State\InRound;$(PlayerDir)State\RoundResult;$(PlayerDir)Main\Map;$(ProjectDir)Data\UIImageBank;$(ProjectDir)Data\UITag;($PlayerDir)Data\UITag;$(ProjectDir)Data\UIAssets;$(PlayerDir)Manager\UIMessageManager;$(ProjectDir)Data\UIConfig;$(PlayerDir)Data\StatusPanelUI;$(PlayerDir)Data\ButtonUI;$(ProjectDir)Data\Font</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation\AnimationController\AIAnimationController.cpp" />
+    <ClCompile Include="Animation\AnimationController\PlayerAnimationController.cpp" />
     <ClCompile Include="Animation\AnimationFrame\AIAnimationFrame.cpp" />
     <ClCompile Include="Base\CharacterBase\CharacterBase.cpp" />
     <ClCompile Include="Base\InputBase\InputBase.cpp" />
@@ -150,9 +151,14 @@
     <ClCompile Include="Data\AnimDB\AnimDB.cpp" />
     <ClCompile Include="Data\Behavior\BehaviorNode\BehaviorNode.cpp" />
     <ClCompile Include="Data\BlackBoard\BlackBoard.cpp" />
+    <ClCompile Include="Data\ButtonUI\ButtonUI.cpp" />
+    <ClCompile Include="Data\Font\UIFontBank.cpp" />
     <ClCompile Include="Data\ItemSystem\ItemSystem.cpp" />
     <ClCompile Include="Data\MapLoad\MapLoader.cpp" />
     <ClCompile Include="Data\Mouse\MouseInput.cpp" />
+    <ClCompile Include="Data\StatusPanelUI\StatusPanelUI.cpp" />
+    <ClCompile Include="Data\UIConfig\HandUI.cpp" />
+    <ClCompile Include="Data\UIImageBank\UIImageBank.cpp" />
     <ClCompile Include="Factory\CharacterFactory\CharacterFactory.cpp" />
     <ClCompile Include="Main\Character\AI\AIPlayer.cpp" />
     <ClCompile Include="Main\Character\AI\AIPlayerLogic.cpp" />
@@ -166,14 +172,19 @@
     <ClCompile Include="Manager\MapManager\MapManager.cpp" />
     <ClCompile Include="Manager\TurnManager\TurnManager.cpp" />
     <ClCompile Include="Manager\UIManager\UIManager.cpp" />
+    <ClCompile Include="Manager\UIMessageManager\UIMessageManager.cpp" />
     <ClCompile Include="Rule\RoundEndRule\RoundEndRule.cpp" />
     <ClCompile Include="Rule\RoundRule\RoundRule.cpp" />
+    <ClCompile Include="State\Clear\ClearState.cpp" />
+    <ClCompile Include="State\GameOver\GameOverState.cpp" />
     <ClCompile Include="State\InRound\InRoundState.cpp" />
     <ClCompile Include="State\RoundResult\GameEndState.cpp" />
     <ClCompile Include="State\RoundResult\RoundResultState.cpp" />
+    <ClCompile Include="State\Title\TitleState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation\AnimationController\AIAnimationController.h" />
+    <ClInclude Include="Animation\AnimationController\PlayerAnimationController.h" />
     <ClInclude Include="Animation\AnimationFrame\AIAnimationFrame.h" />
     <ClInclude Include="Base\AnimationBase\AnimationBase.h" />
     <ClInclude Include="Base\CharacterBase\CharacterBase.h" />
@@ -189,13 +200,21 @@
     <ClInclude Include="Data\AnimDB\AnimDB.h" />
     <ClInclude Include="Data\Behavior\BehaviorNode\BehaviorNode.h" />
     <ClInclude Include="Data\BlackBoard\BlackBoard.h" />
+    <ClInclude Include="Data\ButtonUI\ButtonUI.h" />
+    <ClInclude Include="Data\Font\UIFontBank.h" />
     <ClInclude Include="Data\InitialValue\InitialValue.h" />
     <ClInclude Include="Data\ItemSystem\ItemSystem.h" />
     <ClInclude Include="Data\ItemType\ItemType.h" />
     <ClInclude Include="Data\Key\KeyboardInput.h" />
     <ClInclude Include="Data\MapLoad\MapLoader.h" />
     <ClInclude Include="Data\Mouse\MouseInput.h" />
+    <ClInclude Include="Data\StatusPanelUI\StatusPanelUI.h" />
+    <ClInclude Include="Data\UIAssets\UIAssets.h" />
+    <ClInclude Include="Data\UIConfig\HandUI.h" />
+    <ClInclude Include="Data\UIConfig\UIConfig.h" />
     <ClInclude Include="Data\UIEvent\UIEvent.h" />
+    <ClInclude Include="Data\UIImageBank\UIImageBank.h" />
+    <ClInclude Include="Data\UITag\UIAssetTag.h" />
     <ClInclude Include="Factory\CharacterFactory\CharacterFactory.h" />
     <ClInclude Include="Main\Character\AI\AIPlayer.h" />
     <ClInclude Include="Main\Character\AI\AIPlayerLogic.h" />
@@ -208,11 +227,15 @@
     <ClInclude Include="Manager\MapManager\MapManager.h" />
     <ClInclude Include="Manager\TurnManager\TurnManager.h" />
     <ClInclude Include="Manager\UIManager\UIManager.h" />
+    <ClInclude Include="Manager\UIMessageManager\UIMessageManager.h" />
     <ClInclude Include="Rule\RoundEndRule\RoundEndRule.h" />
     <ClInclude Include="Rule\RoundRule\RoundRule.h" />
+    <ClInclude Include="State\Clear\ClearState.h" />
+    <ClInclude Include="State\GameOver\GameOverState.h" />
     <ClInclude Include="State\InRound\InRoundState.h" />
     <ClInclude Include="State\RoundResult\GameEndState.h" />
     <ClInclude Include="State\RoundResult\RoundResultState.h" />
+    <ClInclude Include="State\Title\TitleState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
